@@ -2,6 +2,7 @@ import { AmbientBackground } from "@/components/site/ambient-background";
 import { BrandWork } from "@/components/site/brand-work";
 import { Contact } from "@/components/site/contact";
 import { Hero } from "@/components/site/hero";
+import { PageSheet } from "@/components/site/page-sheet";
 import { Process } from "@/components/site/process";
 import { Statement } from "@/components/site/statement";
 import { MotionProvider } from "@/components/site/motion-provider";
@@ -17,20 +18,40 @@ export default function Home() {
     <>
       <AmbientBackground />
       <SiteNav />
-      <main className="flex-1">
+      <main className="flex flex-1 flex-col gap-4 sm:gap-6">
         <MotionProvider>
-          <Hero />
-          <Statement />
-          <Process />
-          <ProjectShowcase />
-          <BrandWork />
-          <TypeDesign />
-          <Experience />
-          <GlassmorphismPortfolioBlock />
-          <Contact />
+          <PageSheet>
+            <Hero />
+          </PageSheet>
+          <PageSheet>
+            <Statement />
+          </PageSheet>
+          <PageSheet>
+            <Process />
+          </PageSheet>
+          <PageSheet>
+            <ProjectShowcase />
+          </PageSheet>
+          <PageSheet>
+            <BrandWork />
+          </PageSheet>
+          <PageSheet>
+            <TypeDesign />
+          </PageSheet>
+          <PageSheet>
+            <Experience />
+          </PageSheet>
+          <PageSheet>
+            <GlassmorphismPortfolioBlock />
+          </PageSheet>
+          <PageSheet>
+            <Contact />
+          </PageSheet>
         </MotionProvider>
       </main>
-      <SiteFooter />
+      <PageSheet>
+        <SiteFooter />
+      </PageSheet>
     </>
   );
 }

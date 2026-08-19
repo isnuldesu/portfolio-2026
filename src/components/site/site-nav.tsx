@@ -33,8 +33,8 @@ export function SiteNav() {
       <div id="nav-sentinel" className="absolute top-0 h-px w-full" />
       <header
         className={cn(
-          "sticky top-0 z-50 h-16 w-full transition-all duration-300",
-          scrolled && "pill-glass rounded-none border-x-0 border-t-0",
+          "sticky top-0 z-50 mx-auto h-16 w-full max-w-[82rem] transition-all duration-300",
+          scrolled ? "pill-glass" : "sheet",
         )}
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-5 px-6">

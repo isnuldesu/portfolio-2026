@@ -2,7 +2,7 @@
 
 import { m, useReducedMotion, type Variants } from "motion/react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -130,7 +130,7 @@ export function GlassmorphismPortfolioBlock({
                 >
                   <a href={primaryCta.href}>
                     <StableLabel value={primaryCta.label} />
-                    <ArrowUpRight className="size-4" strokeWidth={1.75} />
+                    <ArrowUpRight className="size-4" />
                   </a>
                 </Button>
               </m.div>
@@ -216,7 +216,6 @@ export function GlassmorphismPortfolioBlock({
                           </span>
                         </span>
                         <ArrowUpRight
-                          strokeWidth={1.5}
                           className="size-4 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
                         />
                       </a>

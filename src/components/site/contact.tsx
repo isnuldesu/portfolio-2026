@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { m, useReducedMotion } from "motion/react";
-import { ArrowUpRight, Loader2 } from "lucide-react";
+import { ArrowUpRight, CircleNotch } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
 import { BrandIcon } from "@/components/ui/brand-icon";
@@ -186,13 +186,13 @@ export function Contact() {
               >
                 {status === "sending" ? (
                   <>
-                    <Loader2 className="size-4 animate-spin" />
+                    <CircleNotch className="size-4 animate-spin" />
                     <StableLabel value={ui.form.sending} />
                   </>
                 ) : (
                   <>
                     <StableLabel value={primaryCta.label} />
-                    <ArrowUpRight className="size-4" strokeWidth={1.75} />
+                    <ArrowUpRight className="size-4" />
                   </>
                 )}
               </Button>

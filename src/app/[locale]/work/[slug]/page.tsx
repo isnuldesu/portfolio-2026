@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 import { CaseStudyGallery } from "@/components/site/case-study-gallery";
+import { PageSheet } from "@/components/site/page-sheet";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
@@ -68,14 +69,15 @@ export default async function CaseStudyPage({
   ];
 
   return (
-    <article className="px-3 pb-24 pt-3 sm:px-4 sm:pt-4">
+    <article className="flex flex-col gap-4 sm:gap-6">
+      <PageSheet>
       <header className="relative overflow-hidden px-6 pb-14 pt-10 sm:px-10 sm:pt-14">
         <div className="relative mx-auto max-w-4xl">
           <Link
             href={`/${locale}#work`}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
           >
-            <ArrowLeft className="size-4" strokeWidth={2} />
+            <ArrowLeft className="size-4" />
             {t(ui.caseStudy.back, locale)}
           </Link>
 
@@ -111,7 +113,7 @@ export default async function CaseStudyPage({
                     className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm font-medium outline-none transition-colors hover:bg-foreground hover:text-background focus-visible:ring-3 focus-visible:ring-ring/50"
                   >
                     {entry.label}
-                    <ArrowUpRight className="size-4" strokeWidth={2} />
+                    <ArrowUpRight className="size-4" />
                   </a>
                 </li>
               ))}
@@ -119,8 +121,10 @@ export default async function CaseStudyPage({
           ) : null}
         </div>
       </header>
+      </PageSheet>
 
-      <div className="mx-auto mt-16 max-w-4xl px-3 sm:px-6">
+      <PageSheet>
+      <div className="mx-auto max-w-4xl px-6 py-14 sm:px-10">
         <div className="space-y-14">
           {study.sections.map((section) => (
             <section key={t(section.heading, "en")}>
@@ -197,11 +201,15 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
       </div>
+      </PageSheet>
 
-      <CaseStudyGallery items={study.gallery} />
+      <PageSheet>
+        <CaseStudyGallery items={study.gallery} />
+      </PageSheet>
 
-      <section className="mx-auto mt-8 max-w-4xl px-3 sm:px-6">
-        <div className="flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <PageSheet>
+      <section className="mx-auto max-w-4xl px-6 py-12 sm:px-10">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="label-mono text-muted-foreground">
               {t(ui.caseStudy.next, locale)}
@@ -211,7 +219,7 @@ export default async function CaseStudyPage({
               className="font-display mt-1 inline-flex items-center gap-2 text-2xl font-medium tracking-tight outline-none hover:underline focus-visible:underline"
             >
               {next.title}
-              <ArrowUpRight className="size-5" strokeWidth={2} />
+              <ArrowUpRight className="size-5" />
             </Link>
           </div>
 
@@ -237,6 +245,7 @@ export default async function CaseStudyPage({
           </div>
         </div>
       </section>
+      </PageSheet>
     </article>
   );
 }

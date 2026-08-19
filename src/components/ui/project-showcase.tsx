@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
 import { projects as defaultProjects, type Project } from "@/content/site";
@@ -64,7 +64,7 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
                   </div>
 
                   <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-none opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <ArrowUpRight className="size-4" strokeWidth={2} />
+                    <ArrowUpRight className="size-4" />
                   </span>
                 </div>
 

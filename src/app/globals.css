@@ -136,9 +136,7 @@
 --------------------------------------------------------------------------- */
 
 :root {
-  --font-sans:
-    "PP Neue Montreal", "Neue Montreal", var(--font-grotesk), ui-sans-serif,
-    system-ui, sans-serif;
+  --font-sans: "Open Sauce Sans", ui-sans-serif, system-ui, sans-serif;
 
   --background: oklch(0.94 0.002 100);
   --sheet: #ffffff;
@@ -290,16 +288,18 @@ html.dark {
 }
 
 /* The CV hangs a thick colour rule off the left of every content group. */
-/* 12pt of a 555pt content column, so it stays chunky at any width. */
+/* A stroked block with a colour rule down its left edge. The rule is 12pt of
+   a 555pt content column on the CV, so it stays chunky at any width. */
 .rule-left {
+  border: var(--stroke) solid var(--border);
   border-left: 14px solid var(--rule, var(--teal));
-  padding-left: 1.25rem;
+  padding: 1rem 1.25rem;
 }
 
 @media (min-width: 768px) {
   .rule-left {
     border-left-width: 20px;
-    padding-left: 1.75rem;
+    padding: 1.5rem 1.75rem;
   }
 }
 
@@ -334,4 +334,10 @@ html.dark {
 .sheet {
   background: var(--sheet);
   border: var(--stroke) solid var(--border);
+}
+
+/* Nothing may push the document sideways. */
+html,
+body {
+  overflow-x: hidden;
 }

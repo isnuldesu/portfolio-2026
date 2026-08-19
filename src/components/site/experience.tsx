@@ -26,7 +26,7 @@ export function Experience() {
         {t(ui.experience.heading, locale)}
       </h2>
 
-      <ol className="mx-auto mt-14 max-w-4xl space-y-6">
+      <ol className="mx-auto mt-14 max-w-4xl">
         {roles.map((role, index) => (
           <m.li
             key={`${role.company}-${role.period}`}
@@ -42,7 +42,9 @@ export function Experience() {
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
                 })}
-            className="rule-left grid gap-4 py-8 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10"
+            className={`rule-left grid gap-4 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10 ${
+              index > 0 ? "-mt-0.5" : ""
+            }`}
             style={{ "--rule": accentAt(index) } as React.CSSProperties}
           >
             <div>
@@ -78,9 +80,9 @@ export function Experience() {
         ))}
       </ol>
 
-      <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
+      <div className="mx-auto mt-12 grid max-w-4xl md:grid-cols-3">
         <div
-          className="rule-left"
+          className="rule-left md:-mr-0.5"
           style={{ "--rule": accentAt(1) } as React.CSSProperties}
         >
           <p className="label-mono text-muted-foreground">
@@ -94,7 +96,7 @@ export function Experience() {
         </div>
 
         <div
-          className="rule-left"
+          className="rule-left -mt-0.5 md:mt-0 md:-mr-0.5"
           style={{ "--rule": accentAt(0) } as React.CSSProperties}
         >
           <p className="label-mono text-muted-foreground">
@@ -108,7 +110,7 @@ export function Experience() {
         </div>
 
         <div
-          className="rule-left"
+          className="rule-left -mt-0.5 md:mt-0"
           style={{ "--rule": accentAt(3) } as React.CSSProperties}
         >
           <p className="label-mono text-muted-foreground">

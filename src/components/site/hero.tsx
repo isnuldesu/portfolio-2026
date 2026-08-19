@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
 import { Button } from "@/components/ui/button";
@@ -134,7 +134,7 @@ export function Hero() {
         <div className="flex flex-wrap gap-3">
           <Button asChild className="h-11 gap-2 px-6 text-sm font-medium">
             <a href={primaryCta.href}>
-              <ArrowRight className="size-4" strokeWidth={2} />
+              <ArrowRight className="size-4" />
               <StableLabel value={primaryCta.label} />
             </a>
           </Button>

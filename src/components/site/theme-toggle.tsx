@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "@phosphor-icons/react/dist/ssr";
 
 /**
  * No mount gate and no hydration guard: both icons are rendered and CSS picks
@@ -17,8 +17,8 @@ export function ThemeToggle({ label }: { label: string }) {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="flex size-10 shrink-0 items-center justify-center border border-border text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <Moon className="size-4 dark:hidden" strokeWidth={1.75} />
-      <Sun className="hidden size-4 dark:block" strokeWidth={1.75} />
+      <Moon className="size-4 dark:hidden" />
+      <Sun className="hidden size-4 dark:block" />
     </button>
   );
 }
