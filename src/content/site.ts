@@ -268,19 +268,22 @@ export const disciplines: L[] = [
 
 export const statement = {
   eyebrow: { id: "Halo!", en: "Hallo!" } as L,
-  lead: {
-    id: "Kerjanya menggabungkan strategi yang jelas, garapan yang teliti, dan empati ke pengguna",
-    en: "My focus is blending clear strategy, careful craft, and real user empathy",
-  } as L,
-  /** Three phrases, each sat on one of the CV's colour blocks. */
-  tailParts: {
+  /** Two plain lines, then two rows of colour blocks. Four lines in total,
+      broken by hand so the sentence lands the same way in both languages. */
+  leadLines: {
     id: [
-      "supaya usaha kecil",
-      "punya software",
-      "yang benar-benar bisa dipakai.",
+      "Kerjanya menggabungkan strategi yang jelas,",
+      "garapan yang teliti, dan empati ke pengguna",
     ],
-    en: ["to build software", "small businesses", "can actually run on."],
+    en: [
+      "My focus is blending clear strategy,",
+      "careful craft, and real user empathy",
+    ],
   } as Record<Locale, string[]>,
+  blockRows: {
+    id: [["supaya usaha kecil", "punya software"], ["yang benar-benar bisa dipakai."]],
+    en: [["to build software", "small businesses"], ["can actually run on."]],
+  } as Record<Locale, string[][]>,
 } as const;
 
 export type ProcessStep = { number: string; title: L; body: L };
