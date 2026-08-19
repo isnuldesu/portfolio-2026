@@ -55,15 +55,15 @@ export function ProjectShowcase({
                 className="block rounded-3xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <div className="surface relative overflow-hidden rounded-3xl">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[1.414] overflow-hidden bg-secondary/40">
                     <Image
                       src={project.image}
-                      alt={`${project.title} interface`}
+                      alt={`${project.title} title card`}
                       fill
                       priority={index < 2}
                       sizes="(max-width: 640px) 100vw, (max-width: 1152px) 50vw, 564px"
-                      quality={80}
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                      quality={90}
+                      className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.025]"
                     />
                   </div>
 

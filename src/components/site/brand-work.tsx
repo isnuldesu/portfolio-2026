@@ -49,14 +49,14 @@ export function BrandWork() {
             )}
           >
             <Link href={`/work/${project.slug}`} className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-            <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+            <div className="relative h-52 overflow-hidden bg-secondary/50 sm:h-60 lg:h-64">
               <Image
                 src={project.image}
-                alt={`${project.title}, ${project.discipline.toLowerCase()}`}
+                alt={`${project.title} title card`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1152px) 66vw, 760px"
-                quality={80}
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                quality={90}
+                className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
             </div>
 

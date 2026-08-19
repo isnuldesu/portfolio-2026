@@ -54,7 +54,7 @@ export const caseStudies: CaseStudy[] = [
       "Point of sale SaaS spanning five apps. Merchants grew from 1,000+ to 4,500+ during my time on the product.",
     summary:
       "Luna POS is software as a service for Indonesian business owners: sales monitoring, product stock, accounting, and customer relations in one account. I joined after launch, with more than a thousand merchants already depending on it, which meant every change had to land without breaking a working shop.",
-    cover: "/work/lunapos.webp",
+    cover: "/work/covers/luna-pos.webp",
     tags: ["SaaS", "Product Design", "Design System"],
     gridSize: "large",
     sections: [
@@ -108,7 +108,7 @@ export const caseStudies: CaseStudy[] = [
       "Accounting app for Indonesian MSMEs, designed from zero as the first designer on the team.",
     summary:
       "Laba.id is a financial companion for micro, small, and medium businesses: record transactions accurately without needing to understand accounting first. The idea started in September 2020 during the pandemic, development began in early 2021, and I was the first designer on it.",
-    cover: "/work/laba.webp",
+    cover: "/work/covers/laba-id.webp",
     tags: ["Fintech", "Product Design", "Mobile"],
     gridSize: "small",
     sections: [
@@ -159,7 +159,7 @@ export const caseStudies: CaseStudy[] = [
       "Landing page for Singapore's oldest youth movement, a registered charity dating back to 1910.",
     summary:
       "The Singapore Scout Association is one of the oldest youth movements in Singapore, dating back to 1910, and a full member of the World Organisation of the Scout Movement, which counted over 57 million Scouts across 173 national organisations as of 2022. I joined the team building their landing page.",
-    cover: "/work/scout.webp",
+    cover: "/work/covers/singapore-scout-association.webp",
     tags: ["Non-profit", "Web Design"],
     gridSize: "small",
     sections: [
@@ -199,7 +199,7 @@ export const caseStudies: CaseStudy[] = [
       "Attendance and scheduling web app built for an Islamic boarding school during learning from home.",
     summary:
       "When Covid-19 closed the campus, Al-Andalus still had to operate as a school. AndalusClass is the internal web app they built to track attendance and daily student activity while students were learning from home. It was also my first project as a UI/UX designer.",
-    cover: "/work/andalusclass.webp",
+    cover: "/work/covers/andalusclass.webp",
     tags: ["EdTech", "UI/UX Design"],
     gridSize: "small",
     sections: [
@@ -241,7 +241,7 @@ export const caseStudies: CaseStudy[] = [
       "Logo system, brandmark variants, tagline lockups, and a custom typeface drawn for the brand.",
     summary:
       "A full identity for Birru.co, taken from the logogram through to the marketplace collateral. The brand ships with its own typeface rather than a licensed one, which is why the wordmark and the interface type feel like the same voice.",
-    cover: "/work/birru.webp",
+    cover: "/work/covers/birru-co.webp",
     tags: ["Branding", "Logo", "Type Design"],
     gridSize: "large",
     sections: [
@@ -277,7 +277,7 @@ export const caseStudies: CaseStudy[] = [
     teaser: "Logo variations, palette, pattern system, and marketplace collateral.",
     summary:
       "Identity for a creative studio, built in five parts: logo variations, colour, typography, pattern, and the brand in action. The pattern does most of the heavy lifting, because a studio brand shows up more often as a background than as a logo.",
-    cover: "/work/backslash.webp",
+    cover: "/work/covers/backslash-creative.webp",
     tags: ["Branding", "Logo", "Pattern"],
     gridSize: "small",
     sections: [
@@ -314,7 +314,7 @@ export const caseStudies: CaseStudy[] = [
     teaser: "Identity, pattern language, and a social media system for a skincare label.",
     summary:
       "A skincare brand needs to look consistent on a shelf, on a phone, and in a feed. VJatre got a primary and secondary logo plus two alternates, a matching icon set, a pattern, and a social template system built on the same four colours.",
-    cover: "/work/vjatre.webp",
+    cover: "/work/covers/vjatre-skincare.webp",
     tags: ["Branding", "Social", "Packaging"],
     gridSize: "small",
     sections: [
@@ -353,7 +353,7 @@ export const caseStudies: CaseStudy[] = [
       "Store thumbnails, promo design, and UI state illustration for a discount and promo app.",
     summary:
       "ProBe is a mobile app that collects discounts and promos in Indonesia in one place, so nobody has to trawl five brand sites and five brand feeds to find them. I handled the promotional design and the illustration layer inside the app.",
-    cover: "/work/probe.webp",
+    cover: "/work/covers/probe.webp",
     tags: ["App Store", "Illustration", "Promo"],
     gridSize: "large",
     sections: [
@@ -385,7 +385,7 @@ export const caseStudies: CaseStudy[] = [
       "Self-directed redesign: a twelve icon category set, empty states, and social templates.",
     summary:
       "A personal redesign of RT Pintar, a neighbourhood administration app. No brief and no client, which made it the right place to work out an icon set and a full set of empty states properly.",
-    cover: "/work/rtpintar.webp",
+    cover: "/work/covers/rt-pintar.webp",
     tags: ["Icons", "Illustration", "Redesign"],
     gridSize: "small",
     sections: [
