@@ -4,9 +4,12 @@ import { useState } from "react";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Loader2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { useLocale } from "@/components/site/locale-provider";
 import { BrandIcon } from "@/components/ui/brand-icon";
+import { Button } from "@/components/ui/button";
 import { contact, person, primaryCta, whatsappCta } from "@/content/site";
+import { errorMessage, ui } from "@/content/ui";
+import { t, type L } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -16,9 +19,10 @@ const fieldClass =
 const labelClass = "block text-sm font-medium text-foreground/90";
 
 export function Contact() {
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<L | null>(null);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,7 +47,9 @@ export function Contact() {
       const payload = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        setError(payload.error ?? "Something went wrong. Try email instead.");
+        // The route answers with a code, so the wording stays on this side and
+        // follows whichever language the visitor is reading in.
+        setError(errorMessage(payload.code));
         setStatus("error");
         return;
       }
@@ -51,7 +57,7 @@ export function Contact() {
       form.reset();
       setStatus("sent");
     } catch {
-      setError("Network dropped. Try again, or email me directly.");
+      setError(errorMessage("network"));
       setStatus("error");
     }
   }
@@ -70,17 +76,19 @@ export function Contact() {
         className="mx-auto max-w-2xl"
       >
         <h2 className="font-display text-center text-3xl font-medium tracking-tight text-balance md:text-5xl">
-          {contact.heading}
+          {t(contact.heading, locale)}
         </h2>
         <p className="mx-auto mt-5 max-w-[52ch] text-center text-base leading-relaxed text-foreground/70">
-          {contact.body}
+          {t(contact.body, locale)}
         </p>
 
         {status === "sent" ? (
           <div className="surface mt-10 rounded-3xl p-8 text-center">
-            <p className="text-lg font-medium text-foreground">Message received.</p>
+            <p className="text-lg font-medium text-foreground">
+              {t(ui.form.successTitle, locale)}
+            </p>
             <p className="mt-2 text-sm text-foreground/70">
-              I reply within two working days. If it is urgent, email is faster.
+              {t(ui.form.successBody, locale)}
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button
@@ -88,9 +96,13 @@ export function Contact() {
                 variant="outline"
                 className="h-11 gap-2 rounded-full border-border bg-card px-6 text-sm font-medium"
               >
-                <a href={whatsappCta.href} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={t(whatsappCta.href, locale)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <BrandIcon name="siWhatsapp" />
-                  {whatsappCta.label}
+                  {t(whatsappCta.label, locale)}
                 </a>
               </Button>
               <button
@@ -98,7 +110,7 @@ export function Contact() {
                 onClick={() => setStatus("idle")}
                 className="text-sm underline-offset-4 hover:underline"
               >
-                Send another
+                {t(ui.form.sendAnother, locale)}
               </button>
             </div>
           </div>
@@ -107,7 +119,7 @@ export function Contact() {
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="grid gap-2">
                 <label htmlFor="contact-name" className={labelClass}>
-                  Name
+                  {t(ui.form.name, locale)}
                 </label>
                 <input
                   id="contact-name"
@@ -115,14 +127,14 @@ export function Contact() {
                   required
                   maxLength={120}
                   autoComplete="name"
-                  placeholder="Nadia Prameswari"
+                  placeholder={t(ui.form.namePlaceholder, locale)}
                   className={fieldClass}
                 />
               </div>
 
               <div className="grid gap-2">
                 <label htmlFor="contact-email" className={labelClass}>
-                  Email
+                  {t(ui.form.email, locale)}
                 </label>
                 <input
                   id="contact-email"
@@ -131,7 +143,7 @@ export function Contact() {
                   required
                   maxLength={255}
                   autoComplete="email"
-                  placeholder="nadia@warungnusa.id"
+                  placeholder={t(ui.form.emailPlaceholder, locale)}
                   className={fieldClass}
                 />
               </div>
@@ -139,7 +151,7 @@ export function Contact() {
 
             <div className="grid gap-2">
               <label htmlFor="contact-message" className={labelClass}>
-                The business, and the bottleneck
+                {t(ui.form.message, locale)}
               </label>
               <textarea
                 id="contact-message"
@@ -147,23 +159,21 @@ export function Contact() {
                 required
                 rows={5}
                 maxLength={4000}
-                placeholder="We run four coffee outlets. Stock counts are done on paper every night and never match the register."
+                placeholder={t(ui.form.messagePlaceholder, locale)}
                 className={`${fieldClass} resize-y`}
               />
-              <p className="text-xs text-muted-foreground">
-                One paragraph is enough. Budget range helps, but is optional.
-              </p>
+              <p className="text-xs text-muted-foreground">{t(ui.form.helper, locale)}</p>
             </div>
 
             {/* Honeypot. Hidden from people, catnip for bots. */}
             <div aria-hidden="true" className="hidden">
-              <label htmlFor="contact-company">Company</label>
+              <label htmlFor="contact-company">{t(ui.form.honeypotLabel, locale)}</label>
               <input id="contact-company" name="company" tabIndex={-1} autoComplete="off" />
             </div>
 
             {error ? (
               <p role="alert" className="text-sm text-destructive">
-                {error}
+                {t(error, locale)}
               </p>
             ) : null}
 
@@ -176,11 +186,11 @@ export function Contact() {
                 {status === "sending" ? (
                   <>
                     <Loader2 className="size-4 animate-spin" />
-                    Sending
+                    {t(ui.form.sending, locale)}
                   </>
                 ) : (
                   <>
-                    {primaryCta.label}
+                    {t(primaryCta.label, locale)}
                     <ArrowUpRight className="size-4" strokeWidth={1.75} />
                   </>
                 )}
@@ -191,15 +201,19 @@ export function Contact() {
                 variant="outline"
                 className="h-12 w-full gap-2 rounded-full border-border bg-card px-8 text-sm font-medium sm:w-auto"
               >
-                <a href={whatsappCta.href} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={t(whatsappCta.href, locale)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <BrandIcon name="siWhatsapp" />
-                  {whatsappCta.label}
+                  {t(whatsappCta.label, locale)}
                 </a>
               </Button>
             </div>
 
             <p className="text-center text-sm text-muted-foreground sm:text-left">
-              Or email{" "}
+              {t(ui.form.orEmail, locale)}{" "}
               <a
                 href={`mailto:${person.email}`}
                 className="font-mono text-foreground/80 underline-offset-4 hover:text-foreground hover:underline"

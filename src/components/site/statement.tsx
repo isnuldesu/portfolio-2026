@@ -2,7 +2,9 @@
 
 import { m, useReducedMotion } from "motion/react";
 
+import { useLocale } from "@/components/site/locale-provider";
 import { disciplines, statement } from "@/content/site";
+import { t } from "@/lib/i18n";
 
 /** Tag placement, clockwise from top-left. Percentages, so it scales cleanly. */
 const positions = [
@@ -15,12 +17,13 @@ const positions = [
 ];
 
 export function Statement() {
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <p className="font-serif-display text-center text-xl text-foreground/60">
-        {statement.eyebrow}
+        {t(statement.eyebrow, locale)}
       </p>
 
       <div className="relative mx-auto mt-8 max-w-3xl">
@@ -28,7 +31,7 @@ export function Statement() {
         <div className="pointer-events-none absolute inset-0 hidden lg:block">
           {disciplines.map((label, index) => (
             <m.span
-              key={label}
+              key={t(label, "en")}
               {...(reduceMotion
                 ? {}
                 : {
@@ -47,7 +50,7 @@ export function Statement() {
                 className="size-2 rounded-full"
                 style={{ background: "var(--lime-ink)" }}
               />
-              {label}
+              {t(label, locale)}
             </m.span>
           ))}
         </div>
@@ -63,21 +66,21 @@ export function Statement() {
               })}
           className="font-display text-center text-2xl font-medium leading-snug text-balance sm:text-3xl md:text-[2.6rem] md:leading-[1.2]"
         >
-          {statement.lead}{" "}
-          <span className="text-foreground/40">{statement.tail}</span>
+          {t(statement.lead, locale)}{" "}
+          <span className="text-foreground/40">{t(statement.tail, locale)}</span>
         </m.h2>
 
         <ul className="mt-9 flex flex-wrap justify-center gap-2 lg:hidden">
           {disciplines.map((label) => (
             <li
-              key={label}
+              key={t(label, "en")}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-medium text-foreground/75"
             >
               <span
                 className="size-2 rounded-full"
                 style={{ background: "var(--lime-ink)" }}
               />
-              {label}
+              {t(label, locale)}
             </li>
           ))}
         </ul>

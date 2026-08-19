@@ -6,7 +6,10 @@ import { m, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/components/site/locale-provider";
 import { availability, hero, person, primaryCta } from "@/content/site";
+import { ui } from "@/content/ui";
+import { t } from "@/lib/i18n";
 
 // The 3D layer never blocks first paint: three and fiber load after hydration
 // and only on viewports wide enough to be worth the GPU work.
@@ -16,6 +19,7 @@ const HeroScene = dynamic(() => import("@/components/site/hero-scene"), {
 });
 
 export function Hero() {
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
   const rise = (delay: number) =>
     reduceMotion
@@ -54,14 +58,14 @@ export function Hero() {
               {...rise(0.02)}
               className="font-mono text-[11px] uppercase tracking-[0.24em] text-foreground/50"
             >
-              Portfolio 2026
+              {t(ui.hero.eyebrow, locale)}
             </m.p>
 
             <m.h1
               {...rise(0.08)}
               className="font-display mt-6 text-[2.6rem] font-medium leading-[0.95] text-foreground sm:text-6xl lg:text-[5.2rem]"
             >
-              Hi, I&rsquo;m {person.name.split(" ")[1]}
+              {t(ui.hero.greeting, locale)}
               <span className="font-serif-display mt-1 block pb-4 text-[2.9rem] font-normal leading-[1.08] sm:text-[4.4rem] lg:text-[6rem]">
                 {person.role}
               </span>
@@ -104,7 +108,7 @@ export function Hero() {
                     style={{ background: "var(--lime-ink)" }}
                   />
                 </span>
-                {availability.label}
+                {t(availability.label, locale)}
               </span>
             </m.div>
 
@@ -115,7 +119,7 @@ export function Hero() {
               className="flex flex-col items-center gap-5 lg:items-end"
             >
               <p className="max-w-[34ch] text-center text-sm leading-relaxed text-foreground/70 lg:text-right">
-                {hero.subtext}
+                {t(hero.subtext, locale)}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Button
@@ -124,7 +128,7 @@ export function Hero() {
                 >
                   <a href={primaryCta.href}>
                     <ArrowRight className="size-4" strokeWidth={2} />
-                    {primaryCta.label}
+                    {t(primaryCta.label, locale)}
                   </a>
                 </Button>
                 <Button
@@ -132,7 +136,7 @@ export function Hero() {
                   variant="outline"
                   className="h-12 rounded-full border-foreground/15 bg-white/70 px-7 text-sm font-medium backdrop-blur"
                 >
-                  <a href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+                  <a href={hero.secondaryCta.href}>{t(hero.secondaryCta.label, locale)}</a>
                 </Button>
               </div>
             </m.div>

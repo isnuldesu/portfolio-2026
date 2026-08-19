@@ -1,12 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
+import { useLocale } from "@/components/site/locale-provider";
+import { LocaleSwitcher } from "@/components/site/locale-switcher";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { nav, person, primaryCta } from "@/content/site";
+import { ui } from "@/content/ui";
+import { t } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export function SiteNav() {
+  const locale = useLocale();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -29,33 +36,36 @@ export function SiteNav() {
           scrolled && "pill-glass rounded-none border-x-0 border-t-0",
         )}
       >
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6">
-          <a
-            href="#top"
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-5 px-6">
+          <Link
+            href={`/${locale}`}
             className="font-serif-display text-xl text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {person.name}
-          </a>
+          </Link>
 
-          <nav className="hidden items-center gap-7 md:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 className="text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
               >
-                {item.label}
+                {t(item.label, locale)}
               </a>
             ))}
           </nav>
 
-          <Button
-            asChild
-            size="sm"
-            className="h-10 rounded-full px-5 text-sm font-medium"
-          >
-            <a href={primaryCta.href}>{primaryCta.label}</a>
-          </Button>
+          <div className="flex items-center gap-2">
+            <LocaleSwitcher />
+            <ThemeToggle label={t(ui.nav.themeToggle, locale)} />
+            <Button
+              asChild
+              className="hidden h-10 rounded-full px-5 text-sm font-medium sm:inline-flex"
+            >
+              <a href={primaryCta.href}>{t(primaryCta.label, locale)}</a>
+            </Button>
+          </div>
         </div>
       </header>
     </>

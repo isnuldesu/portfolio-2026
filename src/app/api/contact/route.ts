@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Malformed request." }, { status: 400 });
+    return NextResponse.json({ code: "unknown" }, { status: 400 });
   }
 
   // Bots fill every field they find. Accept silently so they stop retrying.
@@ -33,30 +33,18 @@ export async function POST(request: Request) {
   const message = asText(body.message, 4000);
 
   if (!name || !email || !message) {
-    return NextResponse.json(
-      { error: "Name, email, and message are all required." },
-      { status: 400 },
-    );
+    return NextResponse.json({ code: "required" }, { status: 400 });
   }
   if (!EMAIL.test(email)) {
-    return NextResponse.json(
-      { error: "That email address does not look right." },
-      { status: 400 },
-    );
+    return NextResponse.json({ code: "email" }, { status: 400 });
   }
   if (message.length < 20) {
-    return NextResponse.json(
-      { error: "Tell me a bit more, at least a sentence or two." },
-      { status: 400 },
-    );
+    return NextResponse.json({ code: "short" }, { status: 400 });
   }
 
   const supabase = getSupabase();
   if (!supabase) {
-    return NextResponse.json(
-      { error: "The form is not connected yet. Email me directly instead." },
-      { status: 503 },
-    );
+    return NextResponse.json({ code: "offline" }, { status: 503 });
   }
 
   const { error } = await supabase.from("contact_messages").insert({
@@ -69,10 +57,7 @@ export async function POST(request: Request) {
 
   if (error) {
     console.error("contact insert failed", error.message);
-    return NextResponse.json(
-      { error: "Could not send that. Email me directly instead." },
-      { status: 502 },
-    );
+    return NextResponse.json({ code: "failed" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

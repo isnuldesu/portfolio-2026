@@ -7,31 +7,45 @@ import { CaseStudyGallery } from "@/components/site/case-study-gallery";
 import { Button } from "@/components/ui/button";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
 import { person, primaryCta, whatsappCta } from "@/content/site";
+import { ui } from "@/content/ui";
+import { isLocale, locales, t } from "@/lib/i18n";
 
 export function generateStaticParams() {
-  return caseStudies.map((study) => ({ slug: study.slug }));
+  return locales.flatMap((locale) =>
+    caseStudies.map((study) => ({ locale, slug: study.slug })),
+  );
 }
 
 export async function generateMetadata({
   params,
-}: PageProps<"/work/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
+}: PageProps<"/[locale]/work/[slug]">): Promise<Metadata> {
+  const { locale, slug } = await params;
   const study = getCaseStudy(slug);
-  if (!study) return {};
+  if (!study || !isLocale(locale)) return {};
+
+  const description = t(study.teaser, locale);
 
   return {
-    title: `${study.title}, ${study.discipline.toLowerCase()}`,
-    description: study.teaser,
+    title: `${study.title}, ${t(study.discipline, locale).toLowerCase()}`,
+    description,
+    alternates: {
+      canonical: `/${locale}/work/${slug}`,
+      languages: { id: `/id/work/${slug}`, en: `/en/work/${slug}` },
+    },
     openGraph: {
       title: `${study.title} - ${person.name}`,
-      description: study.teaser,
+      description,
       images: [{ url: study.cover }],
     },
   };
 }
 
-export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
-  const { slug } = await params;
+export default async function CaseStudyPage({
+  params,
+}: PageProps<"/[locale]/work/[slug]">) {
+  const { locale, slug } = await params;
+  if (!isLocale(locale)) notFound();
+
   const study = getCaseStudy(slug);
   if (!study) notFound();
 
@@ -39,10 +53,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const next = caseStudies[(index + 1) % caseStudies.length];
 
   const facts = [
-    { label: "Role", value: study.role },
-    { label: "Client", value: study.client },
-    { label: "Year", value: study.year },
-    { label: "Discipline", value: study.discipline },
+    { label: t(ui.caseStudy.role, locale), value: t(study.role, locale) },
+    { label: t(ui.caseStudy.client, locale), value: t(study.client, locale) },
+    { label: t(ui.caseStudy.year, locale), value: study.year },
+    { label: t(ui.caseStudy.discipline, locale), value: t(study.discipline, locale) },
   ];
 
   return (
@@ -59,21 +73,21 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
         <div className="relative mx-auto max-w-4xl">
           <Link
-            href="/#work"
+            href={`/${locale}#work`}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
           >
             <ArrowLeft className="size-4" strokeWidth={2} />
-            All work
+            {t(ui.caseStudy.back, locale)}
           </Link>
 
           <p className="font-serif-display mt-10 text-base text-foreground/50">
-            / {study.discipline}
+            / {t(study.discipline, locale)}
           </p>
           <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-balance md:text-6xl">
             {study.title}
           </h1>
           <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-foreground/75 md:text-lg">
-            {study.summary}
+            {t(study.summary, locale)}
           </p>
 
           <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-4">
@@ -94,7 +108,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium outline-none transition-shadow hover:shadow-[0_10px_28px_rgba(23,24,28,0.1)] focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-              {study.linkLabel ?? "Visit the live site"}
+              {study.linkLabel ?? t(ui.caseStudy.visit, locale)}
               <ArrowUpRight className="size-4" strokeWidth={2} />
             </a>
           ) : null}
@@ -104,25 +118,25 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       <div className="mx-auto mt-16 max-w-4xl px-3 sm:px-6">
         <div className="space-y-14">
           {study.sections.map((section) => (
-            <section key={section.heading}>
+            <section key={t(section.heading, "en")}>
               <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
-                {section.heading}
+                {t(section.heading, locale)}
               </h2>
               <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-foreground/75">
-                {section.body}
+                {t(section.body, locale)}
               </p>
               {section.bullets ? (
                 <ul className="mt-5 space-y-2.5">
                   {section.bullets.map((bullet) => (
                     <li
-                      key={bullet}
+                      key={t(bullet, "en")}
                       className="flex gap-3 text-base leading-relaxed text-foreground/75"
                     >
                       <span
                         className="mt-2.5 size-1.5 shrink-0 rounded-full"
                         style={{ background: "var(--lime-ink)" }}
                       />
-                      {bullet}
+                      {t(bullet, locale)}
                     </li>
                   ))}
                 </ul>
@@ -136,12 +150,12 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             {study.typefaces ? (
               <div className="surface rounded-3xl p-7">
                 <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-                  Typography
+                  {t(ui.caseStudy.typography, locale)}
                 </h3>
                 <ul className="mt-4 space-y-2">
                   {study.typefaces.map((face) => (
-                    <li key={face} className="font-display text-xl tracking-tight">
-                      {face}
+                    <li key={t(face, "en")} className="font-display text-xl tracking-tight">
+                      {t(face, locale)}
                     </li>
                   ))}
                 </ul>
@@ -151,7 +165,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             {study.palette ? (
               <div className="surface rounded-3xl p-7">
                 <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-                  Palette
+                  {t(ui.caseStudy.palette, locale)}
                 </h3>
                 <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {study.palette.map((swatch) => (
@@ -178,9 +192,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       <section className="mx-auto mt-8 max-w-4xl px-3 sm:px-6">
         <div className="surface flex flex-col gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">Next project</p>
+            <p className="text-sm text-muted-foreground">{t(ui.caseStudy.next, locale)}</p>
             <Link
-              href={`/work/${next.slug}`}
+              href={`/${locale}/work/${next.slug}`}
               className="font-display mt-1 inline-flex items-center gap-2 text-2xl font-medium tracking-tight outline-none hover:underline focus-visible:underline"
             >
               {next.title}
@@ -190,15 +204,21 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
           <div className="flex flex-wrap gap-3">
             <Button asChild className="h-11 rounded-full px-6 text-sm font-medium">
-              <Link href={primaryCta.href}>{primaryCta.label}</Link>
+              <Link href={`/${locale}${primaryCta.href}`}>
+                {t(primaryCta.label, locale)}
+              </Link>
             </Button>
             <Button
               asChild
               variant="outline"
               className="h-11 rounded-full border-border bg-card px-6 text-sm font-medium"
             >
-              <a href={whatsappCta.href} target="_blank" rel="noopener noreferrer">
-                {whatsappCta.label}
+              <a
+                href={t(whatsappCta.href, locale)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t(whatsappCta.label, locale)}
               </a>
             </Button>
           </div>

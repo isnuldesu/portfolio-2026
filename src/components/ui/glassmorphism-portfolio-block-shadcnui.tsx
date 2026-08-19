@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BrandIcon } from "@/components/ui/brand-icon";
+import { useLocale } from "@/components/site/locale-provider";
 import {
   highlights as defaultHighlights,
   socialLinks as defaultSocials,
@@ -15,6 +16,8 @@ import {
   type Highlight,
   type SocialLink,
 } from "@/content/site";
+import { ui } from "@/content/ui";
+import { t } from "@/lib/i18n";
 
 const listVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -37,6 +40,7 @@ export function GlassmorphismPortfolioBlock({
   highlights?: Highlight[];
   socialLinks?: SocialLink[];
 }) {
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
   const rise = (delay = 0) =>
     reduceMotion
@@ -71,7 +75,7 @@ export function GlassmorphismPortfolioBlock({
                 variant="outline"
                 className="inline-flex items-center gap-2 rounded-full border-border bg-card px-4 py-1.5 text-xs font-medium text-foreground/70"
               >
-                About
+                {t(ui.about.badge, locale)}
               </Badge>
 
               <div className="space-y-4">
@@ -79,20 +83,20 @@ export function GlassmorphismPortfolioBlock({
                   {...rise(0.1)}
                   className="font-display text-xl font-medium tracking-tight text-pretty break-words text-foreground sm:text-2xl md:text-3xl"
                 >
-                  {person.name}, {person.role} and {person.secondaryRole}
+                  {person.name}, {person.role} & {person.secondaryRole}
                 </m.h2>
                 <m.p
                   {...rise(0.18)}
                   className="max-w-[58ch] text-base leading-relaxed text-foreground/70"
                 >
-                  {person.intro}
+                  {t(person.intro, locale)}
                 </m.p>
               </div>
 
               <div className="grid gap-4">
                 {highlights.map((item, index) => (
                   <m.div
-                    key={item.title}
+                    key={t(item.title, "en")}
                     {...(reduceMotion
                       ? { initial: false as const }
                       : {
@@ -106,10 +110,10 @@ export function GlassmorphismPortfolioBlock({
                   >
                     <div className="relative space-y-2">
                       <p className="text-xs font-medium" style={{ color: "var(--lime-ink)" }}>
-                        {item.title}
+                        {t(item.title, locale)}
                       </p>
                       <p className="text-sm leading-relaxed text-foreground/70">
-                        {item.description}
+                        {t(item.description, locale)}
                       </p>
                     </div>
                   </m.div>
@@ -122,7 +126,7 @@ export function GlassmorphismPortfolioBlock({
                   className="h-12 w-full gap-2 rounded-full px-8 text-sm font-medium sm:w-auto"
                 >
                   <a href={primaryCta.href}>
-                    {primaryCta.label}
+                    {t(primaryCta.label, locale)}
                     <ArrowUpRight className="size-4" strokeWidth={1.75} />
                   </a>
                 </Button>
@@ -169,8 +173,7 @@ export function GlassmorphismPortfolioBlock({
                     {...rise(0.26)}
                     className="mt-4 max-w-sm text-sm leading-relaxed text-foreground/70"
                   >
-                    {person.location}. Reachable in one message, and I answer with a
-                    plan rather than a brochure.
+                    {t(person.location, locale)}. {t(ui.about.contactLine, locale)}
                   </m.p>
                 </div>
 

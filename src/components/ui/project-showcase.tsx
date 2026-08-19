@@ -5,30 +5,26 @@ import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
+import { useLocale } from "@/components/site/locale-provider";
 import { projects as defaultProjects, type Project } from "@/content/site";
+import { ui } from "@/content/ui";
+import { t } from "@/lib/i18n";
 
 /**
  * Selected work as a two-up card grid. The screenshot carries the weight, the
  * caption underneath names the project and the disciplines it covered.
  */
-export function ProjectShowcase({
-  items = defaultProjects,
-  eyebrow = "/ Selected work",
-  heading = "Products people run their day on",
-}: {
-  items?: Project[];
-  eyebrow?: string;
-  heading?: string;
-}) {
+export function ProjectShowcase({ items = defaultProjects }: { items?: Project[] }) {
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
 
   return (
     <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <p className="font-serif-display text-center text-base text-foreground/50">
-        {eyebrow}
+        {t(ui.work.eyebrow, locale)}
       </p>
       <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">
-        {heading}
+        {t(ui.work.heading, locale)}
       </h2>
 
       <div className="mt-14 grid gap-6 sm:grid-cols-2">
@@ -51,7 +47,7 @@ export function ProjectShowcase({
               className="group"
             >
               <Link
-                href={`/work/${project.slug}`}
+                href={`/${locale}/work/${project.slug}`}
                 className="block rounded-3xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <div className="surface relative overflow-hidden rounded-3xl">
@@ -78,7 +74,7 @@ export function ProjectShowcase({
                       {project.title}
                     </h3>
                     <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted-foreground">
-                      {project.description}
+                      {t(project.description, locale)}
                     </p>
                   </div>
 
@@ -97,7 +93,7 @@ export function ProjectShowcase({
                 <p className="mt-2 px-1 font-mono text-xs text-muted-foreground">
                   {project.year}
                   {project.linkLabel ? ` · ${project.linkLabel}` : ""}
-                  {" · Read the case study"}
+                  {` · ${t(ui.work.readMore, locale)}`}
                 </p>
               </Link>
             </m.article>

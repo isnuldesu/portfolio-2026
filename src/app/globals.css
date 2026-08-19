@@ -222,3 +222,63 @@ html {
     -webkit-backdrop-filter: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Dark theme. Same structure, inverted ground: near black page, raised cards,
+   and a lime that has to work against dark rather than on paper.
+--------------------------------------------------------------------------- */
+
+.dark {
+  --background: oklch(0.155 0.006 264);
+  --foreground: oklch(0.955 0.003 264);
+
+  --card: oklch(0.203 0.007 264);
+  --card-foreground: oklch(0.955 0.003 264);
+  --popover: oklch(0.203 0.007 264);
+  --popover-foreground: oklch(0.955 0.003 264);
+
+  --primary: oklch(0.955 0.003 264);
+  --primary-foreground: oklch(0.18 0.008 264);
+
+  --secondary: oklch(0.245 0.008 264);
+  --secondary-foreground: oklch(0.955 0.003 264);
+
+  --muted: oklch(0.245 0.008 264);
+  --muted-foreground: oklch(0.68 0.011 264);
+
+  --accent: oklch(0.245 0.008 264);
+  --accent-foreground: oklch(0.955 0.003 264);
+
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.9 0.183 124 / 45%);
+
+  --lime: oklch(0.84 0.185 124);
+  --lime-soft: oklch(0.62 0.14 128);
+  /* Bright enough to pass against the dark card, unlike the light-mode value. */
+  --lime-ink: oklch(0.88 0.185 124);
+}
+
+.dark html,
+html.dark {
+  color-scheme: dark;
+}
+
+.dark .surface {
+  background: var(--card);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 6%),
+    0 20px 50px oklch(0 0 0 / 45%);
+}
+
+.dark .pill-glass {
+  border-color: oklch(1 0 0 / 14%);
+  background: oklch(0.203 0.007 264 / 72%);
+  box-shadow: 0 8px 24px oklch(0 0 0 / 40%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .dark .pill-glass {
+    background: var(--card);
+  }
+}

@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048],
     imageSizes: [128, 240, 304, 384, 564, 760],
   },
+  async redirects() {
+    return [
+      // Indonesian is the default, and the old unprefixed URLs still resolve.
+      { source: "/", destination: "/id", permanent: false },
+      { source: "/work/:slug", destination: "/id/work/:slug", permanent: false },
+    ];
+  },
   // The repo root, not the first package-lock.json found up the tree.
   turbopack: { root: path.resolve(process.cwd()) },
   outputFileTracingRoot: path.resolve(process.cwd()),
