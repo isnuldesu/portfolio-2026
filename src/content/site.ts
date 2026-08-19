@@ -1,8 +1,10 @@
 /**
  * Single source of truth for every visible string on the site.
- * Project data is transcribed from the 2025 Product Design and Graphic Design
- * portfolio decks; imagery in /public/work is rendered from those same pages.
+ * Project cards are derived from case-studies.ts so a card and its detail page
+ * can never disagree about a title, a year, or a link.
  */
+
+import { caseStudies } from "@/content/case-studies";
 
 export const person = {
   name: "Muhammad Isnul",
@@ -33,6 +35,7 @@ export const hero = {
 } as const;
 
 export type Project = {
+  slug: string;
   title: string;
   description: string;
   year: string;
@@ -42,102 +45,40 @@ export type Project = {
   linkLabel?: string;
 };
 
-/** Product work, from the Product Design deck. */
-export const projects: Project[] = [
-  {
-    title: "Luna POS",
-    description:
-      "Point of sale SaaS spanning five apps. Merchants grew from 1,000+ to 4,500+ during my time on the product.",
-    year: "2021 - Present",
-    image: "/work/lunapos.jpg",
-    link: "https://lunapos.id",
-    linkLabel: "lunapos.id",
-    tags: ["SaaS", "Product Design", "Design System"],
-  },
-  {
-    title: "Laba.id",
-    description:
-      "Accounting app for Indonesian MSMEs, designed from zero as the first designer on the team.",
-    year: "2021 - Present",
-    image: "/work/laba.jpg",
-    link: "https://laba.id",
-    linkLabel: "laba.id",
-    tags: ["Fintech", "Product Design", "Mobile"],
-  },
-  {
-    title: "The Singapore Scout Association",
-    description:
-      "Landing page for Singapore's oldest youth movement, a registered charity dating back to 1910.",
-    year: "2023",
-    image: "/work/scout.jpg",
-    link: "https://scout.sg",
-    linkLabel: "scout.sg",
-    tags: ["Non-profit", "Web Design"],
-  },
-  {
-    title: "AndalusClass",
-    description:
-      "Attendance and scheduling web app built for an Islamic boarding school during learning from home.",
-    year: "2020",
-    image: "/work/andalusclass.jpg",
-    tags: ["EdTech", "UI/UX Design"],
-  },
-];
+export const projects: Project[] = caseStudies
+  .filter((study) => study.category === "product")
+  .map((study) => ({
+    slug: study.slug,
+    title: study.title,
+    description: study.teaser,
+    year: study.year,
+    image: study.cover,
+    tags: study.tags,
+    link: study.link,
+    linkLabel: study.linkLabel,
+  }));
 
 export type BrandProject = {
+  slug: string;
   title: string;
   discipline: string;
   description: string;
   year?: string;
   image: string;
-  /** Controls the tile footprint in the grid. */
   size: "large" | "small";
 };
 
-/** Identity and illustration work, from the Graphic Design deck. */
-export const brandProjects: BrandProject[] = [
-  {
-    title: "Birru.co",
-    discipline: "Brand identity",
-    description:
-      "Logo system, brandmark variants, tagline lockups, and a custom typeface drawn for the brand.",
-    year: "2024",
-    image: "/work/birru.jpg",
-    size: "large",
-  },
-  {
-    title: "Backslash Creative",
-    discipline: "Brand identity",
-    description: "Logo variations, palette, pattern system, and marketplace collateral.",
-    year: "2022",
-    image: "/work/backslash.jpg",
-    size: "small",
-  },
-  {
-    title: "VJatre Skincare",
-    discipline: "Brand and social",
-    description: "Identity, pattern language, and a social media system for a skincare label.",
-    year: "2022",
-    image: "/work/vjatre.jpg",
-    size: "small",
-  },
-  {
-    title: "ProBe",
-    discipline: "Product art direction",
-    description:
-      "Store thumbnails, promo design, and UI state illustration for a discount and promo app.",
-    image: "/work/probe.jpg",
-    size: "large",
-  },
-  {
-    title: "RT Pintar",
-    discipline: "Icons and illustration",
-    description:
-      "Self-directed redesign: a twelve icon category set, empty states, and social templates.",
-    image: "/work/rtpintar.jpg",
-    size: "small",
-  },
-];
+export const brandProjects: BrandProject[] = caseStudies
+  .filter((study) => study.category === "brand")
+  .map((study) => ({
+    slug: study.slug,
+    title: study.title,
+    discipline: study.discipline,
+    description: study.teaser,
+    year: study.year,
+    image: study.cover,
+    size: study.gridSize,
+  }));
 
 export type Typeface = {
   name: string;
@@ -226,16 +167,16 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const nav = [
-  { label: "Work", href: "#work" },
-  { label: "Brand", href: "#brand" },
-  { label: "Type", href: "#type" },
-  { label: "About", href: "#about" },
+  { label: "Work", href: "/#work" },
+  { label: "Brand", href: "/#brand" },
+  { label: "Type", href: "/#type" },
+  { label: "About", href: "/#about" },
 ] as const;
 
 /** One label per intent. Used in nav, hero, about, and the contact form alike. */
 export const primaryCta = {
   label: "Start a project",
-  href: "#contact",
+  href: "/#contact",
 } as const;
 
 export const whatsappCta = {

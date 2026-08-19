@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
 
 import { brandProjects } from "@/content/site";
@@ -46,6 +47,7 @@ export function BrandWork() {
               index === brandProjects.length - 1 && "md:col-span-3",
             )}
           >
+            <Link href={`/work/${project.slug}`} className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
             <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -70,6 +72,7 @@ export function BrandWork() {
                 </span>
               ) : null}
             </div>
+            </Link>
           </m.article>
         ))}
       </div>

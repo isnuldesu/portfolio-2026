@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -31,8 +32,6 @@ export function ProjectShowcase({
 
       <div className="mt-14 grid gap-6 sm:grid-cols-2">
         {items.map((project, index) => {
-          const Wrapper = project.link ? "a" : "div";
-
           return (
             <m.article
               key={project.title}
@@ -50,10 +49,8 @@ export function ProjectShowcase({
                   })}
               className="group"
             >
-              <Wrapper
-                {...(project.link
-                  ? { href: project.link, target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+              <Link
+                href={`/work/${project.slug}`}
                 className="block rounded-3xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <div className="surface relative overflow-hidden rounded-3xl">
@@ -67,11 +64,9 @@ export function ProjectShowcase({
                     />
                   </div>
 
-                  {project.link ? (
-                    <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <ArrowUpRight className="size-4" strokeWidth={2} />
-                    </span>
-                  ) : null}
+                  <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <ArrowUpRight className="size-4" strokeWidth={2} />
+                  </span>
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3 px-1">
@@ -99,8 +94,9 @@ export function ProjectShowcase({
                 <p className="mt-2 px-1 font-mono text-xs text-muted-foreground">
                   {project.year}
                   {project.linkLabel ? ` · ${project.linkLabel}` : ""}
+                  {" · Read the case study"}
                 </p>
-              </Wrapper>
+              </Link>
             </m.article>
           );
         })}
