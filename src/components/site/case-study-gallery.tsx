@@ -31,7 +31,7 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
   });
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-14">
+    <section className="">
       <div className="flex items-baseline justify-between gap-6 border-b border-border pb-5">
         <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
           {t(ui.caseStudy.galleryHeading, locale)}

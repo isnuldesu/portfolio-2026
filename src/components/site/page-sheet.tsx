@@ -10,7 +10,7 @@ export function PageSheet({
   className?: string;
 }) {
   return (
-    <div className={`sheet mx-auto w-full max-w-[82rem] overflow-x-clip ${className}`}>
+    <div className={`sheet mx-auto w-full max-w-[82rem] overflow-x-clip px-5 py-12 sm:px-8 md:px-12 md:py-16 ${className}`}>
       {children}
     </div>
   );

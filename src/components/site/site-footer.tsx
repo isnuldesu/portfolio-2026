@@ -9,8 +9,8 @@ export function SiteFooter() {
   const locale = useLocale();
 
   return (
-    <footer className="px-6 py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8">
+    <footer className="">
+      <div className="flex flex-col gap-8">
         {/* The header hides these below lg, so the footer carries them on phones. */}
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-3 border-b border-border pb-8 lg:hidden">
           {nav.map((item) => (

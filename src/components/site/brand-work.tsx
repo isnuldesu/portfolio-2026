@@ -19,7 +19,7 @@ export function BrandWork() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="brand" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+    <section id="brand" className="">
       <h2 className="font-display max-w-[20ch] text-3xl font-medium tracking-tight text-balance md:text-4xl">
         {t(ui.brand.heading, locale)}
       </h2>
@@ -27,7 +27,7 @@ export function BrandWork() {
         {t(ui.brand.body, locale)}
       </p>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2">
         {brandProjects.map((project, index) => (
           <m.article
             key={project.title}
@@ -44,10 +44,10 @@ export function BrandWork() {
                   },
                   whileHover: { y: -6 },
                 })}
-            className="group"
+            className="group -ml-0.5 -mt-0.5 border-2 border-border p-5"
           >
             <Link href={`/${locale}/work/${project.slug}`} className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-            <div className="relative aspect-[4/3] overflow-hidden border border-border">
+            <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
               <Image
                 src={project.image}
                 alt={`${project.title} title card`}

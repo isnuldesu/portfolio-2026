@@ -19,7 +19,7 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+    <section id="work" className="">
       <p className="label-mono text-muted-foreground">
         {t(ui.work.eyebrow, locale)}
       </p>
@@ -27,7 +27,7 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
         {t(ui.work.heading, locale)}
       </h2>
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2">
+      <div className="mt-12 grid sm:grid-cols-2">
         {items.map((project, index) => {
           return (
             <m.article
@@ -44,14 +44,14 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
                       ease: [0.16, 1, 0.3, 1] as const,
                     },
                   })}
-              className="group"
+              className="group -ml-0.5 -mt-0.5 border-2 border-border p-5"
             >
               <Link
                 href={`/${locale}/work/${project.slug}`}
                 className="block rounded-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 <div className="relative overflow-hidden">
-                  <div className="relative aspect-[4/3] overflow-hidden border border-border">
+                  <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
                     <Image
                       src={project.image}
                       alt={`${project.title} title card`}

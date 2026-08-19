@@ -71,8 +71,8 @@ export default async function CaseStudyPage({
   return (
     <article className="flex flex-col gap-4 sm:gap-6">
       <PageSheet>
-      <header className="relative overflow-hidden px-6 pb-14 pt-10 sm:px-10 sm:pt-14">
-        <div className="relative mx-auto max-w-4xl">
+      <header className="relative overflow-hidden">
+        <div className="relative">
           <Link
             href={`/${locale}#work`}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
@@ -124,7 +124,7 @@ export default async function CaseStudyPage({
       </PageSheet>
 
       <PageSheet>
-      <div className="mx-auto max-w-4xl px-6 py-14 sm:px-10">
+      <div>
         <div className="space-y-14">
           {study.sections.map((section) => (
             <section key={t(section.heading, "en")}>
@@ -208,7 +208,7 @@ export default async function CaseStudyPage({
       </PageSheet>
 
       <PageSheet>
-      <section className="mx-auto max-w-4xl px-6 py-12 sm:px-10">
+      <section>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="label-mono text-muted-foreground">

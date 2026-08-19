@@ -30,7 +30,7 @@ export function Hero() {
         };
 
   return (
-    <section id="top" className="mx-auto max-w-6xl px-6 pt-10 sm:pt-14">
+    <section id="top" className="">
       {/* Masthead proportions are lifted straight off the reference: a square
           mark, the name knocked out of a coral block, the title on a wider
           sand block, and a 4px gap holding the three together. */}

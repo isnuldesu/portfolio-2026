@@ -64,7 +64,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative px-6 py-28 md:py-36">
+    <section id="contact" className="relative">
       <m.div
         {...(reduceMotion
           ? {}
@@ -74,7 +74,7 @@ export function Contact() {
               viewport: { once: true, amount: 0.25 },
               transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
             })}
-        className="mx-auto max-w-2xl"
+        className=""
       >
         <h2 className="font-display text-3xl font-medium tracking-tight text-balance md:text-5xl">
           {t(contact.heading, locale)}

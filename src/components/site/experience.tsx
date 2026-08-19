@@ -18,7 +18,7 @@ export function Experience() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+    <section id="experience" className="">
       <p className="label-mono text-muted-foreground">
         {t(ui.experience.eyebrow, locale)}
       </p>
@@ -26,7 +26,7 @@ export function Experience() {
         {t(ui.experience.heading, locale)}
       </h2>
 
-      <ol className="mx-auto mt-14 max-w-4xl">
+      <ol className="mt-14">
         {roles.map((role, index) => (
           <m.li
             key={`${role.company}-${role.period}`}
@@ -80,7 +80,7 @@ export function Experience() {
         ))}
       </ol>
 
-      <div className="mx-auto mt-12 grid max-w-4xl md:grid-cols-3">
+      <div className="mt-6 grid md:grid-cols-3">
         <div
           className="rule-left md:-mr-0.5"
           style={{ "--rule": accentAt(1) } as React.CSSProperties}

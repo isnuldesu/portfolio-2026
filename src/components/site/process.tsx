@@ -13,7 +13,7 @@ export function Process() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+    <section className="">
       <p className="label-mono text-muted-foreground">
         {t(ui.process.eyebrow, locale)}
       </p>

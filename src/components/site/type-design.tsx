@@ -17,8 +17,8 @@ export function TypeDesign() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="type" className="py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="type" className="">
+      <div>
         <h2 className="font-display max-w-[22ch] text-3xl font-medium tracking-tight text-balance md:text-4xl">
           {t(ui.type.heading, locale)}
         </h2>
@@ -37,14 +37,14 @@ export function TypeDesign() {
               viewport: { once: true, amount: 0.2 },
               transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
             })}
-        className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [scrollbar-width:thin]"
+        className="mt-10 flex snap-x snap-mandatory gap-0 overflow-x-auto pb-4 [scrollbar-width:thin]"
       >
         {typefaces.map((face) => (
           <li
             key={face.name}
-            className="w-[19rem] shrink-0 snap-start sm:w-[24rem]"
+            className="-ml-0.5 w-[19rem] shrink-0 snap-start border-2 border-border p-5 sm:w-[24rem]"
           >
-            <div className="relative aspect-[4/3] overflow-hidden border border-border">
+            <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
               <Image
                 src={face.image}
                 alt={`${face.name} specimen`}

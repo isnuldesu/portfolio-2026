@@ -55,8 +55,8 @@ export function GlassmorphismPortfolioBlock({
         };
 
   return (
-    <section id="about" className="relative overflow-hidden px-6 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="about" className="relative">
+      <div>
         <m.div
           {...(reduceMotion
             ? { initial: false as const }
@@ -66,7 +66,7 @@ export function GlassmorphismPortfolioBlock({
                 viewport: { once: true, amount: 0.25 },
                 transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
               })}
-          className="relative overflow-hidden border-t border-border pt-10 sm:pt-12"
+          className="relative overflow-hidden"
         >
           <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(90% 70% at 100% 0%, var(--blush) 0%, transparent 60%)" }} />
 

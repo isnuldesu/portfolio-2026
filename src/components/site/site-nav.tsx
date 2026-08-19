@@ -37,7 +37,7 @@ export function SiteNav() {
           scrolled ? "pill-glass" : "sheet",
         )}
       >
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-5 px-6">
+        <div className="flex h-16 items-center justify-between gap-5 px-5 sm:px-8 md:px-12">
           <Link
             href={`/${locale}`}
             className="font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
