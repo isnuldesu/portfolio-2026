@@ -5,7 +5,7 @@
  */
 
 import { caseStudies } from "@/content/case-studies";
-import type { L } from "@/lib/i18n";
+import type { L, Locale } from "@/lib/i18n";
 
 export const person = {
   name: "Muhammad Isnul",
@@ -256,10 +256,15 @@ export const statement = {
     id: "Kerjanya menggabungkan strategi yang jelas, garapan yang teliti, dan empati ke pengguna",
     en: "My focus is blending clear strategy, careful craft, and real user empathy",
   } as L,
-  tail: {
-    id: "supaya usaha kecil punya software yang benar-benar bisa dipakai.",
-    en: "to build software small businesses can actually run on.",
-  } as L,
+  /** Three phrases, each sat on one of the CV's colour blocks. */
+  tailParts: {
+    id: [
+      "supaya usaha kecil",
+      "punya software",
+      "yang benar-benar bisa dipakai.",
+    ],
+    en: ["to build software", "small businesses", "can actually run on."],
+  } as Record<Locale, string[]>,
 } as const;
 
 export type ProcessStep = { number: string; title: L; body: L };

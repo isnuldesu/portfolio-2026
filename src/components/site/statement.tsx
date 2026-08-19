@@ -16,6 +16,13 @@ const positions = [
   "right-0 top-[70%]",
 ];
 
+/** The CV sets white on coral and ink on the lighter two. Same here. */
+const blocks = [
+  { bg: "var(--teal)", ink: "#2d2d2c" },
+  { bg: "var(--sand)", ink: "#2d2d2c" },
+  { bg: "var(--coral)", ink: "#ffffff" },
+];
+
 export function Statement() {
   const locale = useLocale();
   const reduceMotion = useReducedMotion();
@@ -67,7 +74,18 @@ export function Statement() {
           className="font-display text-2xl font-medium leading-snug text-balance sm:text-3xl md:text-[2.6rem] md:leading-[1.2]"
         >
           {t(statement.lead, locale)}{" "}
-          <span className="text-foreground/40">{t(statement.tail, locale)}</span>
+          {statement.tailParts[locale].map((part, index) => (
+            <span
+              key={part}
+              className="box-decoration-clone px-2 py-0.5 leading-[1.35]"
+              style={{
+                background: blocks[index].bg,
+                color: blocks[index].ink,
+              }}
+            >
+              {part}
+            </span>
+          ))}
         </m.h2>
 
         <ul className="mt-9 flex flex-wrap justify-center gap-2 lg:hidden">

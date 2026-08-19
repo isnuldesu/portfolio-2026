@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 import { CaseStudyGallery } from "@/components/site/case-study-gallery";
 import { Button } from "@/components/ui/button";
+import { StableLabel } from "@/components/ui/stable-label";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
 import { person, primaryCta, whatsappCta } from "@/content/site";
 import { ui } from "@/content/ui";
@@ -205,7 +206,7 @@ export default async function CaseStudyPage({
           <div className="flex flex-wrap gap-3">
             <Button asChild className="h-11 rounded-none px-6 text-sm font-medium">
               <Link href={`/${locale}${primaryCta.href}`}>
-                {t(primaryCta.label, locale)}
+                <StableLabel value={primaryCta.label} />
               </Link>
             </Button>
             <Button
@@ -218,7 +219,7 @@ export default async function CaseStudyPage({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {t(whatsappCta.label, locale)}
+                <StableLabel value={whatsappCta.label} />
               </a>
             </Button>
           </div>

@@ -7,6 +7,7 @@ import { ArrowUpRight, Loader2 } from "lucide-react";
 import { useLocale } from "@/components/site/locale-provider";
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { Button } from "@/components/ui/button";
+import { StableLabel } from "@/components/ui/stable-label";
 import { contact, person, primaryCta, whatsappCta } from "@/content/site";
 import { errorMessage, ui } from "@/content/ui";
 import { t, type L } from "@/lib/i18n";
@@ -102,7 +103,7 @@ export function Contact() {
                   rel="noopener noreferrer"
                 >
                   <BrandIcon name="siWhatsapp" />
-                  {t(whatsappCta.label, locale)}
+                  <StableLabel value={whatsappCta.label} />
                 </a>
               </Button>
               <button
@@ -186,11 +187,11 @@ export function Contact() {
                 {status === "sending" ? (
                   <>
                     <Loader2 className="size-4 animate-spin" />
-                    {t(ui.form.sending, locale)}
+                    <StableLabel value={ui.form.sending} />
                   </>
                 ) : (
                   <>
-                    {t(primaryCta.label, locale)}
+                    <StableLabel value={primaryCta.label} />
                     <ArrowUpRight className="size-4" strokeWidth={1.75} />
                   </>
                 )}
@@ -207,7 +208,7 @@ export function Contact() {
                   rel="noopener noreferrer"
                 >
                   <BrandIcon name="siWhatsapp" />
-                  {t(whatsappCta.label, locale)}
+                  <StableLabel value={whatsappCta.label} />
                 </a>
               </Button>
             </div>

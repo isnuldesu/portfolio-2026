@@ -7,6 +7,7 @@ import { useLocale } from "@/components/site/locale-provider";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { StableLabel } from "@/components/ui/stable-label";
 import { nav, person, primaryCta } from "@/content/site";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
@@ -63,7 +64,9 @@ export function SiteNav() {
               asChild
               className="hidden h-10 px-5 text-sm font-medium sm:inline-flex"
             >
-              <a href={primaryCta.href}>{t(primaryCta.label, locale)}</a>
+              <a href={primaryCta.href}>
+              <StableLabel value={primaryCta.label} />
+            </a>
             </Button>
           </div>
         </div>

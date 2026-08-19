@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 import { useLocale } from "@/components/site/locale-provider";
 import { Button } from "@/components/ui/button";
+import { StableLabel } from "@/components/ui/stable-label";
 import { availability, hero, person, primaryCta } from "@/content/site";
 import { t } from "@/lib/i18n";
 
@@ -140,7 +141,7 @@ export function Hero() {
           <Button asChild className="h-11 gap-2 rounded-none px-6 text-sm font-medium">
             <a href={primaryCta.href}>
               <ArrowRight className="size-4" strokeWidth={2} />
-              {t(primaryCta.label, locale)}
+              <StableLabel value={primaryCta.label} />
             </a>
           </Button>
           <Button
@@ -148,7 +149,9 @@ export function Hero() {
             variant="outline"
             className="h-11 rounded-none border-border px-6 text-sm font-medium"
           >
-            <a href={hero.secondaryCta.href}>{t(hero.secondaryCta.label, locale)}</a>
+            <a href={hero.secondaryCta.href}>
+              <StableLabel value={hero.secondaryCta.label} />
+            </a>
           </Button>
         </div>
       </m.div>

@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { StableLabel } from "@/components/ui/stable-label";
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { useLocale } from "@/components/site/locale-provider";
 import {
@@ -128,7 +129,7 @@ export function GlassmorphismPortfolioBlock({
                   className="h-12 w-full gap-2 rounded-none px-8 text-sm font-medium sm:w-auto"
                 >
                   <a href={primaryCta.href}>
-                    {t(primaryCta.label, locale)}
+                    <StableLabel value={primaryCta.label} />
                     <ArrowUpRight className="size-4" strokeWidth={1.75} />
                   </a>
                 </Button>
