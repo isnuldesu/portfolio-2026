@@ -24,7 +24,7 @@ export function LocaleSwitcher() {
             key={locale}
             href={`/${locale}${rest}`}
             hrefLang={meta.htmlLang}
-            aria-current={active ? "true" : undefined}
+            aria-current={active ? "page" : undefined}
             className={cn(
               "flex h-full items-center gap-1.5 px-3 text-xs font-medium outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50",
               active

@@ -69,9 +69,18 @@ export default async function LocaleLayout({
       <body className="min-h-full bg-background text-foreground">
         <ThemeProvider>
           <LocaleProvider locale={locale}>
-            <div className="flex min-h-dvh flex-col gap-4 px-0 py-0 sm:gap-6 sm:px-6 sm:py-8">
+            <a
+              href="#content"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:border-2 focus:border-border focus:bg-[var(--sheet)] focus:px-4 focus:py-2 focus:text-sm"
+            >
+              {locale === "id" ? "Lompat ke konten" : "Skip to content"}
+            </a>
+            <main
+              id="content"
+              className="flex min-h-dvh flex-col gap-4 px-0 py-0 sm:gap-6 sm:px-6 sm:py-8"
+            >
               {children}
-            </div>
+            </main>
           </LocaleProvider>
         </ThemeProvider>
       </body>

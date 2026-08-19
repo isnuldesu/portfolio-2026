@@ -170,6 +170,10 @@
 
   /* The CV palette. Coral leads; the rest tag categories. */
   --coral: #eb5362;
+  /* Blocks that carry white text keep one printed colour in both themes.
+     The lighter dark-mode coral drops white to 2.84:1, under AA for large
+     text; this value holds at 3.53:1. */
+  --coral-block: #eb5362;
   --teal: #4bbd99;
   --sage: #90ada5;
   --sand: #f3cd65;
@@ -261,6 +265,7 @@ html {
   --ring: oklch(0.72 0.16 20 / 45%);
 
   --coral: #f2707c;
+  --coral-block: #eb5362;
   --teal: #5fd3ae;
   --sage: #a6c2ba;
   --sand: #f6d885;

@@ -54,18 +54,18 @@ export function Hero() {
             />
           </m.div>
 
-          <div className="-ml-0.5 flex min-w-0 flex-col items-start">
+          <div className="-ml-0.5 flex min-w-0 flex-col items-stretch">
             <m.h1
               {...rise(0.06)}
-              className="font-display flex items-center border-2 border-border px-3 py-4 text-[1.5rem] font-bold leading-none text-white sm:px-6 sm:py-6 sm:text-[2.25rem] lg:px-[2.625rem] lg:py-[2.3rem] lg:text-[3.5rem]"
-              style={{ background: "var(--coral)" }}
+              className="font-display flex items-center border-2 border-border px-3 py-4 text-[1.5rem] font-bold leading-none text-white sm:px-6 sm:py-6 sm:text-[2.25rem] lg:px-10 lg:py-[2.3rem] lg:text-[3.5rem]"
+              style={{ background: "var(--coral-block)" }}
             >
               {person.shortName}
             </m.h1>
 
             <m.p
               {...rise(0.12)}
-              className="font-display -mt-0.5 flex items-center border-2 border-border px-3 py-2 text-[0.8rem] font-medium leading-none sm:px-6 sm:py-3 sm:text-base lg:px-[2.8rem] lg:py-[0.95rem] lg:text-[1.5rem]"
+              className="font-display -mt-0.5 flex items-center border-2 border-border px-3 py-2 text-[0.8rem] font-medium leading-none sm:px-6 sm:py-3 sm:text-base lg:px-10 lg:py-[0.95rem] lg:text-[1.5rem]"
               style={{ background: "var(--sand)", color: "#2d2d2c" }}
             >
               {person.role}
@@ -73,7 +73,7 @@ export function Hero() {
 
             <m.p
               {...rise(0.18)}
-              className="font-display -mt-0.5 flex items-center border-2 border-border px-3 py-2 text-[0.8rem] leading-none text-foreground sm:px-6 sm:py-3 sm:text-base lg:px-[0.75rem] lg:py-[0.85rem] lg:text-[1.35rem]"
+              className="font-display -mt-0.5 flex items-center border-2 border-border px-3 py-2 text-[0.8rem] leading-none text-foreground sm:px-6 sm:py-3 sm:text-base lg:px-10 lg:py-[0.85rem] lg:text-[1.35rem]"
             >
               {person.secondaryRole}
             </m.p>

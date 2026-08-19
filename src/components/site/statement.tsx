@@ -10,7 +10,7 @@ import { t } from "@/lib/i18n";
 const blocks = [
   { bg: "var(--teal)", ink: "#2d2d2c" },
   { bg: "var(--sand)", ink: "#2d2d2c" },
-  { bg: "var(--coral)", ink: "#ffffff" },
+  { bg: "var(--coral-block)", ink: "#ffffff" },
 ];
 
 export function Statement() {

@@ -125,6 +125,7 @@ export function Contact() {
                 <input
                   id="contact-name"
                   name="name"
+                  type="text"
                   required
                   maxLength={120}
                   autoComplete="name"

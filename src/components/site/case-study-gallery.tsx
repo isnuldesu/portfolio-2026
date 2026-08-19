@@ -77,10 +77,7 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
                     />
                   </span>
 
-                  <p
-                    className="font-display text-4xl font-medium leading-none"
-                    style={{ color: "var(--coral)" }}
-                  >
+                  <p className="font-display text-4xl font-medium leading-none text-foreground">
                     {String(index + 1).padStart(2, "0")}
                   </p>
                   <p className="mt-4 max-w-[30ch] text-base leading-relaxed text-foreground/75">

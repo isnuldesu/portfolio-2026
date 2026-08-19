@@ -59,7 +59,7 @@ export function Experience() {
               <h3 className="font-display text-xl font-medium tracking-tight">
                 {role.title}
               </h3>
-              <p className="mt-1 text-sm font-medium" style={{ color: accentAt(index) }}>
+              <p className="mt-1 text-sm font-medium text-foreground">
                 {role.company}
               </p>
               <ul className="mt-4 space-y-2">

@@ -112,7 +112,7 @@ export function GlassmorphismPortfolioBlock({
                     style={{ "--rule": accentAt(index) } as React.CSSProperties}
                   >
                     <div className="relative space-y-2">
-                      <p className="text-xs font-medium" style={{ color: accentAt(index) }}>
+                      <p className="label-mono text-foreground">
                         {t(item.title, locale)}
                       </p>
                       <p className="text-sm leading-relaxed text-foreground/70">

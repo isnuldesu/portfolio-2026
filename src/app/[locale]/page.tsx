@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <AmbientBackground />
       <SiteNav />
-      <main className="flex flex-1 flex-col gap-4 sm:gap-6">
+      <div className="flex flex-1 flex-col gap-4 sm:gap-6">
         <MotionProvider>
           <PageSheet>
             <Hero />
@@ -48,7 +48,7 @@ export default function Home() {
             <Contact />
           </PageSheet>
         </MotionProvider>
-      </main>
+      </div>
       <PageSheet>
         <SiteFooter />
       </PageSheet>
