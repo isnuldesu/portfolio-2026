@@ -15,7 +15,7 @@ export function StableLabel({ value, className }: { value: L; className?: string
   const locale = useLocale();
 
   return (
-    <span className={cn("grid", className)}>
+    <span className={cn("grid justify-items-center text-center", className)}>
       {locales.map((entry) => (
         <span
           key={entry}
