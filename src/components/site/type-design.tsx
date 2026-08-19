@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
 
 import { useLocale } from "@/components/site/locale-provider";
@@ -40,10 +41,11 @@ export function TypeDesign() {
         className="mt-10 flex snap-x snap-mandatory gap-0 overflow-x-auto pb-4 [scrollbar-width:thin]"
       >
         {typefaces.map((face) => (
-          <li
-            key={face.name}
-            className="-ml-0.5 w-[19rem] shrink-0 snap-start border-2 border-border p-5 sm:w-[24rem]"
-          >
+          <li key={face.name} className="-ml-0.5 w-[19rem] shrink-0 snap-start sm:w-[24rem]">
+            <Link
+              href={`/${locale}/work/${face.slug}`}
+              className="group block border-2 border-border p-5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
             <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
               <Image
                 src={face.image}
@@ -56,8 +58,14 @@ export function TypeDesign() {
             </div>
             <div className="mt-4 flex items-start justify-between gap-3">
               <div>
-                <h3 className="text-base font-medium tracking-tight">{face.name}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                {/* Each name is set in its own face. */}
+                <h3
+                  className="text-2xl leading-none group-hover:underline"
+                  style={{ fontFamily: `"${face.family}"` }}
+                >
+                  {face.name}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {t(face.note, locale)}
                 </p>
               </div>
@@ -67,6 +75,7 @@ export function TypeDesign() {
                 </span>
               ) : null}
             </div>
+            </Link>
           </li>
         ))}
       </m.ul>

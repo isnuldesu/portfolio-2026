@@ -99,47 +99,63 @@ export const brandProjects: BrandProject[] = caseStudies
   }));
 
 export type Typeface = {
+  slug: string;
   name: string;
   note: L;
   year?: string;
   image: string;
+  /** The registered CSS family, so the rail can set each name in itself. */
+  family: string;
 };
 
 export const typefaces: Typeface[] = [
   {
+    slug: "birru-co",
     name: "Birru Sans",
     note: {
-      id: "Sans display yang digambar khusus untuk identitas Birru.co.",
-      en: "Display sans drawn for the Birru.co identity.",
+      id: "Sans display yang digambar khusus untuk identitas Birru.co. Dua belas gaya.",
+      en: "Display sans drawn for the Birru.co identity. Twelve styles.",
     },
     year: "2024",
     image: "/work/type-birrusans.webp",
+    family: "Birru Sans",
   },
   {
+    slug: "abahchan",
     name: "Abahchan",
     note: {
-      id: "Display bersudut tumpul, project pribadi.",
-      en: "Rounded display face, personal project.",
+      id: "Display bersudut tumpul, 74 karakter.",
+      en: "Rounded display face, 74 glyphs.",
     },
     year: "2020",
     image: "/work/type-abahchan.webp",
+    family: "Abahchan",
   },
   {
+    slug: "beembo",
     name: "BeemBO",
     note: {
-      id: "Set Latin lengkap sampai diakritik.",
-      en: "Full Latin set with extended diacritics.",
+      id: "Latin lengkap sampai diakritik, 197 karakter.",
+      en: "Full Latin with diacritics, 197 glyphs.",
     },
     year: "2020",
     image: "/work/type-beembo.webp",
+    family: "BeemBO",
   },
   {
+    slug: "jablo",
     name: "Jablo",
-    note: {
-      id: "Display rapat, project pribadi.",
-      en: "Condensed display face, personal project.",
-    },
+    note: { id: "Display rapat, 100 karakter.", en: "Condensed display, 100 glyphs." },
+    year: "2020",
     image: "/work/type-jablo.webp",
+    family: "Jablo",
+  },
+  {
+    slug: "geoleo",
+    name: "Geoleo",
+    note: { id: "Geometris, satu berat Bold.", en: "Geometric, one Bold weight." },
+    image: "/work/type-geoleo.webp",
+    family: "Geoleo",
   },
 ];
 

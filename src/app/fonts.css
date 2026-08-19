@@ -1,0 +1,122 @@
+/*
+ * The typefaces on this site are the ones Isnul drew. They are self-hosted
+ * from the original TTF and OTF sources, converted to woff2, so the specimen
+ * pages show the real thing rather than a screenshot of it.
+ */
+
+@font-face {
+  font-family: "Abahchan";
+  src: url("/fonts/abahchan-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BeemBO";
+  src: url("/fonts/beembo-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jablo";
+  src: url("/fonts/jablo-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geoleo";
+  src: url("/fonts/geoleo-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-200.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-200i.woff2") format("woff2");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-300i.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-400i.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-600i.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-700i.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Birru Sans";
+  src: url("/fonts/birru-sans-800i.woff2") format("woff2");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}

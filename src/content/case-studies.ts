@@ -5,6 +5,7 @@
  * cards in site.ts are derived from this file, so the two cannot drift apart.
  */
 
+import type { Specimen } from "@/components/site/font-specimen";
 import type { L } from "@/lib/i18n";
 
 export type Swatch = { name: string; hex: string };
@@ -20,7 +21,7 @@ export type CaseSection = { heading: L; body: L; bullets?: L[] };
 export type CaseStudy = {
   slug: string;
   title: string;
-  category: "product" | "brand";
+  category: "product" | "brand" | "type";
   discipline: L;
   /** The sector the client operates in, not the design discipline. */
   industry: L;
@@ -44,6 +45,8 @@ export type CaseStudy = {
   sections: CaseSection[];
   typefaces?: L[];
   palette?: Swatch[];
+  /** Drives the live specimen block on the detail page. */
+  specimen?: Specimen;
   gallery: GalleryItem[];
 };
 
@@ -455,6 +458,13 @@ export const caseStudies: CaseStudy[] = [
       { id: "Birru Sans, digambar untuk brandnya", en: "Birru Sans, drawn for the brand" },
       { id: "Nunito", en: "Nunito" },
     ],
+    specimen: {
+      family: "Birru Sans",
+      glyphs: 108,
+      sample: { id: "Bicara lebih jelas", en: "Speak a little clearer" },
+      styles: [{"label": "ExtraLight", "weight": 200}, {"label": "ExtraLight Italic", "weight": 200, "italic": true}, {"label": "Light", "weight": 300}, {"label": "Light Italic", "weight": 300, "italic": true}, {"label": "Regular", "weight": 400}, {"label": "Regular Italic", "weight": 400, "italic": true}, {"label": "SemiBold", "weight": 600}, {"label": "SemiBold Italic", "weight": 600, "italic": true}, {"label": "Bold", "weight": 700}, {"label": "Bold Italic", "weight": 700, "italic": true}, {"label": "ExtraBold", "weight": 800}, {"label": "ExtraBold Italic", "weight": 800, "italic": true}],
+      characters: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "|", "}", "~", "©", "®", "°", "±", "×", "÷"],
+    },
     gallery: [
       {
         src: "/work/birru.webp",
@@ -757,6 +767,190 @@ export const caseStudies: CaseStudy[] = [
       {
         src: "/work/gallery/rtpintar-highlight.webp",
         caption: { id: "Ikon highlight Instagram", en: "Instagram highlight icons" },
+        width: 2048,
+        height: 1536,
+      },
+    ],
+  },
+  {
+    slug: "abahchan",
+    title: "Abahchan",
+    category: "type",
+    discipline: { id: "Desain font", en: "Type design" },
+    industry: { id: "Project pribadi", en: "Personal project" },
+    year: "2020",
+    duration: { id: "2020", en: "2020" },
+    role: { id: "Font Designer", en: "Font Designer" },
+    client: { id: "Project pribadi", en: "Personal project" },
+    teaser: {
+      id: "Display bersudut tumpul, 74 karakter, digambar sendiri dari nol.",
+      en: "Rounded display face, 74 glyphs, drawn from scratch.",
+    },
+    summary: {
+      id: "Abahchan huruf display dengan sudut yang ditumpulkan, dibuat sebagai project pribadi di 2020. Isinya cukup untuk judul: huruf besar, huruf kecil, angka, dan sembilan tanda baca. Tidak lebih, karena memang tidak dipakai untuk teks panjang.",
+      en: "Abahchan is a rounded display face, drawn as a personal project in 2020. It carries what a headline needs: caps, lowercase, figures, and nine punctuation marks. Nothing more, because it was never meant for running text.",
+    },
+    cover: "/work/type-abahchan.webp",
+    tags: ["Type Design", "Display"],
+    gridSize: "small",
+    sections: [
+      {
+        heading: { id: "Sebatas yang dipakai", en: "Only what gets used" },
+        body: {
+          id: "74 karakter. Huruf besar, huruf kecil, angka, dan tanda baca seperlunya. Menggambar set lengkap dengan diakritik untuk huruf yang cuma dipakai di judul cuma menunda selesainya.",
+          en: "74 glyphs: caps, lowercase, figures, and the punctuation a headline actually reaches for. Drawing a full accented set for a face that only ever sets titles would have delayed finishing it.",
+        },
+      },
+    ],
+    specimen: {
+      family: "Abahchan",
+      glyphs: 74,
+      sample: { id: "Halo dunia", en: "Hello world" },
+      styles: [{"label": "Regular", "weight": 400}],
+      characters: ["!", "\"", "'", ",", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "?", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+    },
+    gallery: [
+      {
+        src: "/work/type-abahchan.webp",
+        caption: { id: "Set karakter Abahchan", en: "The Abahchan character set" },
+        width: 2048,
+        height: 1536,
+      },
+    ],
+  },
+  {
+    slug: "beembo",
+    title: "BeemBO",
+    category: "type",
+    discipline: { id: "Desain font", en: "Type design" },
+    industry: { id: "Project pribadi", en: "Personal project" },
+    year: "2020",
+    duration: { id: "2020", en: "2020" },
+    role: { id: "Font Designer", en: "Font Designer" },
+    client: { id: "Project pribadi", en: "Personal project" },
+    teaser: {
+      id: "197 karakter, Latin lengkap sampai diakritik, project pribadi 2020.",
+      en: "197 glyphs, a full Latin set down to the diacritics, personal project from 2020.",
+    },
+    summary: {
+      id: "BeemBO yang paling jauh digarap dari empat font ini: 197 karakter, termasuk 94 karakter beraksen di rentang Latin-1. Artinya bisa menyusun bahasa Eropa Barat, bukan cuma bahasa Inggris.",
+      en: "BeemBO is the furthest along of the four: 197 glyphs, including 94 accented characters across the Latin-1 range. That is enough to set Western European languages, not just English.",
+    },
+    cover: "/work/type-beembo.webp",
+    tags: ["Type Design", "Latin Extended"],
+    gridSize: "small",
+    sections: [
+      {
+        heading: { id: "Kenapa diakritiknya digambar", en: "Why the accents got drawn" },
+        body: {
+          id: "Menggambar A sampai Z itu bagian yang mudah. Yang menentukan sebuah font bisa dipakai orang lain justru aksen: tinggi tanda, jaraknya ke huruf, dan apakah masih rapi waktu ditumpuk di huruf kapital.",
+          en: "Drawing A to Z is the easy half. What decides whether a face is usable by anyone else is the accents: how high the marks sit, how far they clear the letter, and whether they still hold on a capital.",
+        },
+      },
+    ],
+    specimen: {
+      family: "BeemBO",
+      glyphs: 197,
+      sample: { id: "Halo dunia", en: "Hello world" },
+      styles: [{"label": "Regular", "weight": 400}],
+      characters: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "|", "}", "~", "¡", "¢", "£", "¤", "¥", "¦", "§", "¨", "©", "ª", "«", "¬", "®", "¯", "°", "±", "²", "³", "´", "µ", "¶", "·", "¸", "¹", "º", "»", "¼", "½", "¾", "¿", "À", "Á", "Â", "Ã", "Ä", "Å", "Æ", "Ç", "È", "É", "Ê", "Ë", "Ì", "Í", "Î", "Ï", "Ð", "Ñ", "Ò", "Ó", "Ô", "Õ", "Ö", "×", "Ø", "Ù", "Ú", "Û", "Ü", "Ý", "Þ", "ß", "à", "á", "â", "ã", "ä", "å", "æ", "ç", "è", "é", "ê", "ë", "ì", "í", "î", "ï", "ð", "ñ", "ò", "ó", "ô", "õ", "ö", "÷", "ø", "ù", "ú", "û", "ü", "ý", "þ", "ÿ"],
+    },
+    gallery: [
+      {
+        src: "/work/type-beembo.webp",
+        caption: { id: "Set karakter BeemBO", en: "The BeemBO character set" },
+        width: 2048,
+        height: 1536,
+      },
+    ],
+  },
+  {
+    slug: "jablo",
+    title: "Jablo",
+    category: "type",
+    discipline: { id: "Desain font", en: "Type design" },
+    industry: { id: "Project pribadi", en: "Personal project" },
+    year: "2020",
+    duration: { id: "2020", en: "2020" },
+    role: { id: "Font Designer", en: "Font Designer" },
+    client: { id: "Project pribadi", en: "Personal project" },
+    teaser: {
+      id: "Display rapat, 100 karakter, dibuat untuk judul yang harus muat.",
+      en: "Condensed display, 100 glyphs, made for headlines that have to fit.",
+    },
+    summary: {
+      id: "Jablo huruf display yang dirapatkan, dengan 100 karakter termasuk satu set tanda baca penuh. Dibuat untuk keadaan yang sering ada di desain: judulnya panjang, kolomnya sempit.",
+      en: "Jablo is a condensed display face with 100 glyphs, including a full punctuation set. Drawn for a situation that keeps coming up in layout: the headline is long and the column is not wide.",
+    },
+    cover: "/work/type-jablo.webp",
+    tags: ["Type Design", "Condensed"],
+    gridSize: "small",
+    sections: [
+      {
+        heading: { id: "Rapat, bukan digepengkan", en: "Condensed, not squashed" },
+        body: {
+          id: "Menggepengkan huruf lewat transformasi merusak tebal batangnya: garis tegak jadi tipis, garis datar tetap tebal. Jablo digambar sempit sejak awal, jadi tebalnya tetap benar.",
+          en: "Squeezing a face with a transform ruins its stems: the uprights go thin while the horizontals stay heavy. Jablo was drawn narrow from the start, so the weight stays true.",
+        },
+      },
+    ],
+    specimen: {
+      family: "Jablo",
+      glyphs: 100,
+      sample: { id: "Halo dunia", en: "Hello world" },
+      styles: [{"label": "Regular", "weight": 400}],
+      characters: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "|", "}", "~"],
+    },
+    gallery: [
+      {
+        src: "/work/type-jablo.webp",
+        caption: { id: "Set karakter Jablo", en: "The Jablo character set" },
+        width: 2048,
+        height: 1536,
+      },
+    ],
+  },
+  {
+    slug: "geoleo",
+    title: "Geoleo",
+    category: "type",
+    discipline: { id: "Desain font", en: "Type design" },
+    industry: { id: "Project pribadi", en: "Personal project" },
+    year: "Undated",
+    duration: { id: "Tidak tercatat", en: "Undated" },
+    role: { id: "Font Designer", en: "Font Designer" },
+    client: { id: "Project pribadi", en: "Personal project" },
+    teaser: {
+      id: "Display geometris, satu berat Bold, 104 karakter.",
+      en: "Geometric display, one Bold weight, 104 glyphs.",
+    },
+    summary: {
+      id: "Geoleo dirilis hanya dalam satu berat, Bold, dengan 104 karakter. Satu berat itu keputusan yang jujur untuk huruf display: kalau cuma dipakai di ukuran besar, berat tipis tidak akan pernah dipanggil.",
+      en: "Geoleo ships in one weight, Bold, with 104 glyphs. A single weight is an honest call for a display face: if it only ever sets large, the lighter weights never get reached for.",
+    },
+    cover: "/work/covers/geoleo.webp",
+    tags: ["Type Design", "Geometric"],
+    gridSize: "small",
+    sections: [
+      {
+        heading: { id: "Satu berat, selesai", en: "One weight, finished" },
+        body: {
+          id: "Keluarga font tidak selesai karena beratnya banyak. Selesai kalau yang dirilis benar-benar dipakai. Geoleo dirilis Bold saja, dan itu berat yang memang dipanggil huruf display.",
+          en: "A family is not finished because it has many weights. It is finished when what shipped gets used. Geoleo shipped Bold, which is the weight a display face is actually reached for.",
+        },
+      },
+    ],
+    specimen: {
+      family: "Geoleo",
+      glyphs: 104,
+      sample: { id: "Halo dunia", en: "Hello world" },
+      styles: [{"label": "Bold", "weight": 700}],
+      characters: ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "}", "~", "£", "¥", "·"],
+    },
+    gallery: [
+      {
+        src: "/work/type-geoleo.webp",
+        caption: { id: "Set karakter Geoleo", en: "The Geoleo character set" },
         width: 2048,
         height: 1536,
       },

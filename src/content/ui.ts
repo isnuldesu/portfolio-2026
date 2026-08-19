@@ -82,6 +82,14 @@ export const ui = {
     next: { id: "Project berikutnya", en: "Next project" },
   },
 
+  specimen: {
+    heading: { id: "Coba fontnya", en: "Try the typeface" },
+    tryIt: { id: "Ketik di sini", en: "Type here" },
+    glyphs: { id: "karakter", en: "glyphs" },
+    styles: { id: "gaya", en: "styles" },
+    characterSet: { id: "Set karakter", en: "Character set" },
+  },
+
   form: {
     name: { id: "Nama", en: "Name" },
     namePlaceholder: { id: "Nadia Prameswari", en: "Nadia Prameswari" },

@@ -7,6 +7,7 @@ import "@fontsource/open-sauce-sans/400.css";
 import "@fontsource/open-sauce-sans/500.css";
 import "@fontsource/open-sauce-sans/700.css";
 import "../globals.css";
+import "../fonts.css";
 
 import { LocaleProvider } from "@/components/site/locale-provider";
 import { ThemeProvider } from "@/components/site/theme-provider";

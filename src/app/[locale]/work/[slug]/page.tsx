@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 import { CaseStudyGallery } from "@/components/site/case-study-gallery";
+import { FontSpecimen } from "@/components/site/font-specimen";
 import { PageSheet } from "@/components/site/page-sheet";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
@@ -200,6 +201,8 @@ export default async function CaseStudyPage({
             ) : null}
           </section>
         ) : null}
+
+        {study.specimen ? <FontSpecimen specimen={study.specimen} /> : null}
       </div>
       </PageSheet>
 
