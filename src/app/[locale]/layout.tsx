@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Geist_Mono, Inter, Lexend, Playfair_Display } from "next/font/google";
+import { Geist, Space_Mono } from "next/font/google";
 import "../globals.css";
 
 import { LocaleProvider } from "@/components/site/locale-provider";
@@ -8,30 +8,22 @@ import { ThemeProvider } from "@/components/site/theme-provider";
 import { person } from "@/content/site";
 import { isLocale, locales, localeMeta, t } from "@/lib/i18n";
 
-const lexend = Lexend({
-  variable: "--font-lexend",
+// The CV sets its text in Neue Montreal. That face is licensed from Pangram
+// Pangram and cannot be served from a font CDN, so this is the stand-in until
+// the webfont files are in hand. Geist is the closest free neo-grotesque:
+// same Swiss skeleton, same tight apertures. The CSS stack in globals.css asks
+// for Neue Montreal first, so dropping the woff2 files into src/app/fonts and
+// switching this to next/font/local is a two line change.
+const grotesk = Geist({
+  variable: "--font-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
-  display: "swap",
-});
-
-// Used for exactly one line: the italic display half of the hero headline.
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  style: ["italic"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -77,7 +69,7 @@ export default async function LocaleLayout({
     <html
       lang={localeMeta[locale].htmlLang}
       suppressHydrationWarning
-      className={`${lexend.variable} ${inter.variable} ${playfair.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${grotesk.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider>

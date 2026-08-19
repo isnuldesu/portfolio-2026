@@ -25,7 +25,7 @@ export function SiteFooter() {
         </nav>
 
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <p className="font-serif-display text-lg text-foreground/70">{person.name}</p>
+          <p className="font-display text-lg font-medium tracking-tight text-foreground">{person.name}</p>
 
           <ul className="flex items-center gap-2">
             {socialLinks.map((social) => (

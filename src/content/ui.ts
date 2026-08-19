@@ -13,11 +13,10 @@ export const ui = {
 
   hero: {
     eyebrow: { id: "Portofolio 2026", en: "Portfolio 2026" },
-    greeting: { id: "Halo, saya Isnul", en: "Hi, I'm Isnul" },
   },
 
   work: {
-    eyebrow: { id: "/ Pilihan kerjaan", en: "/ Selected work" },
+    eyebrow: { id: "Pilihan kerjaan", en: "Selected work" },
     heading: {
       id: "Produk yang dipakai orang dari pagi sampai tutup",
       en: "Products people run their day on",
@@ -47,13 +46,16 @@ export const ui = {
     },
   },
 
-  timeline: {
-    eyebrow: { id: "/ Enam tahun, berurutan", en: "/ Six years, in order" },
-    heading: { id: "Urutan kerjaannya", en: "How the work stacked up" },
+  experience: {
+    eyebrow: { id: "Pengalaman", en: "Experience" },
+    heading: { id: "Di mana saja saya kerja", en: "Where the work happened" },
+    software: { id: "Software", en: "Software" },
+    expertise: { id: "Keahlian", en: "Expertise" },
+    education: { id: "Pendidikan", en: "Education" },
   },
 
   process: {
-    eyebrow: { id: "/ Cara kerjanya", en: "/ How the work runs" },
+    eyebrow: { id: "Cara kerjanya", en: "How the work runs" },
     heading: { id: "Begini jalannya", en: "Here is how it works" },
   },
 

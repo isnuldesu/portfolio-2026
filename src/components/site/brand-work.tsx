@@ -66,7 +66,7 @@ export function BrandWork() {
             <div className="flex items-start justify-between gap-4 p-5">
               <div>
                 <h3 className="text-base font-medium tracking-tight">{project.title}</h3>
-                <p className="mt-1 text-xs font-medium" style={{ color: "var(--lime-ink)" }}>{t(project.discipline, locale)}</p>
+                <p className="mt-1 text-xs font-medium" style={{ color: "var(--coral)" }}>{t(project.discipline, locale)}</p>
                 <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-muted-foreground">
                   {t(project.description, locale)}
                 </p>

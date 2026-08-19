@@ -54,7 +54,7 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
             className="absolute left-[7px] top-2 hidden w-px origin-top lg:block"
             style={{
               bottom: "0.5rem",
-              background: "var(--lime-ink)",
+              background: "var(--coral)",
               scaleY: reduceMotion ? 1 : progress,
             }}
           />
@@ -73,13 +73,13 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
                   >
                     <span
                       className="size-1.5 rounded-full"
-                      style={{ background: "var(--lime-ink)" }}
+                      style={{ background: "var(--coral)" }}
                     />
                   </span>
 
                   <p
                     className="font-display text-4xl font-medium leading-none"
-                    style={{ color: "var(--lime-ink)" }}
+                    style={{ color: "var(--coral)" }}
                   >
                     {String(index + 1).padStart(2, "0")}
                   </p>

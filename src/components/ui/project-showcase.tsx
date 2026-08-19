@@ -20,7 +20,7 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
 
   return (
     <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <p className="font-serif-display text-center text-base text-foreground/50">
+      <p className="label-mono text-center text-muted-foreground">
         {t(ui.work.eyebrow, locale)}
       </p>
       <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">

@@ -22,7 +22,7 @@ export function Statement() {
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <p className="font-serif-display text-center text-xl text-foreground/60">
+      <p className="label-mono text-center text-muted-foreground">
         {t(statement.eyebrow, locale)}
       </p>
 
@@ -48,7 +48,7 @@ export function Statement() {
             >
               <span
                 className="size-2 rounded-full"
-                style={{ background: "var(--lime-ink)" }}
+                style={{ background: "var(--coral)" }}
               />
               {t(label, locale)}
             </m.span>
@@ -78,7 +78,7 @@ export function Statement() {
             >
               <span
                 className="size-2 rounded-full"
-                style={{ background: "var(--lime-ink)" }}
+                style={{ background: "var(--coral)" }}
               />
               {t(label, locale)}
             </li>

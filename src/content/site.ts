@@ -11,8 +11,10 @@ export const person = {
   name: "Muhammad Isnul",
   handle: "isnuldesu",
   /** Job titles stay in English in both locales, the way people write them. */
-  role: "Design Engineer",
-  secondaryRole: "Product Designer",
+  role: "Product Designer (UX/UI)",
+  secondaryRole: "Creative Director & Designer",
+  /** How the CV signs itself. */
+  shortName: "MUH.ISNUL",
   email: "isnulmuhammad@gmail.com",
   whatsapp: "6282255845751",
   whatsappLabel: "0822 5584 5751",
@@ -205,7 +207,7 @@ export const nav: { label: L; href: string }[] = [
   { label: { id: "Kerjaan", en: "Work" }, href: "#work" },
   { label: { id: "Brand", en: "Brand" }, href: "#brand" },
   { label: { id: "Font", en: "Type" }, href: "#type" },
-  { label: { id: "Linimasa", en: "Timeline" }, href: "#timeline" },
+  { label: { id: "Pengalaman", en: "Experience" }, href: "#experience" },
   { label: { id: "Tentang", en: "About" }, href: "#about" },
 ];
 

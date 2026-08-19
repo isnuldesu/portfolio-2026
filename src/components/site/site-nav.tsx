@@ -39,7 +39,7 @@ export function SiteNav() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-5 px-6">
           <Link
             href={`/${locale}`}
-            className="font-serif-display text-xl text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="font-display text-lg font-medium tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {person.name}
           </Link>

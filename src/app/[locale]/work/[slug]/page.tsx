@@ -67,7 +67,7 @@ export default async function CaseStudyPage({
           className="pointer-events-none absolute inset-x-0 top-0 h-64"
           style={{
             background:
-              "radial-gradient(80% 100% at 50% 0%, var(--lime-soft) 0%, transparent 70%)",
+              "radial-gradient(80% 100% at 50% 0%, var(--blush) 0%, transparent 70%)",
           }}
         />
 
@@ -80,7 +80,7 @@ export default async function CaseStudyPage({
             {t(ui.caseStudy.back, locale)}
           </Link>
 
-          <p className="font-serif-display mt-10 text-base text-foreground/50">
+          <p className="label-mono mt-10 text-muted-foreground">
             / {t(study.discipline, locale)}
           </p>
           <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-balance md:text-6xl">
@@ -134,7 +134,7 @@ export default async function CaseStudyPage({
                     >
                       <span
                         className="mt-2.5 size-1.5 shrink-0 rounded-full"
-                        style={{ background: "var(--lime-ink)" }}
+                        style={{ background: "var(--coral)" }}
                       />
                       {t(bullet, locale)}
                     </li>

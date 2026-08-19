@@ -96,8 +96,8 @@ function Blob(props: ThreeElements["mesh"]) {
     () => ({
       uTime: { value: 0 },
       uPointer: { value: 0 },
-      uBase: { value: new THREE.Color("#cdf05a") },
-      uAccent: { value: new THREE.Color("#f4fbe4") },
+      uBase: { value: new THREE.Color("#edc5cd") },
+      uAccent: { value: new THREE.Color("#90ada5") },
     }),
     [],
   );

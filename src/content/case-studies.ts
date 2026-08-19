@@ -49,7 +49,7 @@ export const caseStudies: CaseStudy[] = [
     discipline: { id: "Product design", en: "Product design" },
     year: "2021 - Present",
     role: { id: "Product Designer", en: "Product Designer" },
-    client: { id: "Luna POS", en: "Luna POS" },
+    client: { id: "IMPACTO, untuk LUNAPOS", en: "IMPACTO, for LUNAPOS" },
     link: "https://lunapos.id",
     linkLabel: "lunapos.id",
     teaser: {
@@ -154,7 +154,7 @@ export const caseStudies: CaseStudy[] = [
     discipline: { id: "Product design", en: "Product design" },
     year: "2021 - Present",
     role: { id: "Product Designer pertama", en: "First Product Designer" },
-    client: { id: "Laba.id", en: "Laba.id" },
+    client: { id: "IMPACTO, untuk Laba.id", en: "IMPACTO, for Laba.id" },
     link: "https://laba.id",
     linkLabel: "laba.id",
     teaser: {
@@ -243,8 +243,11 @@ export const caseStudies: CaseStudy[] = [
     category: "product",
     discipline: { id: "Desain web", en: "Web design" },
     year: "2023",
-    role: { id: "Desainer, tim landing page", en: "Designer, landing page team" },
-    client: { id: "The Singapore Scout Association", en: "The Singapore Scout Association" },
+    role: { id: "Web Designer", en: "Web Designer" },
+    client: {
+      id: "Adonai MediaTech Solutions, untuk The Singapore Scout Association",
+      en: "Adonai MediaTech Solutions, for The Singapore Scout Association",
+    },
     link: "https://scout.sg",
     linkLabel: "scout.sg",
     teaser: {
@@ -388,16 +391,16 @@ export const caseStudies: CaseStudy[] = [
     title: "Birru.co",
     category: "brand",
     discipline: { id: "Identitas brand", en: "Brand identity" },
-    year: "2024",
-    role: { id: "Creative Designer", en: "Creative Designer" },
+    year: "2023 - 2025",
+    role: { id: "Brand & Graphic Designer", en: "Brand & Graphic Designer" },
     client: { id: "Birru.co", en: "Birru.co" },
     teaser: {
       id: "Sistem logo, varian brandmark, kunci tagline, dan satu typeface yang digambar khusus untuk brandnya.",
       en: "Logo system, brandmark variants, tagline lockups, and a custom typeface drawn for the brand.",
     },
     summary: {
-      id: "Identitas lengkap untuk Birru.co, dari logogram sampai materi marketplace. Brandnya jalan dengan typeface sendiri, bukan font berlisensi, dan itu sebabnya wordmark dan huruf di antarmukanya terdengar seperti satu suara.",
-      en: "A full identity for Birru.co, taken from the logogram through to the marketplace collateral. The brand ships with its own typeface rather than a licensed one, which is why the wordmark and the interface type feel like the same voice.",
+      id: "Identitas lengkap untuk Birru.co, rumah terapi wicara untuk anak, dari logogram sampai materi marketplace. Brandnya jalan dengan typeface sendiri, bukan font berlisensi, dan itu sebabnya wordmark dan huruf di antarmukanya terdengar seperti satu suara.",
+      en: "A full identity for Birru.co, a speech therapy house for children, taken from the logogram through to the marketplace collateral. The brand ships with its own typeface rather than a licensed one, which is why the wordmark and the interface type feel like the same voice.",
     },
     cover: "/work/covers/birru-co.webp",
     tags: ["Branding", "Logo", "Type Design"],
@@ -465,8 +468,8 @@ export const caseStudies: CaseStudy[] = [
     category: "brand",
     discipline: { id: "Identitas brand", en: "Brand identity" },
     year: "2022",
-    role: { id: "Graphic Designer", en: "Graphic Designer" },
-    client: { id: "Backslash Creative", en: "Backslash Creative" },
+    role: { id: "Brand Designer", en: "Brand Designer" },
+    client: { id: "Backslash Creative Nusantara", en: "Backslash Creative Nusantara" },
     teaser: {
       id: "Varian logo, palet, sistem pola, dan materi marketplace.",
       en: "Logo variations, palette, pattern system, and marketplace collateral.",
@@ -533,8 +536,11 @@ export const caseStudies: CaseStudy[] = [
     category: "brand",
     discipline: { id: "Brand dan sosial", en: "Brand and social" },
     year: "2022",
-    role: { id: "Graphic Designer", en: "Graphic Designer" },
-    client: { id: "VJatre", en: "VJatre" },
+    role: { id: "Brand Designer", en: "Brand Designer" },
+    client: {
+      id: "Backslash Creative Nusantara, untuk Vjatre",
+      en: "Backslash Creative Nusantara, for Vjatre",
+    },
     teaser: {
       id: "Identitas, bahasa pola, dan sistem media sosial untuk sebuah label skincare.",
       en: "Identity, pattern language, and a social media system for a skincare label.",

@@ -66,7 +66,7 @@ export function GlassmorphismPortfolioBlock({
               })}
           className="surface relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-12"
         >
-          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(90% 70% at 100% 0%, var(--lime-soft) 0%, transparent 60%)" }} />
+          <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(90% 70% at 100% 0%, var(--blush) 0%, transparent 60%)" }} />
 
           <div className="relative grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             {/* Left column */}
@@ -83,7 +83,7 @@ export function GlassmorphismPortfolioBlock({
                   {...rise(0.1)}
                   className="font-display text-xl font-medium tracking-tight text-pretty break-words text-foreground sm:text-2xl md:text-3xl"
                 >
-                  {person.name}, {person.role} & {person.secondaryRole}
+                  {person.name}
                 </m.h2>
                 <m.p
                   {...rise(0.18)}
@@ -109,7 +109,7 @@ export function GlassmorphismPortfolioBlock({
                     className="group relative overflow-hidden rounded-2xl border border-border bg-secondary/60 p-5 transition-colors hover:border-foreground/20"
                   >
                     <div className="relative space-y-2">
-                      <p className="text-xs font-medium" style={{ color: "var(--lime-ink)" }}>
+                      <p className="text-xs font-medium" style={{ color: "var(--coral)" }}>
                         {t(item.title, locale)}
                       </p>
                       <p className="text-sm leading-relaxed text-foreground/70">
@@ -135,7 +135,7 @@ export function GlassmorphismPortfolioBlock({
 
             {/* Right column */}
             <div className="relative">
-              <div className="pointer-events-none absolute inset-0 rounded-3xl blur-3xl" style={{ background: "linear-gradient(180deg, var(--lime-soft), transparent 70%)" }} />
+              <div className="pointer-events-none absolute inset-0 rounded-3xl blur-3xl" style={{ background: "linear-gradient(180deg, var(--blush), transparent 70%)" }} />
               <div className="relative flex h-full flex-col justify-between rounded-3xl border border-border bg-secondary/60 p-6 sm:p-8">
                 <div className="flex flex-col items-center text-center">
                   <m.div
@@ -149,7 +149,7 @@ export function GlassmorphismPortfolioBlock({
                         })}
                     className="relative mb-6"
                   >
-                    <div className="absolute left-1/2 top-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl" style={{ background: "var(--lime)" }} />
+                    <div className="absolute left-1/2 top-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl" style={{ background: "var(--coral)" }} />
                     <Image
                       src={person.portrait}
                       alt={`Portrait of ${person.name}`}
@@ -165,7 +165,7 @@ export function GlassmorphismPortfolioBlock({
                       {person.name}
                     </h3>
                     <p className="text-xs font-medium text-muted-foreground">
-                      {person.role} / {person.secondaryRole}
+                      {person.role} · {person.secondaryRole}
                     </p>
                   </m.div>
 

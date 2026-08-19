@@ -16,7 +16,7 @@ export function Process() {
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <p className="font-serif-display text-center text-base text-foreground/50">
+      <p className="label-mono text-center text-muted-foreground">
         {t(ui.process.eyebrow, locale)}
       </p>
       <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">
@@ -44,7 +44,7 @@ export function Process() {
           >
             <p
               className="font-display text-5xl font-medium leading-none"
-              style={{ color: "var(--lime-ink)" }}
+              style={{ color: "var(--coral)" }}
             >
               {step.number}
             </p>
