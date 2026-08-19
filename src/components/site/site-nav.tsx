@@ -25,14 +25,14 @@ export function SiteNav() {
       <div id="nav-sentinel" className="absolute top-0 h-px w-full" />
       <header
         className={cn(
-          "sticky top-0 z-50 h-16 w-full transition-colors duration-300",
-          scrolled && "glass-panel rounded-none border-x-0 border-t-0 shadow-none",
+          "sticky top-0 z-50 h-16 w-full transition-all duration-300",
+          scrolled && "pill-glass rounded-none border-x-0 border-t-0",
         )}
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6">
           <a
             href="#top"
-            className="font-mono text-xs uppercase tracking-[0.22em] text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="font-serif-display text-xl text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {person.name}
           </a>
@@ -52,7 +52,7 @@ export function SiteNav() {
           <Button
             asChild
             size="sm"
-            className="h-9 rounded-full px-4 text-xs uppercase tracking-[0.16em]"
+            className="h-10 rounded-full px-5 text-sm font-medium"
           >
             <a href={primaryCta.href}>{primaryCta.label}</a>
           </Button>

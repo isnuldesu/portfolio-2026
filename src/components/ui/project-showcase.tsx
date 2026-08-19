@@ -1,147 +1,110 @@
 "use client";
 
-import type React from "react";
-
-import { useRef, useState } from "react";
+import { m, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 
 import { projects as defaultProjects, type Project } from "@/content/site";
 
 /**
- * Hover-preview work list.
- *
- * The cursor-following preview is driven by motion values plus a spring, not by
- * React state on every pointer frame. State per frame re-renders the whole list
- * and collapses on mid-range devices.
+ * Selected work as a two-up card grid. The screenshot carries the weight, the
+ * caption underneath names the project and the disciplines it covered.
  */
 export function ProjectShowcase({
   items = defaultProjects,
-  eyebrow = "Selected work",
+  eyebrow = "/ Selected work",
+  heading = "Products people run their day on",
 }: {
   items?: Project[];
   eyebrow?: string;
+  heading?: string;
 }) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const x = useSpring(pointerX, { stiffness: 220, damping: 28, mass: 0.6 });
-  const y = useSpring(pointerY, { stiffness: 220, damping: 28, mass: 0.6 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    pointerX.set(e.clientX + 24);
-    pointerY.set(e.clientY - 96);
-  };
-
-  const isVisible = hoveredIndex !== null;
-
   return (
-    <section
-      id="work"
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="relative mx-auto w-full max-w-6xl px-6 py-24 md:py-32"
-    >
-      <h2 className="mb-10 font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+    <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <p className="font-serif-display text-center text-base text-foreground/50">
         {eyebrow}
+      </p>
+      <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">
+        {heading}
       </h2>
 
-      {/* Cursor preview. Hidden below lg where there is no hover pointer. */}
-      <motion.div
-        aria-hidden="true"
-        style={{ x, y }}
-        animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
-        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none fixed left-0 top-0 z-40 hidden overflow-hidden rounded-2xl shadow-2xl lg:block"
-      >
-        <div className="relative h-[190px] w-[300px] overflow-hidden rounded-2xl bg-secondary">
-          {items.map((project, index) => (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              key={project.title}
-              src={project.image}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out"
-              style={{
-                opacity: hoveredIndex === index ? 1 : 0,
-                transform: hoveredIndex === index ? "scale(1)" : "scale(1.08)",
-                filter: hoveredIndex === index ? "none" : "blur(10px)",
-              }}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
-        </div>
-      </motion.div>
-
-      <ul className="border-t border-border">
+      <div className="mt-14 grid gap-6 sm:grid-cols-2">
         {items.map((project, index) => {
-          const active = hoveredIndex === index;
+          const Wrapper = project.link ? "a" : "div";
+
           return (
-            <li key={project.title}>
-              <a
-                href={project.link}
-                className="group block rounded-2xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onFocus={() => setHoveredIndex(index)}
-                onBlur={() => setHoveredIndex(null)}
+            <m.article
+              key={project.title}
+              {...(reduceMotion
+                ? {}
+                : {
+                    initial: { opacity: 0, y: 32 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true, amount: 0.2 },
+                    transition: {
+                      duration: 0.6,
+                      delay: (index % 2) * 0.08,
+                      ease: [0.16, 1, 0.3, 1] as const,
+                    },
+                  })}
+              className="group"
+            >
+              <Wrapper
+                {...(project.link
+                  ? { href: project.link, target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="block rounded-3xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <div className="relative border-b border-border py-6">
-                  <div
-                    className={`absolute inset-0 -mx-4 rounded-2xl bg-secondary/40 transition-opacity duration-300 ease-out ${
-                      active ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
-
-                  <div className="relative flex items-start justify-between gap-6 px-1">
-                    <div className="min-w-0 flex-1">
-                      <div className="inline-flex items-center gap-2">
-                        <h3 className="text-lg font-medium tracking-tight text-foreground md:text-xl">
-                          <span className="relative">
-                            {project.title}
-                            <span
-                              className={`absolute -bottom-0.5 left-0 h-px bg-primary transition-all duration-300 ease-out ${
-                                active ? "w-full" : "w-0"
-                              }`}
-                            />
-                          </span>
-                        </h3>
-                        <ArrowUpRight
-                          strokeWidth={1.5}
-                          className={`size-4 text-primary transition-all duration-300 ease-out ${
-                            active
-                              ? "translate-x-0 translate-y-0 opacity-100"
-                              : "-translate-x-2 translate-y-2 opacity-0"
-                          } ${reduceMotion ? "transition-none" : ""}`}
-                        />
-                      </div>
-
-                      <p
-                        className={`mt-1.5 max-w-[52ch] text-sm leading-relaxed transition-colors duration-300 ease-out ${
-                          active ? "text-foreground/80" : "text-muted-foreground"
-                        }`}
-                      >
-                        {project.description}
-                      </p>
-                    </div>
-
-                    <span
-                      className={`font-mono text-xs tabular-nums transition-colors duration-300 ease-out ${
-                        active ? "text-foreground/70" : "text-muted-foreground"
-                      }`}
-                    >
-                      {project.year}
-                    </span>
+                <div className="surface relative overflow-hidden rounded-3xl">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={project.image}
+                      alt={`${project.title} interface`}
+                      loading={index < 2 ? "eager" : "lazy"}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                    />
                   </div>
+
+                  {project.link ? (
+                    <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <ArrowUpRight className="size-4" strokeWidth={2} />
+                    </span>
+                  ) : null}
                 </div>
-              </a>
-            </li>
+
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 px-1">
+                  <div>
+                    <h3 className="text-base font-medium tracking-tight">
+                      {project.title}
+                    </h3>
+                    <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted-foreground">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <ul className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-foreground/65"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <p className="mt-2 px-1 font-mono text-xs text-muted-foreground">
+                  {project.year}
+                  {project.linkLabel ? ` · ${project.linkLabel}` : ""}
+                </p>
+              </Wrapper>
+            </m.article>
           );
         })}
-      </ul>
+      </div>
     </section>
   );
 }

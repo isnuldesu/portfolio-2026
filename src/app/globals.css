@@ -130,43 +130,49 @@
 }
 /* ---------------------------------------------------------------------------
    Portfolio 2026 theme
-   Locked to dark. Neutral cool base, one accent (acid lime), one radius system:
-   pill for interactive, 24px for panels, 16px for tiles.
+   Light page, cool grey ground, white surfaces, near-black interactive colour,
+   and one decorative accent (lime) reserved for glow, dots, and tags.
+   Radius system: pill for interactive, 28px panels, 20px tiles.
 --------------------------------------------------------------------------- */
 
 :root {
-  --font-sans: var(--font-geist-sans);
-}
+  --font-sans: var(--font-inter);
 
-.dark {
-  --background: oklch(0.145 0.004 285);
-  --foreground: oklch(0.965 0.002 285);
+  --background: oklch(0.949 0.003 264);
+  --foreground: oklch(0.19 0.01 264);
 
-  --card: oklch(0.185 0.005 285);
-  --card-foreground: oklch(0.965 0.002 285);
-  --popover: oklch(0.185 0.005 285);
-  --popover-foreground: oklch(0.965 0.002 285);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.01 264);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.01 264);
 
-  --primary: oklch(0.876 0.176 118);
-  --primary-foreground: oklch(0.21 0.05 118);
+  --primary: oklch(0.2 0.008 264);
+  --primary-foreground: oklch(0.985 0 0);
 
-  --secondary: oklch(0.245 0.006 285);
-  --secondary-foreground: oklch(0.965 0.002 285);
+  --secondary: oklch(0.968 0.002 264);
+  --secondary-foreground: oklch(0.19 0.01 264);
 
-  --muted: oklch(0.245 0.006 285);
-  --muted-foreground: oklch(0.68 0.008 285);
+  --muted: oklch(0.968 0.002 264);
+  --muted-foreground: oklch(0.53 0.012 264);
 
-  --accent: oklch(0.245 0.006 285);
-  --accent-foreground: oklch(0.965 0.002 285);
+  --accent: oklch(0.968 0.002 264);
+  --accent-foreground: oklch(0.19 0.01 264);
 
-  --border: oklch(1 0 0 / 11%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.876 0.176 118 / 55%);
+  --border: oklch(0.19 0.01 264 / 10%);
+  --input: oklch(0.19 0.01 264 / 14%);
+  --ring: oklch(0.2 0.008 264 / 30%);
+
+  --radius: 1rem;
+
+  /* Decorative accent. Never used for text on white. */
+  --lime: oklch(0.9 0.183 124);
+  --lime-soft: oklch(0.94 0.12 124);
+  --lime-ink: oklch(0.52 0.14 128);
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -176,30 +182,42 @@ html {
 }
 
 ::selection {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--lime);
+  color: var(--foreground);
 }
 
-/* Frosted glass panel. Web glassmorphism approximation, not an Apple material. */
-.glass-panel {
-  border: 1px solid oklch(1 0 0 / 12%);
-  background: linear-gradient(
-      135deg,
-      oklch(1 0 0 / 6%),
-      oklch(1 0 0 / 1.5%) 55%,
-      transparent
-    ),
-    oklch(0.185 0.005 285 / 55%);
-  backdrop-filter: blur(28px) saturate(140%);
-  -webkit-backdrop-filter: blur(28px) saturate(140%);
+.font-display {
+  font-family: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.035em;
+}
+
+/* The one italic display line, per the reference composition. */
+.font-serif-display {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+/* Soft white panel that sits on the grey ground. */
+.surface {
+  background: var(--card);
   box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 10%),
-    0 24px 70px oklch(0 0 0 / 45%);
+    0 1px 2px oklch(0.19 0.01 264 / 5%),
+    0 18px 50px oklch(0.19 0.01 264 / 6%);
+}
+
+/* Frosted pill used for floating tags and the availability badge. */
+.pill-glass {
+  border: 1px solid oklch(1 0 0 / 70%);
+  background: oklch(1 0 0 / 78%);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: 0 8px 24px oklch(0.19 0.01 264 / 8%);
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .glass-panel {
-    background: oklch(0.195 0.005 285);
+  .pill-glass {
+    background: var(--card);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
