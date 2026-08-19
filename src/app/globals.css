@@ -140,7 +140,8 @@
     "PP Neue Montreal", "Neue Montreal", var(--font-grotesk), ui-sans-serif,
     system-ui, sans-serif;
 
-  --background: oklch(0.985 0.001 100);
+  --background: oklch(0.94 0.002 100);
+  --sheet: #ffffff;
   --foreground: #2d2d2c;
 
   --card: oklch(1 0 0);
@@ -216,15 +217,15 @@ html {
 }
 
 .pill-glass {
-  border: 1px solid var(--border);
-  background: oklch(1 0 0 / 82%);
+  border: var(--stroke) solid var(--border);
+  background: color-mix(in oklab, var(--sheet) 90%, transparent);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
 @media (prefers-reduced-transparency: reduce) {
   .pill-glass {
-    background: var(--card);
+    background: var(--sheet);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -236,7 +237,8 @@ html {
 --------------------------------------------------------------------------- */
 
 .dark {
-  --background: oklch(0.165 0.003 285);
+  --background: oklch(0.132 0.003 285);
+  --sheet: oklch(0.185 0.004 285);
   --foreground: oklch(0.955 0.002 100);
 
   --card: oklch(0.212 0.004 285);
@@ -278,12 +280,12 @@ html.dark {
 }
 
 .dark .pill-glass {
-  background: oklch(0.212 0.004 285 / 78%);
+  background: color-mix(in oklab, var(--sheet) 90%, transparent);
 }
 
 @media (prefers-reduced-transparency: reduce) {
   .dark .pill-glass {
-    background: var(--card);
+    background: var(--sheet);
   }
 }
 
@@ -326,4 +328,10 @@ html.dark {
 }
 .border-r {
   border-right-width: var(--stroke);
+}
+
+/* The page sits on the ground as a single sheet, the way a document does. */
+.sheet {
+  background: var(--sheet);
+  border: var(--stroke) solid var(--border);
 }

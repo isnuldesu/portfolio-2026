@@ -71,9 +71,15 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={`${grotesk.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background text-foreground">
+      <body className="min-h-full bg-background text-foreground">
         <ThemeProvider>
-          <LocaleProvider locale={locale}>{children}</LocaleProvider>
+          <LocaleProvider locale={locale}>
+            <div className="mx-auto w-full max-w-[82rem] px-0 sm:px-6 sm:py-8">
+              <div className="sheet flex min-h-[calc(100dvh-4rem)] flex-col">
+                {children}
+              </div>
+            </div>
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

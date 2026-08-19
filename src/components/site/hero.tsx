@@ -42,7 +42,7 @@ export function Hero() {
           <m.div
             {...rise(0)}
             className="relative aspect-square w-24 shrink-0 overflow-hidden border-2 border-border sm:w-40 lg:w-[13.875rem]"
-            style={{ background: "var(--teal)" }}
+            style={{ background: "#546f4c" }}
           >
             <Image
               src={person.portrait}
@@ -116,12 +116,12 @@ export function Hero() {
               {!reduceMotion ? (
                 <span
                   className="absolute inline-flex size-full animate-ping rounded-full opacity-70"
-                  style={{ background: "var(--teal)" }}
+                  style={{ background: "#546f4c" }}
                 />
               ) : null}
               <span
                 className="relative inline-flex size-2.5 rounded-full"
-                style={{ background: "var(--teal)" }}
+                style={{ background: "#546f4c" }}
               />
             </span>
             {t(availability.label, locale)}
