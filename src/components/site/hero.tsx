@@ -80,12 +80,19 @@ export function Hero() {
           </div>
         </div>
 
+        {/* Four flush boxes, right aligned, together exactly as tall as the
+            mark square, each hugging its own text. */}
         <m.ul
           {...rise(0.24)}
-          className="flex flex-col justify-between gap-3 border-border lg:border-r-2 lg:pr-4 lg:text-right"
+          className="flex flex-col items-stretch lg:h-[13.875rem] lg:items-end"
         >
-          {contacts.map((contact) => (
-            <li key={contact.label}>
+          {contacts.map((contact, index) => (
+            <li
+              key={contact.label}
+              className={`flex flex-1 items-center border-2 border-border px-4 py-3 sm:px-5 lg:px-6 ${
+                index > 0 ? "-mt-0.5" : ""
+              }`}
+            >
               <a
                 href={contact.href}
                 target={contact.href.startsWith("http") ? "_blank" : undefined}

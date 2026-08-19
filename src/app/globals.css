@@ -166,6 +166,9 @@
 
   --radius: 0rem;
 
+  /* One stroke weight for the whole page. The reference measures 2px. */
+  --stroke: 2px;
+
   /* The CV palette. Coral leads; the rest tag categories. */
   --coral: #eb5362;
   --teal: #4bbd99;
@@ -209,7 +212,7 @@ html {
 /* The CV builds structure from rules, not from filled cards. */
 .surface {
   background: transparent;
-  border: 1.5px solid var(--border);
+  border: var(--stroke) solid var(--border);
 }
 
 .pill-glass {
@@ -298,11 +301,29 @@ html.dark {
   }
 }
 
-/* Every hairline on the page is the CV's rule weight. */
+/* Every rule on the page carries the same weight and colour. */
 .border,
 .border-t,
 .border-b,
 .border-l,
-.border-r {
+.border-r,
+.border-y,
+.border-x {
   border-color: var(--border);
+}
+
+.border {
+  border-width: var(--stroke);
+}
+.border-t {
+  border-top-width: var(--stroke);
+}
+.border-b {
+  border-bottom-width: var(--stroke);
+}
+.border-l {
+  border-left-width: var(--stroke);
+}
+.border-r {
+  border-right-width: var(--stroke);
 }
