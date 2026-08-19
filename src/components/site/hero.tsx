@@ -34,11 +34,14 @@ export function Hero() {
       {/* Masthead proportions are lifted straight off the reference: a square
           mark, the name knocked out of a coral block, the title on a wider
           sand block, and a 4px gap holding the three together. */}
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-        <div className="flex items-stretch gap-1">
+      {/* Measured off the reference: 2px black rules, blocks flush with no
+          vertical gap, each block sized to its own text, and a rule closing
+          the masthead on the right with the contacts ranged against it. */}
+      <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:justify-between lg:gap-12">
+        <div className="flex items-stretch">
           <m.div
             {...rise(0)}
-            className="relative aspect-square w-24 shrink-0 overflow-hidden sm:w-40 lg:w-[13.625rem]"
+            className="relative aspect-square w-24 shrink-0 overflow-hidden border-2 border-border sm:w-40 lg:w-[13.875rem]"
             style={{ background: "var(--teal)" }}
           >
             <Image
@@ -46,15 +49,15 @@ export function Hero() {
               alt={`Portrait of ${person.name}`}
               fill
               priority
-              sizes="(max-width: 640px) 96px, (max-width: 1024px) 160px, 218px"
-              className="relative object-cover"
+              sizes="(max-width: 640px) 96px, (max-width: 1024px) 160px, 222px"
+              className="object-cover"
             />
           </m.div>
 
-          <div className="flex min-w-0 flex-col gap-1">
+          <div className="-ml-0.5 flex min-w-0 flex-col items-start">
             <m.h1
               {...rise(0.06)}
-              className="font-display flex items-center px-3 py-4 text-[1.5rem] font-bold leading-none text-white sm:px-6 sm:py-6 sm:text-[2.25rem] lg:px-[2.6rem] lg:py-[2.3rem] lg:text-[3.5rem]"
+              className="font-display flex items-center border-2 border-border px-3 py-4 text-[1.5rem] font-bold leading-none text-white sm:px-6 sm:py-6 sm:text-[2.25rem] lg:px-[2.625rem] lg:py-[2.3rem] lg:text-[3.5rem]"
               style={{ background: "var(--coral)" }}
             >
               {person.shortName}
@@ -62,7 +65,7 @@ export function Hero() {
 
             <m.p
               {...rise(0.12)}
-              className="font-display flex items-center px-3 py-2 text-[0.8rem] font-medium leading-none sm:px-6 sm:py-3 sm:text-base lg:px-[2.7rem] lg:py-[0.8rem] lg:text-[1.5rem]"
+              className="font-display -mt-0.5 flex items-center border-2 border-border px-3 py-2 text-[0.8rem] font-medium leading-none sm:px-6 sm:py-3 sm:text-base lg:px-[2.8rem] lg:py-[0.95rem] lg:text-[1.5rem]"
               style={{ background: "var(--sand)", color: "#2d2d2c" }}
             >
               {person.role}
@@ -70,7 +73,7 @@ export function Hero() {
 
             <m.p
               {...rise(0.18)}
-              className="font-display mt-1 text-[0.8rem] leading-tight text-foreground sm:text-base lg:text-[1.5rem]"
+              className="font-display -mt-0.5 flex items-center border-2 border-border px-3 py-2 text-[0.8rem] leading-none text-foreground sm:px-6 sm:py-3 sm:text-base lg:px-[0.75rem] lg:py-[0.85rem] lg:text-[1.35rem]"
             >
               {person.secondaryRole}
             </m.p>
@@ -79,7 +82,7 @@ export function Hero() {
 
         <m.ul
           {...rise(0.24)}
-          className="flex flex-col justify-between gap-3 lg:h-[13.625rem] lg:text-right"
+          className="flex flex-col justify-between gap-3 border-border lg:border-r-2 lg:pr-4 lg:text-right"
         >
           {contacts.map((contact) => (
             <li key={contact.label}>
