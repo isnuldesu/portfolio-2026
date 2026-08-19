@@ -38,15 +38,15 @@ export function TypeDesign() {
               viewport: { once: true, amount: 0.2 },
               transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
             })}
-        className="mt-10 flex snap-x snap-mandatory gap-0 overflow-x-auto pb-4 [scrollbar-width:thin]"
+        className="mt-10 flex snap-x snap-mandatory overflow-x-auto border-y-2 border-border [scrollbar-width:thin]"
       >
         {typefaces.map((face) => (
-          <li key={face.name} className="-ml-0.5 w-[19rem] shrink-0 snap-start sm:w-[24rem]">
+          <li key={face.name} className="w-[19rem] shrink-0 snap-start sm:w-[24rem]">
             <Link
               href={`/${locale}/work/${face.slug}`}
-              className="group block border-2 border-border p-5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="group block border-r-2 border-border outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-            <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
+            <div className="relative aspect-[4/3] overflow-hidden border-b-2 border-border">
               <Image
                 src={face.image}
                 alt={`${face.name} specimen`}
@@ -56,7 +56,7 @@ export function TypeDesign() {
                 className="object-cover"
               />
             </div>
-            <div className="mt-4 flex items-start justify-between gap-3">
+            <div className="flex items-start justify-between gap-3 p-6">
               <div>
                 {/* Each name is set in its own face. */}
                 <h3
@@ -70,7 +70,7 @@ export function TypeDesign() {
                 </p>
               </div>
               {face.year ? (
-                <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
+                <span className="label-mono shrink-0 text-muted-foreground">
                   {face.year}
                 </span>
               ) : null}

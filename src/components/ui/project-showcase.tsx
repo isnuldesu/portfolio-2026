@@ -27,78 +27,73 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
         {t(ui.work.heading, locale)}
       </h2>
 
-      <div className="mt-12 grid sm:grid-cols-2">
-        {items.map((project, index) => {
-          return (
-            <m.article
-              key={project.title}
-              {...(reduceMotion
-                ? {}
-                : {
-                    initial: { opacity: 0, y: 32 },
-                    whileInView: { opacity: 1, y: 0 },
-                    viewport: { once: true, amount: 0.2 },
-                    transition: {
-                      duration: 0.6,
-                      delay: (index % 2) * 0.08,
-                      ease: [0.16, 1, 0.3, 1] as const,
-                    },
-                  })}
-              className="group -ml-0.5 -mt-0.5 border-2 border-border p-5"
+      {/* The negative offset lives on the container, so the outer edges stay
+          on the section's line and only the shared inner borders collapse. */}
+      <div className="mt-12 grid border-t-2 border-border sm:grid-cols-2">
+        {items.map((project, index) => (
+          <m.article
+            key={project.title}
+            {...(reduceMotion
+              ? {}
+              : {
+                  initial: { opacity: 0, y: 32 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true, amount: 0.2 },
+                  transition: {
+                    duration: 0.6,
+                    delay: (index % 2) * 0.08,
+                    ease: [0.16, 1, 0.3, 1] as const,
+                  },
+                })}
+            className="group border-b-2 border-border sm:odd:border-r-2"
+          >
+            <Link
+              href={`/${locale}/work/${project.slug}`}
+              className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-              <Link
-                href={`/${locale}/work/${project.slug}`}
-                className="block rounded-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-              >
-                <div className="relative overflow-hidden">
-                  <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
-                    <Image
-                      src={project.image}
-                      alt={`${project.title} title card`}
-                      fill
-                      priority={index < 2}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1152px) 50vw, 564px"
-                      quality={90}
-                      className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-                    />
-                  </div>
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={project.image}
+                  alt={`${project.title} title card`}
+                  fill
+                  priority={index < 2}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1152px) 50vw, 564px"
+                  quality={90}
+                  className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
 
-                  <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-none opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <ArrowUpRight className="size-4" />
+              <div className="p-6">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-display text-lg font-medium tracking-tight">
+                    {project.title}
+                  </h3>
+                  <span className="label-mono shrink-0 text-muted-foreground">
+                    {project.year}
                   </span>
                 </div>
 
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 px-1">
-                  <div>
-                    <h3 className="text-base font-medium tracking-tight">
-                      {project.title}
-                    </h3>
-                    <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted-foreground">
-                      {t(project.description, locale)}
-                    </p>
-                  </div>
-
-                  <ul className="flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="rounded-none border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-foreground/65"
-                      >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <p className="mt-2 px-1 font-mono text-xs text-muted-foreground">
-                  {project.year}
-                  {project.linkLabel ? ` · ${project.linkLabel}` : ""}
-                  {` · ${t(ui.work.readMore, locale)}`}
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {t(project.description, locale)}
                 </p>
-              </Link>
-            </m.article>
-          );
-        })}
+
+                <p className="label-mono mt-4 text-muted-foreground">
+                  {project.tags.join(" / ")}
+                </p>
+
+                <p className="mt-5 flex items-center justify-between gap-4">
+                  <span className="label-mono text-muted-foreground">
+                    {project.linkLabel ?? "\u00a0"}
+                  </span>
+                  <span className="label-mono inline-flex items-center gap-2 text-foreground">
+                    {t(ui.work.readMore, locale)}
+                    <ArrowUpRight className="size-4" />
+                  </span>
+                </p>
+              </div>
+            </Link>
+          </m.article>
+        ))}
       </div>
     </section>
   );

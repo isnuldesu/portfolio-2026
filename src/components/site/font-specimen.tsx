@@ -44,8 +44,8 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
       </div>
 
       {/* Type something and watch it set in the real face. */}
-      <div className="mt-8 border-2 border-border">
-        <div className="flex flex-wrap items-center gap-4 border-b-2 border-border p-4">
+      <div className="mt-8">
+        <div className="flex flex-wrap items-center gap-4 border-y-2 border-border py-4">
           <label htmlFor={inputId} className="label-mono text-muted-foreground">
             {t(ui.specimen.tryIt, locale)}
           </label>
@@ -55,7 +55,7 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
             value={text}
             onChange={(event) => setText(event.target.value)}
             placeholder={sample}
-            className="min-w-0 flex-1 border-2 border-border bg-transparent px-3 py-2 text-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="min-w-0 flex-1 border-b-2 border-border bg-transparent px-1 py-2 text-sm outline-none focus-visible:border-foreground focus-visible:ring-0"
           />
           <label htmlFor={sizeId} className="label-mono text-muted-foreground">
             {size}px
@@ -73,7 +73,7 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
         </div>
 
         <p
-          className="overflow-hidden p-6 leading-[1.15] break-words"
+          className="overflow-hidden py-8 leading-[1.15] break-words"
           style={{ ...face, fontSize: `${size}px` }}
         >
           {typed}
@@ -81,13 +81,11 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
       </div>
 
       {/* Size ladder. */}
-      <div className="mt-10 border-2 border-border">
-        {SIZES.map((step, index) => (
+      <div className="mt-10 border-t-2 border-border">
+        {SIZES.map((step) => (
           <p
             key={step}
-            className={`overflow-hidden px-6 py-3 leading-[1.2] break-words ${
-              index > 0 ? "border-t-2 border-border" : ""
-            }`}
+            className="overflow-hidden border-b-2 border-border py-3 leading-[1.2] break-words"
             style={{ ...face, fontSize: `${step}px` }}
           >
             {sample}
@@ -97,13 +95,11 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
 
       {/* Every style in the family, set in itself. */}
       {specimen.styles.length > 1 ? (
-        <ul className="mt-10 border-2 border-border">
-          {specimen.styles.map((style, index) => (
+        <ul className="mt-10 border-t-2 border-border">
+          {specimen.styles.map((style) => (
             <li
               key={style.label}
-              className={`flex flex-wrap items-baseline justify-between gap-4 px-6 py-4 ${
-                index > 0 ? "border-t-2 border-border" : ""
-              }`}
+              className="flex flex-wrap items-baseline justify-between gap-4 border-b-2 border-border py-4"
             >
               <span
                 className="text-3xl leading-none"
@@ -126,11 +122,11 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
         <p className="label-mono text-muted-foreground">
           {t(ui.specimen.characterSet, locale)}
         </p>
-        <ul className="mt-4 flex flex-wrap">
+        <ul className="mt-4 -ml-0.5 flex flex-wrap border-t-2 border-border pt-0.5">
           {specimen.characters.map((glyph) => (
             <li
               key={glyph}
-              className="-ml-0.5 -mt-0.5 flex size-12 items-center justify-center border-2 border-border text-xl sm:size-14 sm:text-2xl"
+              className="ml-0.5 mt-0.5 flex size-12 items-center justify-center border-b-2 border-r-2 border-border text-xl sm:size-14 sm:text-2xl"
               style={face}
             >
               {glyph}

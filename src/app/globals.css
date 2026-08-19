@@ -296,15 +296,14 @@ html.dark {
 /* A stroked block with a colour rule down its left edge. The rule is 12pt of
    a 555pt content column on the CV, so it stays chunky at any width. */
 .rule-left {
-  border: var(--stroke) solid var(--border);
   border-left: 14px solid var(--rule, var(--teal));
-  padding: 1rem 1.25rem;
+  padding: 1rem 0 1rem 1.25rem;
 }
 
 @media (min-width: 768px) {
   .rule-left {
     border-left-width: 20px;
-    padding: 1.5rem 1.75rem;
+    padding: 1.5rem 0 1.5rem 1.75rem;
   }
 }
 

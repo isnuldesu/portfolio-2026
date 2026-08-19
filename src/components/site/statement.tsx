@@ -57,7 +57,7 @@ export function Statement() {
       </m.h2>
 
       {/* A ruled strip rather than tags floating off the column. */}
-      <ul className="mt-12 flex flex-wrap">
+      <ul className="mt-12 flex flex-wrap border-t-2 border-border">
         {disciplines.map((label, index) => (
           <m.li
             key={t(label, "en")}
@@ -73,7 +73,7 @@ export function Statement() {
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
                 })}
-            className="-ml-0.5 -mt-0.5 flex items-center gap-2.5 border-2 border-border px-4 py-3 text-sm text-foreground"
+            className="flex items-center gap-2.5 border-b-2 border-border px-4 py-3 pl-0 text-sm text-foreground sm:pl-4"
           >
             <span
               aria-hidden="true"

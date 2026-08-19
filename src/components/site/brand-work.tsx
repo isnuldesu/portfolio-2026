@@ -27,7 +27,7 @@ export function BrandWork() {
         {t(ui.brand.body, locale)}
       </p>
 
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2">
+      <div className="mt-12 grid grid-cols-1 border-t-2 border-border sm:grid-cols-2">
         {brandProjects.map((project, index) => (
           <m.article
             key={project.title}
@@ -44,10 +44,10 @@ export function BrandWork() {
                   },
                   whileHover: { y: -6 },
                 })}
-            className="group -ml-0.5 -mt-0.5 border-2 border-border p-5"
+            className="group border-b-2 border-border sm:odd:border-r-2"
           >
             <Link href={`/${locale}/work/${project.slug}`} className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-            <div className="relative aspect-[4/3] overflow-hidden border-2 border-border">
+            <div className="relative aspect-[4/3] overflow-hidden">
               <Image
                 src={project.image}
                 alt={`${project.title} title card`}
@@ -58,16 +58,16 @@ export function BrandWork() {
               />
             </div>
 
-            <div className="mt-4 flex items-start justify-between gap-4">
+            <div className="flex items-start justify-between gap-4 p-6">
               <div>
-                <h3 className="text-base font-medium tracking-tight">{project.title}</h3>
-                <p className="label-mono mt-1 text-foreground">{t(project.discipline, locale)}</p>
-                <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-muted-foreground">
+                <h3 className="font-display text-lg font-medium tracking-tight">{project.title}</h3>
+                <p className="label-mono mt-1.5 text-muted-foreground">{t(project.discipline, locale)}</p>
+                <p className="mt-3 max-w-[48ch] text-sm leading-relaxed text-muted-foreground">
                   {t(project.description, locale)}
                 </p>
               </div>
               {project.year ? (
-                <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
+                <span className="label-mono shrink-0 text-muted-foreground">
                   {project.year}
                 </span>
               ) : null}

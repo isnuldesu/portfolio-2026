@@ -30,7 +30,7 @@ export function SiteNav() {
 
   return (
     <>
-      <div id="nav-sentinel" className="absolute top-0 h-px w-full" />
+      <div id="nav-sentinel" className="absolute inset-x-0 top-0 h-px" />
       <header
         className={cn(
           "sticky top-0 z-50 mx-auto h-16 w-full max-w-[82rem] transition-all duration-300",
