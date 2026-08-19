@@ -42,7 +42,7 @@ export function TypeDesign() {
         {typefaces.map((face) => (
           <li
             key={face.name}
-            className="surface w-[19rem] shrink-0 snap-start overflow-hidden rounded-3xl sm:w-[24rem]"
+            className="surface w-[19rem] shrink-0 snap-start overflow-hidden rounded-none sm:w-[24rem]"
           >
             <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
               <Image

@@ -6,9 +6,7 @@ import { useLocale } from "@/components/site/locale-provider";
 import { processSteps } from "@/content/site";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
-
-/** Cards fan out like a loose stack of paper. Middle card sits forward. */
-const tilts = ["lg:-rotate-[3deg]", "lg:rotate-[1deg] lg:-translate-y-8", "lg:rotate-[4deg]"];
+import { accentAt } from "@/lib/accents";
 
 export function Process() {
   const locale = useLocale();
@@ -16,10 +14,10 @@ export function Process() {
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <p className="label-mono text-center text-muted-foreground">
+      <p className="label-mono text-muted-foreground">
         {t(ui.process.eyebrow, locale)}
       </p>
-      <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">
+      <h2 className="font-display mt-3 max-w-[24ch] text-3xl font-medium tracking-tight md:text-5xl">
         {t(ui.process.heading, locale)}
       </h2>
 
@@ -38,17 +36,14 @@ export function Process() {
                     delay: index * 0.1,
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
-                  whileHover: { y: -8, rotate: 0 },
                 })}
-            className={`surface rounded-3xl p-7 transition-shadow hover:shadow-[0_24px_60px_rgba(23,24,28,0.12)] ${tilts[index]}`}
+            className="rule-left py-2"
+            style={{ "--rule": accentAt(index) } as React.CSSProperties}
           >
-            <p
-              className="font-display text-5xl font-medium leading-none"
-              style={{ color: "var(--coral)" }}
-            >
-              {step.number}
-            </p>
-            <h3 className="mt-8 text-xl font-medium tracking-tight">{t(step.title, locale)}</h3>
+            <p className="label-mono text-muted-foreground">{step.number}</p>
+            <h3 className="font-display mt-3 text-2xl font-medium tracking-tight">
+              {t(step.title, locale)}
+            </h3>
             <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
               {t(step.body, locale)}
             </p>

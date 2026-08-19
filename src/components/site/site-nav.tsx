@@ -61,7 +61,7 @@ export function SiteNav() {
             <ThemeToggle label={t(ui.nav.themeToggle, locale)} />
             <Button
               asChild
-              className="hidden h-10 rounded-full px-5 text-sm font-medium sm:inline-flex"
+              className="hidden h-10 rounded-none px-5 text-sm font-medium sm:inline-flex"
             >
               <a href={primaryCta.href}>{t(primaryCta.label, locale)}</a>
             </Button>

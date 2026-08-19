@@ -164,7 +164,7 @@
   --input: oklch(0.26 0.003 285 / 18%);
   --ring: oklch(0.63 0.19 20 / 35%);
 
-  --radius: 1rem;
+  --radius: 0rem;
 
   /* The CV palette. Coral leads; the rest tag categories. */
   --coral: #eb5362;
@@ -208,10 +208,10 @@ html {
 }
 
 /* Panels sit on the page as paper, held by a hairline rather than a shadow. */
+/* The CV builds structure from rules, not from filled cards. */
 .surface {
-  background: var(--card);
+  background: transparent;
   border: 1px solid var(--border);
-  box-shadow: 0 1px 2px oklch(0.26 0.003 285 / 4%);
 }
 
 .pill-glass {
@@ -272,9 +272,8 @@ html.dark {
 }
 
 .dark .surface {
-  background: var(--card);
-  border-color: oklch(1 0 0 / 10%);
-  box-shadow: 0 1px 2px oklch(0 0 0 / 40%);
+  background: transparent;
+  border-color: oklch(1 0 0 / 12%);
 }
 
 .dark .pill-glass {
@@ -284,5 +283,18 @@ html.dark {
 @media (prefers-reduced-transparency: reduce) {
   .dark .pill-glass {
     background: var(--card);
+  }
+}
+
+/* The CV hangs a thick colour rule off the left of every content group. */
+.rule-left {
+  border-left: 6px solid var(--rule, var(--teal));
+  padding-left: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .rule-left {
+    border-left-width: 8px;
+    padding-left: 1.75rem;
   }
 }

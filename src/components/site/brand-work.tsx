@@ -46,7 +46,7 @@ export function BrandWork() {
                   whileHover: { y: -6 },
                 })}
             className={cn(
-              "surface group overflow-hidden rounded-3xl transition-shadow hover:shadow-[0_24px_60px_rgba(23,24,28,0.12)]",
+              "surface group overflow-hidden rounded-none transition-shadow hover:shadow-[0_24px_60px_rgba(23,24,28,0.12)]",
               project.size === "large" ? "md:col-span-2" : "md:col-span-1",
               index === brandProjects.length - 1 && "md:col-span-3",
             )}

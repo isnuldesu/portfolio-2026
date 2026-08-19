@@ -14,7 +14,7 @@ import { t, type L } from "@/lib/i18n";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const fieldClass =
-  "w-full rounded-2xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50";
+  "w-full rounded-none border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50";
 
 const labelClass = "block text-sm font-medium text-foreground/90";
 
@@ -75,15 +75,15 @@ export function Contact() {
             })}
         className="mx-auto max-w-2xl"
       >
-        <h2 className="font-display text-center text-3xl font-medium tracking-tight text-balance md:text-5xl">
+        <h2 className="font-display text-3xl font-medium tracking-tight text-balance md:text-5xl">
           {t(contact.heading, locale)}
         </h2>
-        <p className="mx-auto mt-5 max-w-[52ch] text-center text-base leading-relaxed text-foreground/70">
+        <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-muted-foreground">
           {t(contact.body, locale)}
         </p>
 
         {status === "sent" ? (
-          <div className="surface mt-10 rounded-3xl p-8 text-center">
+          <div className="surface mt-10 rounded-none p-8 text-center">
             <p className="text-lg font-medium text-foreground">
               {t(ui.form.successTitle, locale)}
             </p>
@@ -94,7 +94,7 @@ export function Contact() {
               <Button
                 asChild
                 variant="outline"
-                className="h-11 gap-2 rounded-full border-border bg-card px-6 text-sm font-medium"
+                className="h-11 gap-2 rounded-none border-border bg-card px-6 text-sm font-medium"
               >
                 <a
                   href={t(whatsappCta.href, locale)}
@@ -181,7 +181,7 @@ export function Contact() {
               <Button
                 type="submit"
                 disabled={status === "sending"}
-                className="h-12 w-full gap-2 rounded-full px-8 text-sm font-medium sm:w-auto"
+                className="h-12 w-full gap-2 rounded-none px-8 text-sm font-medium sm:w-auto"
               >
                 {status === "sending" ? (
                   <>
@@ -199,7 +199,7 @@ export function Contact() {
               <Button
                 asChild
                 variant="outline"
-                className="h-12 w-full gap-2 rounded-full border-border bg-card px-8 text-sm font-medium sm:w-auto"
+                className="h-12 w-full gap-2 rounded-none border-border bg-card px-8 text-sm font-medium sm:w-auto"
               >
                 <a
                   href={t(whatsappCta.href, locale)}

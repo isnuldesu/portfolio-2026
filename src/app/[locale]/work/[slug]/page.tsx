@@ -9,6 +9,7 @@ import { caseStudies, getCaseStudy } from "@/content/case-studies";
 import { person, primaryCta, whatsappCta } from "@/content/site";
 import { ui } from "@/content/ui";
 import { isLocale, locales, t } from "@/lib/i18n";
+import { accentAt } from "@/lib/accents";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -61,16 +62,7 @@ export default async function CaseStudyPage({
 
   return (
     <article className="px-3 pb-24 pt-3 sm:px-4 sm:pt-4">
-      <header className="surface relative overflow-hidden rounded-[28px] px-6 pb-14 pt-10 sm:rounded-[36px] sm:px-10 sm:pt-14">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-64"
-          style={{
-            background:
-              "radial-gradient(80% 100% at 50% 0%, var(--blush) 0%, transparent 70%)",
-          }}
-        />
-
+      <header className="relative overflow-hidden px-6 pb-14 pt-10 sm:px-10 sm:pt-14">
         <div className="relative mx-auto max-w-4xl">
           <Link
             href={`/${locale}#work`}
@@ -106,7 +98,7 @@ export default async function CaseStudyPage({
               href={study.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium outline-none transition-shadow hover:shadow-[0_10px_28px_rgba(23,24,28,0.1)] focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="mt-8 inline-flex items-center gap-2 rounded-none border border-border bg-card px-5 py-2.5 text-sm font-medium outline-none transition-shadow hover:shadow-[0_10px_28px_rgba(23,24,28,0.1)] focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               {study.linkLabel ?? t(ui.caseStudy.visit, locale)}
               <ArrowUpRight className="size-4" strokeWidth={2} />
@@ -148,8 +140,11 @@ export default async function CaseStudyPage({
         {study.typefaces || study.palette ? (
           <section className="mt-16 grid gap-6 md:grid-cols-2">
             {study.typefaces ? (
-              <div className="surface rounded-3xl p-7">
-                <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+              <div
+                className="rule-left"
+                style={{ "--rule": accentAt(0) } as React.CSSProperties}
+              >
+                <h3 className="label-mono text-muted-foreground">
                   {t(ui.caseStudy.typography, locale)}
                 </h3>
                 <ul className="mt-4 space-y-2">
@@ -163,15 +158,18 @@ export default async function CaseStudyPage({
             ) : null}
 
             {study.palette ? (
-              <div className="surface rounded-3xl p-7">
-                <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+              <div
+                className="rule-left"
+                style={{ "--rule": accentAt(1) } as React.CSSProperties}
+              >
+                <h3 className="label-mono text-muted-foreground">
                   {t(ui.caseStudy.palette, locale)}
                 </h3>
                 <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {study.palette.map((swatch) => (
                     <li key={swatch.hex + swatch.name}>
                       <span
-                        className="block h-14 w-full rounded-xl border border-border"
+                        className="block h-14 w-full rounded-none border border-border"
                         style={{ background: swatch.hex }}
                       />
                       <span className="mt-2 block text-xs font-medium">{swatch.name}</span>
@@ -190,9 +188,11 @@ export default async function CaseStudyPage({
       <CaseStudyGallery items={study.gallery} />
 
       <section className="mx-auto mt-8 max-w-4xl px-3 sm:px-6">
-        <div className="surface flex flex-col gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">{t(ui.caseStudy.next, locale)}</p>
+            <p className="label-mono text-muted-foreground">
+              {t(ui.caseStudy.next, locale)}
+            </p>
             <Link
               href={`/${locale}/work/${next.slug}`}
               className="font-display mt-1 inline-flex items-center gap-2 text-2xl font-medium tracking-tight outline-none hover:underline focus-visible:underline"
@@ -203,7 +203,7 @@ export default async function CaseStudyPage({
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Button asChild className="h-11 rounded-full px-6 text-sm font-medium">
+            <Button asChild className="h-11 rounded-none px-6 text-sm font-medium">
               <Link href={`/${locale}${primaryCta.href}`}>
                 {t(primaryCta.label, locale)}
               </Link>
@@ -211,7 +211,7 @@ export default async function CaseStudyPage({
             <Button
               asChild
               variant="outline"
-              className="h-11 rounded-full border-border bg-card px-6 text-sm font-medium"
+              className="h-11 rounded-none border-border bg-card px-6 text-sm font-medium"
             >
               <a
                 href={t(whatsappCta.href, locale)}

@@ -96,8 +96,8 @@ function Blob(props: ThreeElements["mesh"]) {
     () => ({
       uTime: { value: 0 },
       uPointer: { value: 0 },
-      uBase: { value: new THREE.Color("#edc5cd") },
-      uAccent: { value: new THREE.Color("#90ada5") },
+      uBase: { value: new THREE.Color("#3fae8c") },
+      uAccent: { value: new THREE.Color("#bfe8d8") },
     }),
     [],
   );
@@ -133,7 +133,7 @@ export default function HeroScene() {
   return (
     <Canvas
       className="!absolute inset-0"
-      camera={{ position: [0, 0, 4], fov: 42 }}
+      camera={{ position: [0, 0, 3.4], fov: 42 }}
       dpr={[1, 1.6]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       frameloop="always"

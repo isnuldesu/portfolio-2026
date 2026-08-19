@@ -18,6 +18,7 @@ import {
 } from "@/content/site";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
+import { accentAt } from "@/lib/accents";
 
 const listVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -64,7 +65,7 @@ export function GlassmorphismPortfolioBlock({
                 viewport: { once: true, amount: 0.25 },
                 transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
               })}
-          className="surface relative overflow-hidden rounded-[32px] p-6 sm:p-8 md:p-12"
+          className="relative overflow-hidden border-t border-border pt-10 sm:pt-12"
         >
           <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(90% 70% at 100% 0%, var(--blush) 0%, transparent 60%)" }} />
 
@@ -73,7 +74,7 @@ export function GlassmorphismPortfolioBlock({
             <div className="space-y-8">
               <Badge
                 variant="outline"
-                className="inline-flex items-center gap-2 rounded-full border-border bg-card px-4 py-1.5 text-xs font-medium text-foreground/70"
+                className="inline-flex items-center gap-2 rounded-none border-border bg-card px-4 py-1.5 text-xs font-medium text-foreground/70"
               >
                 {t(ui.about.badge, locale)}
               </Badge>
@@ -106,10 +107,11 @@ export function GlassmorphismPortfolioBlock({
                           transition: { duration: 0.4, delay: 0.08 * index },
                           whileHover: { y: -4 },
                         })}
-                    className="group relative overflow-hidden rounded-2xl border border-border bg-secondary/60 p-5 transition-colors hover:border-foreground/20"
+                    className="rule-left group relative overflow-hidden py-1"
+                    style={{ "--rule": accentAt(index) } as React.CSSProperties}
                   >
                     <div className="relative space-y-2">
-                      <p className="text-xs font-medium" style={{ color: "var(--coral)" }}>
+                      <p className="text-xs font-medium" style={{ color: accentAt(index) }}>
                         {t(item.title, locale)}
                       </p>
                       <p className="text-sm leading-relaxed text-foreground/70">
@@ -123,7 +125,7 @@ export function GlassmorphismPortfolioBlock({
               <m.div {...rise(0.26)}>
                 <Button
                   asChild
-                  className="h-12 w-full gap-2 rounded-full px-8 text-sm font-medium sm:w-auto"
+                  className="h-12 w-full gap-2 rounded-none px-8 text-sm font-medium sm:w-auto"
                 >
                   <a href={primaryCta.href}>
                     {t(primaryCta.label, locale)}
@@ -135,8 +137,8 @@ export function GlassmorphismPortfolioBlock({
 
             {/* Right column */}
             <div className="relative">
-              <div className="pointer-events-none absolute inset-0 rounded-3xl blur-3xl" style={{ background: "linear-gradient(180deg, var(--blush), transparent 70%)" }} />
-              <div className="relative flex h-full flex-col justify-between rounded-3xl border border-border bg-secondary/60 p-6 sm:p-8">
+              <div className="pointer-events-none absolute inset-0 rounded-none blur-3xl" style={{ background: "linear-gradient(180deg, var(--blush), transparent 70%)" }} />
+              <div className="relative flex h-full flex-col justify-between border border-border p-6 sm:p-8">
                 <div className="flex flex-col items-center text-center">
                   <m.div
                     {...(reduceMotion
@@ -149,14 +151,14 @@ export function GlassmorphismPortfolioBlock({
                         })}
                     className="relative mb-6"
                   >
-                    <div className="absolute left-1/2 top-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl" style={{ background: "var(--coral)" }} />
+                    <div className="absolute left-1/2 top-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-none blur-2xl" style={{ background: "var(--coral)" }} />
                     <Image
                       src={person.portrait}
                       alt={`Portrait of ${person.name}`}
                       width={1400}
                       height={1400}
                       sizes="128px"
-                      className="relative size-32 rounded-full border-4 border-white object-cover shadow-[0_18px_44px_rgba(23,24,28,0.18)]"
+                      className="relative size-32 rounded-none border-4 border-white object-cover shadow-[0_18px_44px_rgba(23,24,28,0.18)]"
                     />
                   </m.div>
 
@@ -197,10 +199,10 @@ export function GlassmorphismPortfolioBlock({
                         href={social.href}
                         target={social.href.startsWith("http") ? "_blank" : undefined}
                         rel="noopener noreferrer"
-                        className="group flex items-center justify-between rounded-2xl border border-border bg-card px-4 py-3 text-left outline-none transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(23,24,28,0.08)] focus-visible:ring-3 focus-visible:ring-ring/50"
+                        className="group flex items-center justify-between rounded-none border border-border bg-card px-4 py-3 text-left outline-none transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(23,24,28,0.08)] focus-visible:ring-3 focus-visible:ring-ring/50"
                       >
                         <span className="flex items-center gap-3">
-                          <span className="flex size-10 items-center justify-center rounded-full border border-border bg-secondary text-foreground/80">
+                          <span className="flex size-10 items-center justify-center rounded-none border border-border bg-secondary text-foreground/80">
                             <BrandIcon name={social.icon} />
                           </span>
                           <span className="block">

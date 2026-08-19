@@ -6,6 +6,7 @@ import { useLocale } from "@/components/site/locale-provider";
 import { education, roles, toolkit } from "@/content/experience";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
+import { accentAt } from "@/lib/accents";
 
 /**
  * A ledger rather than a timeline: period on the left, the job on the right,
@@ -18,14 +19,14 @@ export function Experience() {
 
   return (
     <section id="experience" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <p className="label-mono text-center text-muted-foreground">
+      <p className="label-mono text-muted-foreground">
         {t(ui.experience.eyebrow, locale)}
       </p>
-      <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">
+      <h2 className="font-display mt-3 max-w-[24ch] text-3xl font-medium tracking-tight md:text-5xl">
         {t(ui.experience.heading, locale)}
       </h2>
 
-      <ol className="mx-auto mt-14 max-w-4xl border-t border-border">
+      <ol className="mx-auto mt-14 max-w-4xl space-y-6">
         {roles.map((role, index) => (
           <m.li
             key={`${role.company}-${role.period}`}
@@ -41,7 +42,8 @@ export function Experience() {
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
                 })}
-            className="grid gap-4 border-b border-border py-8 md:grid-cols-[13rem_minmax(0,1fr)] md:gap-10"
+            className="rule-left grid gap-4 py-8 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10"
+            style={{ "--rule": accentAt(index) } as React.CSSProperties}
           >
             <div>
               <p className="label-mono text-foreground">{role.period}</p>
@@ -55,7 +57,7 @@ export function Experience() {
               <h3 className="font-display text-xl font-medium tracking-tight">
                 {role.title}
               </h3>
-              <p className="mt-1 text-sm font-medium" style={{ color: "var(--coral)" }}>
+              <p className="mt-1 text-sm font-medium" style={{ color: accentAt(index) }}>
                 {role.company}
               </p>
               <ul className="mt-4 space-y-2">
@@ -64,11 +66,9 @@ export function Experience() {
                     key={t(point, "en")}
                     className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 size-1 shrink-0 rounded-full"
-                      style={{ background: "var(--coral)" }}
-                    />
+                    <span aria-hidden="true" className="mt-2 shrink-0 text-muted-foreground">
+                      &bull;
+                    </span>
                     {t(point, locale)}
                   </li>
                 ))}
@@ -79,7 +79,10 @@ export function Experience() {
       </ol>
 
       <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
-        <div className="surface rounded-2xl p-6">
+        <div
+          className="rule-left"
+          style={{ "--rule": accentAt(1) } as React.CSSProperties}
+        >
           <p className="label-mono text-muted-foreground">
             {t(ui.experience.software, locale)}
           </p>
@@ -90,7 +93,10 @@ export function Experience() {
           </ul>
         </div>
 
-        <div className="surface rounded-2xl p-6">
+        <div
+          className="rule-left"
+          style={{ "--rule": accentAt(0) } as React.CSSProperties}
+        >
           <p className="label-mono text-muted-foreground">
             {t(ui.experience.expertise, locale)}
           </p>
@@ -101,7 +107,10 @@ export function Experience() {
           </ul>
         </div>
 
-        <div className="surface rounded-2xl p-6">
+        <div
+          className="rule-left"
+          style={{ "--rule": accentAt(3) } as React.CSSProperties}
+        >
           <p className="label-mono text-muted-foreground">
             {t(ui.experience.education, locale)}
           </p>

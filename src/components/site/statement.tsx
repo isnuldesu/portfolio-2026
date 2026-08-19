@@ -22,7 +22,7 @@ export function Statement() {
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <p className="label-mono text-center text-muted-foreground">
+      <p className="label-mono text-muted-foreground">
         {t(statement.eyebrow, locale)}
       </p>
 
@@ -44,7 +44,7 @@ export function Statement() {
                       ease: [0.16, 1, 0.3, 1] as const,
                     },
                   })}
-              className={`pill-glass absolute inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium text-foreground/75 ${positions[index]} -mx-[9rem] xl:-mx-[12rem]`}
+              className={`pill-glass absolute inline-flex items-center gap-2 whitespace-nowrap rounded-none px-3.5 py-2 text-xs font-medium text-foreground/75 ${positions[index]} -mx-[9rem] xl:-mx-[12rem]`}
             >
               <span
                 className="size-2 rounded-full"
@@ -64,7 +64,7 @@ export function Statement() {
                 viewport: { once: true, amount: 0.4 },
                 transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
               })}
-          className="font-display text-center text-2xl font-medium leading-snug text-balance sm:text-3xl md:text-[2.6rem] md:leading-[1.2]"
+          className="font-display text-2xl font-medium leading-snug text-balance sm:text-3xl md:text-[2.6rem] md:leading-[1.2]"
         >
           {t(statement.lead, locale)}{" "}
           <span className="text-foreground/40">{t(statement.tail, locale)}</span>
@@ -74,7 +74,7 @@ export function Statement() {
           {disciplines.map((label) => (
             <li
               key={t(label, "en")}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-medium text-foreground/75"
+              className="inline-flex items-center gap-2 rounded-none border border-border bg-card px-3.5 py-2 text-xs font-medium text-foreground/75"
             >
               <span
                 className="size-2 rounded-full"

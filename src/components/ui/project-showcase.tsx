@@ -20,10 +20,10 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
 
   return (
     <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <p className="label-mono text-center text-muted-foreground">
+      <p className="label-mono text-muted-foreground">
         {t(ui.work.eyebrow, locale)}
       </p>
-      <h2 className="font-display mt-3 text-center text-3xl font-medium tracking-tight md:text-5xl">
+      <h2 className="font-display mt-3 max-w-[24ch] text-3xl font-medium tracking-tight md:text-5xl">
         {t(ui.work.heading, locale)}
       </h2>
 
@@ -48,9 +48,9 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
             >
               <Link
                 href={`/${locale}/work/${project.slug}`}
-                className="block rounded-3xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="block rounded-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <div className="surface relative overflow-hidden rounded-3xl">
+                <div className="surface relative overflow-hidden rounded-none">
                   <div className="relative aspect-[1.414] overflow-hidden bg-secondary/40">
                     <Image
                       src={project.image}
@@ -63,7 +63,7 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
                     />
                   </div>
 
-                  <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="pill-glass absolute right-4 top-4 flex size-10 items-center justify-center rounded-none opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <ArrowUpRight className="size-4" strokeWidth={2} />
                   </span>
                 </div>
@@ -82,7 +82,7 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
                     {project.tags.map((tag) => (
                       <li
                         key={tag}
-                        className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-foreground/65"
+                        className="rounded-none border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-foreground/65"
                       >
                         {tag}
                       </li>

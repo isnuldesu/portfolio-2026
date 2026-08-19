@@ -69,7 +69,7 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
                   {/* Node on the rail, aligned with the number. */}
                   <span
                     aria-hidden="true"
-                    className="absolute -left-14 top-1.5 hidden size-4 items-center justify-center rounded-full border border-border bg-card lg:flex"
+                    className="absolute -left-14 top-1.5 hidden size-4 items-center justify-center rounded-none border border-border bg-card lg:flex"
                   >
                     <span
                       className="size-1.5 rounded-full"
@@ -97,7 +97,7 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
                         viewport: { once: true, amount: 0.15 },
                         transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
                       })}
-                  className="surface overflow-hidden rounded-3xl"
+                  className="surface overflow-hidden rounded-none"
                 >
                   <Image
                     src={item.src}
