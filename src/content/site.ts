@@ -15,7 +15,7 @@ export const person = {
   email: "isnulmuhammad@gmail.com",
   whatsapp: "6282255845751",
   whatsappLabel: "0822 5584 5751",
-  portrait: "/portrait.jpg",
+  portrait: "/portrait.webp",
   tagline:
     "Design engineer working on point of sale, accounting, and school operations software, plus the brand and type systems around them.",
   intro:
@@ -92,24 +92,24 @@ export const typefaces: Typeface[] = [
     name: "Birru Sans",
     note: "Display sans drawn for the Birru.co identity.",
     year: "2024",
-    image: "/work/type-birrusans.jpg",
+    image: "/work/type-birrusans.webp",
   },
   {
     name: "Abahchan",
     note: "Rounded display face, personal project.",
     year: "2020",
-    image: "/work/type-abahchan.jpg",
+    image: "/work/type-abahchan.webp",
   },
   {
     name: "BeemBO",
     note: "Full Latin set with extended diacritics.",
     year: "2020",
-    image: "/work/type-beembo.jpg",
+    image: "/work/type-beembo.webp",
   },
   {
     name: "Jablo",
     note: "Condensed display face, personal project.",
-    image: "/work/type-jablo.jpg",
+    image: "/work/type-jablo.webp",
   },
 ];
 

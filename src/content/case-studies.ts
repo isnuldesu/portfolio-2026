@@ -6,7 +6,13 @@
  */
 
 export type Swatch = { name: string; hex: string };
-export type GalleryItem = { src: string; caption: string };
+export type GalleryItem = {
+  src: string;
+  caption: string;
+  /** Intrinsic pixels, so next/image can reserve the box and build a srcset. */
+  width: number;
+  height: number;
+};
 export type CaseSection = { heading: string; body: string; bullets?: string[] };
 
 export type CaseStudy = {
@@ -48,7 +54,7 @@ export const caseStudies: CaseStudy[] = [
       "Point of sale SaaS spanning five apps. Merchants grew from 1,000+ to 4,500+ during my time on the product.",
     summary:
       "Luna POS is software as a service for Indonesian business owners: sales monitoring, product stock, accounting, and customer relations in one account. I joined after launch, with more than a thousand merchants already depending on it, which meant every change had to land without breaking a working shop.",
-    cover: "/work/lunapos.jpg",
+    cover: "/work/lunapos.webp",
     tags: ["SaaS", "Product Design", "Design System"],
     gridSize: "large",
     sections: [
@@ -82,10 +88,10 @@ export const caseStudies: CaseStudy[] = [
       { name: "White", hex: "#FFFFFF" },
     ],
     gallery: [
-      { src: "/work/gallery/lunapos-overview.jpg", caption: "Product overview and the five surfaces" },
-      { src: "/work/lunapos.jpg", caption: "Back office, the web merchant dashboard" },
-      { src: "/work/gallery/lunapos-app.jpg", caption: "Tablet and phone point of sale" },
-      { src: "/work/gallery/lunapos-tokoluna.jpg", caption: "TokoLUNA, the merchant online store" },
+      { src: "/work/gallery/lunapos-overview.webp", caption: "Product overview and the five surfaces", width: 2048, height: 1449 },
+      { src: "/work/lunapos.webp", caption: "Back office, the web merchant dashboard", width: 2048, height: 1449 },
+      { src: "/work/gallery/lunapos-app.webp", caption: "Tablet and phone point of sale", width: 2048, height: 1449 },
+      { src: "/work/gallery/lunapos-tokoluna.webp", caption: "TokoLUNA, the merchant online store", width: 2048, height: 1449 },
     ],
   },
   {
@@ -102,7 +108,7 @@ export const caseStudies: CaseStudy[] = [
       "Accounting app for Indonesian MSMEs, designed from zero as the first designer on the team.",
     summary:
       "Laba.id is a financial companion for micro, small, and medium businesses: record transactions accurately without needing to understand accounting first. The idea started in September 2020 during the pandemic, development began in early 2021, and I was the first designer on it.",
-    cover: "/work/laba.jpg",
+    cover: "/work/laba.webp",
     tags: ["Fintech", "Product Design", "Mobile"],
     gridSize: "small",
     sections: [
@@ -133,10 +139,10 @@ export const caseStudies: CaseStudy[] = [
       { name: "Shark", hex: "#212529" },
     ],
     gallery: [
-      { src: "/work/gallery/laba-overview.jpg", caption: "What the product is for" },
-      { src: "/work/gallery/laba-brand.jpg", caption: "Logo, type, and colour" },
-      { src: "/work/gallery/laba-bisnis.jpg", caption: "Laba Bisnis, the web app" },
-      { src: "/work/gallery/laba-saku.jpg", caption: "Laba Saku, the mobile app" },
+      { src: "/work/gallery/laba-overview.webp", caption: "What the product is for", width: 2048, height: 1449 },
+      { src: "/work/gallery/laba-brand.webp", caption: "Logo, type, and colour", width: 2048, height: 1449 },
+      { src: "/work/gallery/laba-bisnis.webp", caption: "Laba Bisnis, the web app", width: 2048, height: 1449 },
+      { src: "/work/gallery/laba-saku.webp", caption: "Laba Saku, the mobile app", width: 2048, height: 1449 },
     ],
   },
   {
@@ -153,7 +159,7 @@ export const caseStudies: CaseStudy[] = [
       "Landing page for Singapore's oldest youth movement, a registered charity dating back to 1910.",
     summary:
       "The Singapore Scout Association is one of the oldest youth movements in Singapore, dating back to 1910, and a full member of the World Organisation of the Scout Movement, which counted over 57 million Scouts across 173 national organisations as of 2022. I joined the team building their landing page.",
-    cover: "/work/scout.jpg",
+    cover: "/work/scout.webp",
     tags: ["Non-profit", "Web Design"],
     gridSize: "small",
     sections: [
@@ -176,9 +182,9 @@ export const caseStudies: CaseStudy[] = [
       { name: "Lux Black", hex: "#212529" },
     ],
     gallery: [
-      { src: "/work/gallery/scout-overview.jpg", caption: "Who the association is" },
-      { src: "/work/gallery/scout-brand.jpg", caption: "Type scale and the full colour system" },
-      { src: "/work/scout.jpg", caption: "The landing page" },
+      { src: "/work/gallery/scout-overview.webp", caption: "Who the association is", width: 2048, height: 1449 },
+      { src: "/work/gallery/scout-brand.webp", caption: "Type scale and the full colour system", width: 2048, height: 1449 },
+      { src: "/work/scout.webp", caption: "The landing page", width: 2048, height: 1449 },
     ],
   },
   {
@@ -193,7 +199,7 @@ export const caseStudies: CaseStudy[] = [
       "Attendance and scheduling web app built for an Islamic boarding school during learning from home.",
     summary:
       "When Covid-19 closed the campus, Al-Andalus still had to operate as a school. AndalusClass is the internal web app they built to track attendance and daily student activity while students were learning from home. It was also my first project as a UI/UX designer.",
-    cover: "/work/andalusclass.jpg",
+    cover: "/work/andalusclass.webp",
     tags: ["EdTech", "UI/UX Design"],
     gridSize: "small",
     sections: [
@@ -218,9 +224,9 @@ export const caseStudies: CaseStudy[] = [
       { name: "Mine Shaft", hex: "#333333" },
     ],
     gallery: [
-      { src: "/work/gallery/andalusclass-overview.jpg", caption: "Why the school needed it" },
-      { src: "/work/gallery/andalusclass-brand.jpg", caption: "Type and the colour system" },
-      { src: "/work/andalusclass.jpg", caption: "Attendance and scheduling screens" },
+      { src: "/work/gallery/andalusclass-overview.webp", caption: "Why the school needed it", width: 2048, height: 1449 },
+      { src: "/work/gallery/andalusclass-brand.webp", caption: "Type and the colour system", width: 2048, height: 1449 },
+      { src: "/work/andalusclass.webp", caption: "Attendance and scheduling screens", width: 2048, height: 1449 },
     ],
   },
   {
@@ -235,7 +241,7 @@ export const caseStudies: CaseStudy[] = [
       "Logo system, brandmark variants, tagline lockups, and a custom typeface drawn for the brand.",
     summary:
       "A full identity for Birru.co, taken from the logogram through to the marketplace collateral. The brand ships with its own typeface rather than a licensed one, which is why the wordmark and the interface type feel like the same voice.",
-    cover: "/work/birru.jpg",
+    cover: "/work/birru.webp",
     tags: ["Branding", "Logo", "Type Design"],
     gridSize: "large",
     sections: [
@@ -254,10 +260,10 @@ export const caseStudies: CaseStudy[] = [
     ],
     typefaces: ["Birru Sans, drawn for the brand", "Nunito"],
     gallery: [
-      { src: "/work/birru.jpg", caption: "Logo and brandmark variants" },
-      { src: "/work/gallery/birru-tagline.jpg", caption: "Tagline lockups" },
-      { src: "/work/gallery/birru-typeface.jpg", caption: "Birru Sans against Nunito" },
-      { src: "/work/gallery/birru-social.jpg", caption: "Social media and marketplace design" },
+      { src: "/work/birru.webp", caption: "Logo and brandmark variants", width: 2048, height: 1536 },
+      { src: "/work/gallery/birru-tagline.webp", caption: "Tagline lockups", width: 2048, height: 1536 },
+      { src: "/work/gallery/birru-typeface.webp", caption: "Birru Sans against Nunito", width: 2048, height: 1536 },
+      { src: "/work/gallery/birru-social.webp", caption: "Social media and marketplace design", width: 2048, height: 1536 },
     ],
   },
   {
@@ -271,7 +277,7 @@ export const caseStudies: CaseStudy[] = [
     teaser: "Logo variations, palette, pattern system, and marketplace collateral.",
     summary:
       "Identity for a creative studio, built in five parts: logo variations, colour, typography, pattern, and the brand in action. The pattern does most of the heavy lifting, because a studio brand shows up more often as a background than as a logo.",
-    cover: "/work/backslash.jpg",
+    cover: "/work/backslash.webp",
     tags: ["Branding", "Logo", "Pattern"],
     gridSize: "small",
     sections: [
@@ -291,10 +297,10 @@ export const caseStudies: CaseStudy[] = [
       { name: "Wild Sand", hex: "#F5F5F5" },
     ],
     gallery: [
-      { src: "/work/gallery/backslash-logo.jpg", caption: "Logo variations" },
-      { src: "/work/gallery/backslash-colors.jpg", caption: "Brand colours" },
-      { src: "/work/gallery/backslash-pattern.jpg", caption: "Pattern design" },
-      { src: "/work/backslash.jpg", caption: "Brand in action" },
+      { src: "/work/gallery/backslash-logo.webp", caption: "Logo variations", width: 2048, height: 1536 },
+      { src: "/work/gallery/backslash-colors.webp", caption: "Brand colours", width: 2048, height: 1536 },
+      { src: "/work/gallery/backslash-pattern.webp", caption: "Pattern design", width: 2048, height: 1536 },
+      { src: "/work/backslash.webp", caption: "Brand in action", width: 2048, height: 5073 },
     ],
   },
   {
@@ -308,7 +314,7 @@ export const caseStudies: CaseStudy[] = [
     teaser: "Identity, pattern language, and a social media system for a skincare label.",
     summary:
       "A skincare brand needs to look consistent on a shelf, on a phone, and in a feed. VJatre got a primary and secondary logo plus two alternates, a matching icon set, a pattern, and a social template system built on the same four colours.",
-    cover: "/work/vjatre.jpg",
+    cover: "/work/vjatre.webp",
     tags: ["Branding", "Social", "Packaging"],
     gridSize: "small",
     sections: [
@@ -328,11 +334,11 @@ export const caseStudies: CaseStudy[] = [
       { name: "Cod Gray", hex: "#0A0A0A" },
     ],
     gallery: [
-      { src: "/work/gallery/vjatre-logo.jpg", caption: "Logo and icon variants" },
-      { src: "/work/gallery/vjatre-colors.jpg", caption: "Brand colour" },
-      { src: "/work/gallery/vjatre-pattern.jpg", caption: "Pattern design" },
-      { src: "/work/gallery/vjatre-social.jpg", caption: "Social media posts" },
-      { src: "/work/vjatre.jpg", caption: "Brand in action" },
+      { src: "/work/gallery/vjatre-logo.webp", caption: "Logo and icon variants", width: 2048, height: 1536 },
+      { src: "/work/gallery/vjatre-colors.webp", caption: "Brand colour", width: 2048, height: 1536 },
+      { src: "/work/gallery/vjatre-pattern.webp", caption: "Pattern design", width: 2048, height: 1536 },
+      { src: "/work/gallery/vjatre-social.webp", caption: "Social media posts", width: 2048, height: 1536 },
+      { src: "/work/vjatre.webp", caption: "Brand in action", width: 2048, height: 2954 },
     ],
   },
   {
@@ -347,7 +353,7 @@ export const caseStudies: CaseStudy[] = [
       "Store thumbnails, promo design, and UI state illustration for a discount and promo app.",
     summary:
       "ProBe is a mobile app that collects discounts and promos in Indonesia in one place, so nobody has to trawl five brand sites and five brand feeds to find them. I handled the promotional design and the illustration layer inside the app.",
-    cover: "/work/probe.jpg",
+    cover: "/work/probe.webp",
     tags: ["App Store", "Illustration", "Promo"],
     gridSize: "large",
     sections: [
@@ -361,10 +367,10 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     gallery: [
-      { src: "/work/gallery/probe-cover.jpg", caption: "What the app is for" },
-      { src: "/work/probe.jpg", caption: "Promo design and store thumbnails" },
-      { src: "/work/gallery/probe-illustration.jpg", caption: "Sketch to final illustration" },
-      { src: "/work/gallery/probe-preview.jpg", caption: "In app preview" },
+      { src: "/work/gallery/probe-cover.webp", caption: "What the app is for", width: 2048, height: 1536 },
+      { src: "/work/probe.webp", caption: "Promo design and store thumbnails", width: 2048, height: 1536 },
+      { src: "/work/gallery/probe-illustration.webp", caption: "Sketch to final illustration", width: 2048, height: 1536 },
+      { src: "/work/gallery/probe-preview.webp", caption: "In app preview", width: 2048, height: 1536 },
     ],
   },
   {
@@ -379,7 +385,7 @@ export const caseStudies: CaseStudy[] = [
       "Self-directed redesign: a twelve icon category set, empty states, and social templates.",
     summary:
       "A personal redesign of RT Pintar, a neighbourhood administration app. No brief and no client, which made it the right place to work out an icon set and a full set of empty states properly.",
-    cover: "/work/rtpintar.jpg",
+    cover: "/work/rtpintar.webp",
     tags: ["Icons", "Illustration", "Redesign"],
     gridSize: "small",
     sections: [
@@ -393,10 +399,10 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     gallery: [
-      { src: "/work/rtpintar.jpg", caption: "Category icon set" },
-      { src: "/work/gallery/rtpintar-states.jpg", caption: "Empty and error states" },
-      { src: "/work/gallery/rtpintar-social.jpg", caption: "Social media templates" },
-      { src: "/work/gallery/rtpintar-highlight.jpg", caption: "Instagram highlight icons" },
+      { src: "/work/rtpintar.webp", caption: "Category icon set", width: 2048, height: 1536 },
+      { src: "/work/gallery/rtpintar-states.webp", caption: "Empty and error states", width: 2048, height: 1536 },
+      { src: "/work/gallery/rtpintar-social.webp", caption: "Social media templates", width: 2048, height: 1536 },
+      { src: "/work/gallery/rtpintar-highlight.webp", caption: "Instagram highlight icons", width: 2048, height: 1536 },
     ],
   },
 ];

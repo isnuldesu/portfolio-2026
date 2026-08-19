@@ -1,6 +1,7 @@
 "use client";
 
 import { m, useReducedMotion, type Variants } from "motion/react";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -145,12 +146,12 @@ export function GlassmorphismPortfolioBlock({
                     className="relative mb-6"
                   >
                     <div className="absolute left-1/2 top-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl" style={{ background: "var(--lime)" }} />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={person.portrait}
                       alt={`Portrait of ${person.name}`}
-                      width={128}
-                      height={128}
+                      width={1400}
+                      height={1400}
+                      sizes="128px"
                       className="relative size-32 rounded-full border-4 border-white object-cover shadow-[0_18px_44px_rgba(23,24,28,0.18)]"
                     />
                   </m.div>

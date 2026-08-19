@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
 
@@ -49,12 +50,13 @@ export function BrandWork() {
           >
             <Link href={`/work/${project.slug}`} className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
             <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={project.image}
                 alt={`${project.title}, ${project.discipline.toLowerCase()}`}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1152px) 66vw, 760px"
+                quality={80}
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               />
             </div>
 

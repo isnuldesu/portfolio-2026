@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 
 import { typefaces } from "@/content/site";
@@ -39,13 +40,14 @@ export function TypeDesign() {
             key={face.name}
             className="surface w-[19rem] shrink-0 snap-start overflow-hidden rounded-3xl sm:w-[24rem]"
           >
-            <div className="aspect-[4/3] overflow-hidden bg-secondary">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+              <Image
                 src={face.image}
                 alt={`${face.name} specimen`}
-                loading="lazy"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 640px) 304px, 384px"
+                quality={90}
+                className="object-cover"
               />
             </div>
             <div className="flex items-start justify-between gap-3 p-5">

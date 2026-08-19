@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
@@ -77,13 +78,13 @@ export function Hero() {
                 })}
             className="relative z-10 mx-auto mt-2"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={person.portrait}
               alt={`Portrait of ${person.name}`}
-              width={460}
-              height={460}
-              fetchPriority="high"
+              width={1400}
+              height={1400}
+              priority
+              sizes="(max-width: 640px) 160px, (max-width: 1024px) 208px, 240px"
               className="size-40 rounded-full border-4 border-white object-cover shadow-[0_24px_60px_rgba(23,24,28,0.22)] sm:size-52 lg:size-60"
             />
           </m.div>

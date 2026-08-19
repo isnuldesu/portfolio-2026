@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 
 import { MotionProvider } from "@/components/site/motion-provider";
@@ -28,12 +29,15 @@ export function CaseStudyGallery({ items }: { items: GalleryItem[] }) {
           >
             <figure>
               <div className="surface overflow-hidden rounded-3xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={item.src}
                   alt={item.caption}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  className="w-full"
+                  width={item.width}
+                  height={item.height}
+                  priority={index === 0}
+                  quality={90}
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  className="h-auto w-full"
                 />
               </div>
               <figcaption className="mt-3 px-1 text-sm text-muted-foreground">
