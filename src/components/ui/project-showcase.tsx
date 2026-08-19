@@ -43,7 +43,7 @@ export function ProjectShowcase({
       id="work"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative mx-auto w-full max-w-5xl px-6 py-24 md:py-32"
+      className="relative mx-auto w-full max-w-6xl px-6 py-24 md:py-32"
     >
       <h2 className="mb-10 font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
         {eyebrow}

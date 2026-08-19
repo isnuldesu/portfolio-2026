@@ -51,9 +51,9 @@ export function Capabilities() {
                   src={item.image}
                   alt=""
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-25 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/10" />
               </>
             ) : null}
 

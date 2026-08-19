@@ -59,7 +59,7 @@ export function GlassmorphismPortfolioBlock({
                 viewport: { once: true, amount: 0.25 },
                 transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
               })}
-          className="glass-panel relative overflow-hidden rounded-3xl p-8 md:p-12"
+          className="glass-panel relative overflow-hidden rounded-3xl p-6 sm:p-8 md:p-12"
         >
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-foreground/[0.05] via-transparent to-transparent" />
 
@@ -76,7 +76,7 @@ export function GlassmorphismPortfolioBlock({
               <div className="space-y-4">
                 <motion.h2
                   {...rise(0.1)}
-                  className="text-2xl font-semibold tracking-tight text-balance text-foreground md:text-3xl"
+                  className="text-xl font-semibold tracking-tight text-pretty break-words text-foreground sm:text-2xl md:text-3xl"
                 >
                   {person.name}, {person.role} and {person.secondaryRole}
                 </motion.h2>
@@ -131,7 +131,7 @@ export function GlassmorphismPortfolioBlock({
             {/* Right column */}
             <div className="relative">
               <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-b from-primary/15 via-transparent to-transparent blur-3xl" />
-              <div className="glass-panel relative flex h-full flex-col justify-between rounded-3xl p-8">
+              <div className="glass-panel relative flex h-full flex-col justify-between rounded-3xl p-6 sm:p-8">
                 <div className="flex flex-col items-center text-center">
                   <motion.div
                     {...(reduceMotion
