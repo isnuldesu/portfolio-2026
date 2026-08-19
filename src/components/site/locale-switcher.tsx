@@ -13,7 +13,7 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
 
   return (
-    <div className="flex items-center rounded-none border border-border bg-card p-0.5">
+    <div className="flex h-10 items-center border border-border">
       {locales.map((locale) => {
         const meta = localeMeta[locale];
         const rest = pathname.replace(/^\/(id|en)/, "") || "";
@@ -26,9 +26,9 @@ export function LocaleSwitcher() {
             hrefLang={meta.htmlLang}
             aria-current={active ? "true" : undefined}
             className={cn(
-              "flex items-center gap-1.5 rounded-none px-2.5 py-1.5 text-xs font-medium outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50",
+              "flex h-full items-center gap-1.5 px-3 text-xs font-medium outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50",
               active
-                ? "bg-secondary text-foreground"
+                ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground",
             )}
           >

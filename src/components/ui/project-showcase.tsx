@@ -50,8 +50,8 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
                 href={`/${locale}/work/${project.slug}`}
                 className="block rounded-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <div className="surface relative overflow-hidden rounded-none">
-                  <div className="relative aspect-[1.414] overflow-hidden bg-secondary/40">
+                <div className="relative overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden border border-border">
                     <Image
                       src={project.image}
                       alt={`${project.title} title card`}

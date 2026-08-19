@@ -42,9 +42,9 @@ export function TypeDesign() {
         {typefaces.map((face) => (
           <li
             key={face.name}
-            className="surface w-[19rem] shrink-0 snap-start overflow-hidden rounded-none sm:w-[24rem]"
+            className="w-[19rem] shrink-0 snap-start sm:w-[24rem]"
           >
-            <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+            <div className="relative aspect-[4/3] overflow-hidden border border-border">
               <Image
                 src={face.image}
                 alt={`${face.name} specimen`}
@@ -54,7 +54,7 @@ export function TypeDesign() {
                 className="object-cover"
               />
             </div>
-            <div className="flex items-start justify-between gap-3 p-5">
+            <div className="mt-4 flex items-start justify-between gap-3">
               <div>
                 <h3 className="text-base font-medium tracking-tight">{face.name}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">

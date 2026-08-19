@@ -8,7 +8,6 @@ import { useLocale } from "@/components/site/locale-provider";
 import { brandProjects } from "@/content/site";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
 
 /**
  * Identity work reads through the artwork, so the image is the tile and the
@@ -28,7 +27,7 @@ export function BrandWork() {
         {t(ui.brand.body, locale)}
       </p>
 
-      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {brandProjects.map((project, index) => (
           <m.article
             key={project.title}
@@ -45,25 +44,21 @@ export function BrandWork() {
                   },
                   whileHover: { y: -6 },
                 })}
-            className={cn(
-              "surface group overflow-hidden rounded-none transition-shadow hover:shadow-[0_24px_60px_rgba(23,24,28,0.12)]",
-              project.size === "large" ? "md:col-span-2" : "md:col-span-1",
-              index === brandProjects.length - 1 && "md:col-span-3",
-            )}
+            className="group"
           >
             <Link href={`/${locale}/work/${project.slug}`} className="block outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
-            <div className="relative h-52 overflow-hidden bg-secondary/50 sm:h-60 lg:h-64">
+            <div className="relative aspect-[4/3] overflow-hidden border border-border">
               <Image
                 src={project.image}
                 alt={`${project.title} title card`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1152px) 66vw, 760px"
                 quality={90}
-                className="object-contain p-4 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
             </div>
 
-            <div className="flex items-start justify-between gap-4 p-5">
+            <div className="mt-4 flex items-start justify-between gap-4">
               <div>
                 <h3 className="text-base font-medium tracking-tight">{project.title}</h3>
                 <p className="mt-1 text-xs font-medium" style={{ color: "var(--coral)" }}>{t(project.discipline, locale)}</p>

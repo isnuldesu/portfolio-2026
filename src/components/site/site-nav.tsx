@@ -39,7 +39,7 @@ export function SiteNav() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-5 px-6">
           <Link
             href={`/${locale}`}
-            className="font-display text-lg font-medium tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             {person.name}
           </Link>
@@ -61,7 +61,7 @@ export function SiteNav() {
             <ThemeToggle label={t(ui.nav.themeToggle, locale)} />
             <Button
               asChild
-              className="hidden h-10 rounded-none px-5 text-sm font-medium sm:inline-flex"
+              className="hidden h-10 px-5 text-sm font-medium sm:inline-flex"
             >
               <a href={primaryCta.href}>{t(primaryCta.label, locale)}</a>
             </Button>

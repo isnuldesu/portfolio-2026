@@ -141,27 +141,27 @@
     system-ui, sans-serif;
 
   --background: oklch(0.985 0.001 100);
-  --foreground: oklch(0.26 0.003 285);
+  --foreground: #2d2d2c;
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.26 0.003 285);
+  --card-foreground: #2d2d2c;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.26 0.003 285);
+  --popover-foreground: #2d2d2c;
 
-  --primary: oklch(0.3 0.004 285);
+  --primary: #2d2d2c;
   --primary-foreground: oklch(0.99 0 0);
 
   --secondary: oklch(0.965 0.001 100);
-  --secondary-foreground: oklch(0.26 0.003 285);
+  --secondary-foreground: #2d2d2c;
 
   --muted: oklch(0.965 0.001 100);
-  --muted-foreground: oklch(0.475 0.005 285);
+  --muted-foreground: #6d6f71;
 
   --accent: oklch(0.965 0.001 100);
-  --accent-foreground: oklch(0.26 0.003 285);
+  --accent-foreground: #2d2d2c;
 
-  --border: oklch(0.26 0.003 285 / 13%);
-  --input: oklch(0.26 0.003 285 / 18%);
+  --border: #070504;
+  --input: #070504;
   --ring: oklch(0.63 0.19 20 / 35%);
 
   --radius: 0rem;
@@ -191,27 +191,25 @@ html {
   color: #fff;
 }
 
-/* Neue Montreal leads the stack so a licensed webfont takes over the moment
-   it is added, with the free stand-in behind it. */
+/* On the CV every heading, title, and contact line is Space Mono. Neue
+   Montreal is reserved for running text and meta. */
 .font-display {
-  font-family: "PP Neue Montreal", "Neue Montreal", var(--font-grotesk),
-    ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.03em;
+  font-family: var(--font-space-mono), ui-monospace, monospace;
+  letter-spacing: -0.02em;
 }
 
 /* Mono labels, the CV's signature. Replaces the old italic serif. */
 .label-mono {
   font-family: var(--font-space-mono), ui-monospace, monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
 }
 
 /* Panels sit on the page as paper, held by a hairline rather than a shadow. */
 /* The CV builds structure from rules, not from filled cards. */
 .surface {
   background: transparent;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
 }
 
 .pill-glass {
@@ -250,13 +248,13 @@ html {
   --secondary-foreground: oklch(0.955 0.002 100);
 
   --muted: oklch(0.253 0.005 285);
-  --muted-foreground: oklch(0.735 0.006 285);
+  --muted-foreground: #a8aaac;
 
   --accent: oklch(0.253 0.005 285);
   --accent-foreground: oklch(0.955 0.002 100);
 
-  --border: oklch(1 0 0 / 13%);
-  --input: oklch(1 0 0 / 17%);
+  --border: #efefee;
+  --input: #efefee;
   --ring: oklch(0.72 0.16 20 / 45%);
 
   --coral: #f2707c;
@@ -273,7 +271,7 @@ html.dark {
 
 .dark .surface {
   background: transparent;
-  border-color: oklch(1 0 0 / 12%);
+  border-color: var(--border);
 }
 
 .dark .pill-glass {
@@ -287,14 +285,24 @@ html.dark {
 }
 
 /* The CV hangs a thick colour rule off the left of every content group. */
+/* 12pt of a 555pt content column, so it stays chunky at any width. */
 .rule-left {
-  border-left: 6px solid var(--rule, var(--teal));
+  border-left: 14px solid var(--rule, var(--teal));
   padding-left: 1.25rem;
 }
 
 @media (min-width: 768px) {
   .rule-left {
-    border-left-width: 8px;
+    border-left-width: 20px;
     padding-left: 1.75rem;
   }
+}
+
+/* Every hairline on the page is the CV's rule weight. */
+.border,
+.border-t,
+.border-b,
+.border-l,
+.border-r {
+  border-color: var(--border);
 }

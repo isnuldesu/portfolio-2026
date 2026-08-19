@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
@@ -40,16 +41,30 @@ export function Hero() {
           block, the title on a sand block, and the contacts ranged right. */}
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-12">
         <div className="flex gap-5 sm:gap-7">
-          <m.div
-            {...rise(0)}
-            className="relative aspect-square w-20 shrink-0 overflow-hidden sm:w-28 lg:w-32"
-            style={{ background: "var(--teal)" }}
-          >
-            {!reduceMotion ? (
-              <div aria-hidden="true" className="absolute inset-0 opacity-90">
-                <HeroScene />
-              </div>
-            ) : null}
+          {/* Two squares of the same size: the portrait, then the colour mark. */}
+          <m.div {...rise(0)} className="flex shrink-0 gap-3 sm:gap-4">
+            <div className="relative aspect-square w-20 overflow-hidden border border-border sm:w-28 lg:w-32">
+              <Image
+                src={person.portrait}
+                alt={`Portrait of ${person.name}`}
+                fill
+                priority
+                sizes="(max-width: 640px) 80px, (max-width: 1024px) 112px, 128px"
+                className="object-cover"
+              />
+            </div>
+
+            <div
+              aria-hidden="true"
+              className="relative hidden aspect-square w-20 overflow-hidden border border-border sm:block sm:w-28 lg:w-32"
+              style={{ background: "var(--teal)" }}
+            >
+              {!reduceMotion ? (
+                <div className="absolute inset-0 opacity-90">
+                  <HeroScene />
+                </div>
+              ) : null}
+            </div>
           </m.div>
 
           <div className="min-w-0">
