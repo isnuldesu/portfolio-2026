@@ -12,9 +12,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Indonesian is the default, and the old unprefixed URLs still resolve.
-      { source: "/", destination: "/id", permanent: false },
-      { source: "/work/:slug", destination: "/id/work/:slug", permanent: false },
+      // English is the default, and the old unprefixed URLs still resolve.
+      { source: "/", destination: "/en", permanent: false },
+      // The slug pattern excludes dots on purpose: /work also holds the image
+      // files, and a bare :slug swallowed /work/lunapos.webp into a redirect.
+      {
+        source: "/work/:slug([a-z0-9-]+)",
+        destination: "/en/work/:slug",
+        permanent: false,
+      },
     ];
   },
   // The repo root, not the first package-lock.json found up the tree.

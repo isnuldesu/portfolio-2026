@@ -1,8 +1,8 @@
-export const locales = ["id", "en"] as const;
+export const locales = ["en", "id"] as const;
 
 export type Locale = (typeof locales)[number];
 
-export const defaultLocale: Locale = "id";
+export const defaultLocale: Locale = "en";
 
 /** A string that exists in both languages. Plain strings pass through as-is. */
 export type L = Record<Locale, string>;
