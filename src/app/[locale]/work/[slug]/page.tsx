@@ -54,11 +54,17 @@ export default async function CaseStudyPage({
   const index = caseStudies.findIndex((entry) => entry.slug === study.slug);
   const next = caseStudies[(index + 1) % caseStudies.length];
 
+  const links =
+    study.links ??
+    (study.link
+      ? [{ href: study.link, label: study.linkLabel ?? t(ui.caseStudy.visit, locale) }]
+      : []);
+
   const facts = [
+    { label: t(ui.caseStudy.industry, locale), value: t(study.industry, locale) },
     { label: t(ui.caseStudy.role, locale), value: t(study.role, locale) },
+    { label: t(ui.caseStudy.duration, locale), value: t(study.duration, locale) },
     { label: t(ui.caseStudy.client, locale), value: t(study.client, locale) },
-    { label: t(ui.caseStudy.year, locale), value: study.year },
-    { label: t(ui.caseStudy.discipline, locale), value: t(study.discipline, locale) },
   ];
 
   return (
@@ -86,7 +92,7 @@ export default async function CaseStudyPage({
           <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-4">
             {facts.map((fact) => (
               <div key={fact.label}>
-                <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <dt className="label-mono text-muted-foreground">
                   {fact.label}
                 </dt>
                 <dd className="mt-1.5 text-sm text-foreground">{fact.value}</dd>
@@ -94,16 +100,22 @@ export default async function CaseStudyPage({
             ))}
           </dl>
 
-          {study.link ? (
-            <a
-              href={study.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-none border border-border bg-card px-5 py-2.5 text-sm font-medium outline-none transition-shadow hover:shadow-[0_10px_28px_rgba(23,24,28,0.1)] focus-visible:ring-3 focus-visible:ring-ring/50"
-            >
-              {study.linkLabel ?? t(ui.caseStudy.visit, locale)}
-              <ArrowUpRight className="size-4" strokeWidth={2} />
-            </a>
+          {links.length ? (
+            <ul className="mt-8 flex flex-wrap gap-3">
+              {links.map((entry) => (
+                <li key={entry.href}>
+                  <a
+                    href={entry.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm font-medium outline-none transition-colors hover:bg-foreground hover:text-background focus-visible:ring-3 focus-visible:ring-ring/50"
+                  >
+                    {entry.label}
+                    <ArrowUpRight className="size-4" strokeWidth={2} />
+                  </a>
+                </li>
+              ))}
+            </ul>
           ) : null}
         </div>
       </header>

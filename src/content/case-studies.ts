@@ -22,11 +22,17 @@ export type CaseStudy = {
   title: string;
   category: "product" | "brand";
   discipline: L;
+  /** The sector the client operates in, not the design discipline. */
+  industry: L;
   year: string;
+  /** How long the engagement ran, in the words the CV uses. */
+  duration: L;
   role: L;
   client: L;
   link?: string;
   linkLabel?: string;
+  /** Every public address the project lives at, primary first. */
+  links?: { href: string; label: string }[];
   /** One line for the home page card. */
   teaser: L;
   /** Opening paragraph on the detail page. */
@@ -47,7 +53,9 @@ export const caseStudies: CaseStudy[] = [
     title: "Luna POS",
     category: "product",
     discipline: { id: "Product design", en: "Product design" },
+    industry: { id: "Teknologi ritel, SaaS kasir", en: "Retail technology, point of sale SaaS" },
     year: "2021 - Present",
+    duration: { id: "Jan 2021 - sekarang", en: "Jan 2021 - present" },
     role: { id: "Product Designer", en: "Product Designer" },
     client: { id: "IMPACTO, untuk LUNAPOS", en: "IMPACTO, for LUNAPOS" },
     link: "https://lunapos.id",
@@ -152,11 +160,17 @@ export const caseStudies: CaseStudy[] = [
     title: "Laba.id",
     category: "product",
     discipline: { id: "Product design", en: "Product design" },
+    industry: { id: "Fintech, akuntansi UMKM", en: "Fintech, MSME accounting" },
     year: "2021 - Present",
+    duration: { id: "Jan 2021 - sekarang", en: "Jan 2021 - present" },
     role: { id: "Product Designer pertama", en: "First Product Designer" },
     client: { id: "IMPACTO, untuk Laba.id", en: "IMPACTO, for Laba.id" },
     link: "https://laba.id",
     linkLabel: "laba.id",
+    links: [
+      { href: "https://laba.id", label: "laba.id" },
+      { href: "https://labasaku.com", label: "labasaku.com" },
+    ],
     teaser: {
       id: "Aplikasi akuntansi untuk UMKM Indonesia, dirancang dari nol sebagai desainer pertama di timnya.",
       en: "Accounting app for Indonesian MSMEs, designed from zero as the first designer on the team.",
@@ -184,7 +198,10 @@ export const caseStudies: CaseStudy[] = [
         },
         bullets: [
           { id: "Laba Bisnis, web, di app.laba.id", en: "Laba Bisnis, web, at app.laba.id" },
-          { id: "Laba Saku, Android, di Google Play", en: "Laba Saku, Android, on Google Play" },
+          {
+            id: "Laba Saku, di labasaku.com dan di Google Play untuk Android",
+            en: "Laba Saku, at labasaku.com and on Google Play for Android",
+          },
         ],
       },
       {
@@ -242,7 +259,9 @@ export const caseStudies: CaseStudy[] = [
     title: "The Singapore Scout Association",
     category: "product",
     discipline: { id: "Desain web", en: "Web design" },
+    industry: { id: "Nirlaba, gerakan kepemudaan", en: "Non-profit, youth movement" },
     year: "2023",
+    duration: { id: "2023", en: "2023" },
     role: { id: "Web Designer", en: "Web Designer" },
     client: {
       id: "Adonai MediaTech Solutions, untuk The Singapore Scout Association",
@@ -318,7 +337,9 @@ export const caseStudies: CaseStudy[] = [
     title: "AndalusClass",
     category: "product",
     discipline: { id: "Desain UI/UX", en: "UI/UX design" },
+    industry: { id: "Pendidikan, pesantren", en: "Education, boarding school" },
     year: "2020",
+    duration: { id: "2020", en: "2020" },
     role: { id: "UI/UX Designer", en: "UI/UX Designer" },
     client: {
       id: "Pesantren Internasional Al-Andalus",
@@ -391,7 +412,9 @@ export const caseStudies: CaseStudy[] = [
     title: "Birru.co",
     category: "brand",
     discipline: { id: "Identitas brand", en: "Brand identity" },
+    industry: { id: "Kesehatan anak, terapi wicara", en: "Children's health, speech therapy" },
     year: "2023 - 2025",
+    duration: { id: "Des 2023 - Des 2025, 2 tahun", en: "Dec 2023 - Dec 2025, 2 years" },
     role: { id: "Brand & Graphic Designer", en: "Brand & Graphic Designer" },
     client: { id: "Birru.co", en: "Birru.co" },
     teaser: {
@@ -467,7 +490,9 @@ export const caseStudies: CaseStudy[] = [
     title: "Backslash Creative",
     category: "brand",
     discipline: { id: "Identitas brand", en: "Brand identity" },
+    industry: { id: "Studio kreatif", en: "Creative studio" },
     year: "2022",
+    duration: { id: "Jan - Apr 2022, 4 bulan", en: "Jan - Apr 2022, 4 months" },
     role: { id: "Brand Designer", en: "Brand Designer" },
     client: { id: "Backslash Creative Nusantara", en: "Backslash Creative Nusantara" },
     teaser: {
@@ -535,7 +560,9 @@ export const caseStudies: CaseStudy[] = [
     title: "VJatre Skincare",
     category: "brand",
     discipline: { id: "Brand dan sosial", en: "Brand and social" },
+    industry: { id: "Skincare", en: "Skincare" },
     year: "2022",
+    duration: { id: "Jan - Apr 2022, 4 bulan", en: "Jan - Apr 2022, 4 months" },
     role: { id: "Brand Designer", en: "Brand Designer" },
     client: {
       id: "Backslash Creative Nusantara, untuk Vjatre",
@@ -612,7 +639,9 @@ export const caseStudies: CaseStudy[] = [
     title: "ProBe",
     category: "brand",
     discipline: { id: "Art direction produk", en: "Product art direction" },
+    industry: { id: "Aplikasi diskon dan promo", en: "Discount and promo app" },
     year: "2022",
+    duration: { id: "2022", en: "2022" },
     role: { id: "Graphic Designer", en: "Graphic Designer" },
     client: { id: "ProBe", en: "ProBe" },
     teaser: {
@@ -674,7 +703,9 @@ export const caseStudies: CaseStudy[] = [
     title: "RT Pintar",
     category: "brand",
     discipline: { id: "Ikon dan ilustrasi", en: "Icons and illustration" },
+    industry: { id: "Administrasi warga", en: "Neighbourhood administration" },
     year: "2022",
+    duration: { id: "2022", en: "2022" },
     role: { id: "Inisiatif sendiri", en: "Self-directed" },
     client: { id: "Project pribadi", en: "Personal project" },
     teaser: {

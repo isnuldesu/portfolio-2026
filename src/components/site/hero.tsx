@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
@@ -10,12 +9,6 @@ import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
 import { availability, hero, person, primaryCta } from "@/content/site";
 import { t } from "@/lib/i18n";
-
-// Fills the mark square. Loads after hydration and only where it is visible.
-const HeroScene = dynamic(() => import("@/components/site/hero-scene"), {
-  ssr: false,
-  loading: () => null,
-});
 
 const contacts = [
   { label: "@_isnul", href: "https://instagram.com/_isnul" },
@@ -31,79 +24,70 @@ export function Hero() {
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 18 },
+          initial: { opacity: 0, y: 16 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
         };
 
   return (
     <section id="top" className="mx-auto max-w-6xl px-6 pt-10 sm:pt-14">
-      {/* The CV masthead: a colour square, the name knocked out of a coral
-          block, the title on a sand block, and the contacts ranged right. */}
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-12">
-        <div className="flex gap-5 sm:gap-7">
-          {/* Two squares of the same size: the portrait, then the colour mark. */}
-          <m.div {...rise(0)} className="flex shrink-0 gap-3 sm:gap-4">
-            <div className="relative aspect-square w-20 overflow-hidden border border-border sm:w-28 lg:w-32">
-              <Image
-                src={person.portrait}
-                alt={`Portrait of ${person.name}`}
-                fill
-                priority
-                sizes="(max-width: 640px) 80px, (max-width: 1024px) 112px, 128px"
-                className="object-cover"
-              />
-            </div>
-
-            <div
-              aria-hidden="true"
-              className="relative hidden aspect-square w-20 overflow-hidden border border-border sm:block sm:w-28 lg:w-32"
-              style={{ background: "var(--teal)" }}
-            >
-              {!reduceMotion ? (
-                <div className="absolute inset-0 opacity-90">
-                  <HeroScene />
-                </div>
-              ) : null}
-            </div>
+      {/* Masthead proportions are lifted straight off the reference: a square
+          mark, the name knocked out of a coral block, the title on a wider
+          sand block, and a 4px gap holding the three together. */}
+      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+        <div className="flex items-stretch gap-1">
+          <m.div
+            {...rise(0)}
+            className="relative aspect-square w-24 shrink-0 overflow-hidden sm:w-40 lg:w-[13.625rem]"
+            style={{ background: "var(--teal)" }}
+          >
+            <Image
+              src={person.portrait}
+              alt={`Portrait of ${person.name}`}
+              fill
+              priority
+              sizes="(max-width: 640px) 96px, (max-width: 1024px) 160px, 218px"
+              className="relative object-cover"
+            />
           </m.div>
 
-          <div className="min-w-0">
-            <m.h1 {...rise(0.06)}>
-              <span
-                className="font-display inline-block px-3 py-1.5 text-[2rem] font-semibold leading-none tracking-tight text-white sm:px-4 sm:text-[3rem] lg:text-[3.75rem]"
-                style={{ background: "var(--coral)" }}
-              >
-                {person.shortName}
-              </span>
+          <div className="flex min-w-0 flex-col gap-1">
+            <m.h1
+              {...rise(0.06)}
+              className="font-display flex items-center px-3 py-4 text-[1.5rem] font-bold leading-none text-white sm:px-6 sm:py-6 sm:text-[2.25rem] lg:px-[2.6rem] lg:py-[2.3rem] lg:text-[3.5rem]"
+              style={{ background: "var(--coral)" }}
+            >
+              {person.shortName}
             </m.h1>
 
-            <m.p {...rise(0.12)} className="mt-2.5">
-              <span
-                className="inline-block px-3 py-1 text-base font-medium leading-snug sm:px-4 sm:text-xl"
-                style={{ background: "var(--sand)", color: "#2b2b2c" }}
-              >
-                {person.role}
-              </span>
+            <m.p
+              {...rise(0.12)}
+              className="font-display flex items-center px-3 py-2 text-[0.8rem] font-medium leading-none sm:px-6 sm:py-3 sm:text-base lg:px-[2.7rem] lg:py-[0.8rem] lg:text-[1.5rem]"
+              style={{ background: "var(--sand)", color: "#2d2d2c" }}
+            >
+              {person.role}
             </m.p>
 
             <m.p
               {...rise(0.18)}
-              className="mt-2.5 px-3 text-base text-foreground/80 sm:px-4 sm:text-lg"
+              className="font-display mt-1 text-[0.8rem] leading-tight text-foreground sm:text-base lg:text-[1.5rem]"
             >
               {person.secondaryRole}
             </m.p>
           </div>
         </div>
 
-        <m.ul {...rise(0.24)} className="space-y-1.5 lg:text-right">
+        <m.ul
+          {...rise(0.24)}
+          className="flex flex-col justify-between gap-3 lg:h-[13.625rem] lg:text-right"
+        >
           {contacts.map((contact) => (
             <li key={contact.label}>
               <a
                 href={contact.href}
                 target={contact.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="font-mono text-xs text-muted-foreground underline-offset-4 outline-none transition-colors hover:text-foreground hover:underline focus-visible:text-foreground sm:text-sm"
+                className="font-display text-xs text-foreground underline-offset-4 outline-none transition-colors hover:text-muted-foreground hover:underline focus-visible:underline sm:text-sm"
               >
                 {contact.label}
               </a>
@@ -117,7 +101,7 @@ export function Hero() {
         className="mt-12 flex flex-col gap-6 border-t border-border pt-8 md:flex-row md:items-end md:justify-between"
       >
         <div>
-          <span className="inline-flex items-center gap-2.5 text-sm text-foreground/80">
+          <span className="inline-flex items-center gap-2.5 text-sm text-foreground">
             <span className="relative flex size-2.5">
               {!reduceMotion ? (
                 <span
@@ -138,7 +122,7 @@ export function Hero() {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <Button asChild className="h-11 gap-2 rounded-none px-6 text-sm font-medium">
+          <Button asChild className="h-11 gap-2 px-6 text-sm font-medium">
             <a href={primaryCta.href}>
               <ArrowRight className="size-4" strokeWidth={2} />
               <StableLabel value={primaryCta.label} />
@@ -147,7 +131,7 @@ export function Hero() {
           <Button
             asChild
             variant="outline"
-            className="h-11 rounded-none border-border px-6 text-sm font-medium"
+            className="h-11 border-border px-6 text-sm font-medium"
           >
             <a href={hero.secondaryCta.href}>
               <StableLabel value={hero.secondaryCta.label} />
