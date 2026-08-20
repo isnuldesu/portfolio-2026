@@ -41,7 +41,7 @@ export async function generateMetadata({
   const description = t(person.tagline, locale);
 
   return {
-    metadataBase: new URL("https://isnul-portfolio-2026.vercel.app"),
+    metadataBase: new URL("https://isnul.site"),
     title: { default: title, template: `%s - ${person.name}` },
     description,
     alternates: {
