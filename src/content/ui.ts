@@ -22,6 +22,14 @@ export const ui = {
       en: "Products people run their day on",
     },
     readMore: { id: "Baca studi kasusnya", en: "Read the case study" },
+    seeAll: { id: "Lihat semua kerjaan", en: "See all the work" },
+    indexHeading: { id: "Semua kerjaan", en: "All the work" },
+    indexEyebrow: { id: "Indeks", en: "Index" },
+    filterAll: { id: "Semua", en: "All" },
+    categoryProduct: { id: "Produk", en: "Product" },
+    categoryStrategy: { id: "Strategi", en: "Strategy" },
+    categoryBrand: { id: "Brand", en: "Brand" },
+    categoryType: { id: "Font", en: "Type" },
   },
 
   brand: {
@@ -94,6 +102,24 @@ export const ui = {
     glyphs: { id: "karakter", en: "glyphs" },
     styles: { id: "gaya", en: "styles" },
     characterSet: { id: "Set karakter", en: "Character set" },
+  },
+
+  doors: {
+    work: { id: "Lihat kerjaan", en: "See the work" },
+    workNote: {
+      id: "14 project, lengkap dengan masalah dan hasilnya",
+      en: "Fourteen projects, with the problem and the result",
+    },
+    experience: { id: "Riwayat kerja", en: "Work history" },
+    experienceNote: {
+      id: "Tujuh posisi, ruang lingkup dan kerja hariannya",
+      en: "Seven roles, their scope and their day to day",
+    },
+    hire: { id: "Ajak kerja sama", en: "Start a project" },
+    hireNote: {
+      id: "Scope, timeline, dan harga, bukan ajakan meeting",
+      en: "Scope, timeline, and a price, not a meeting invite",
+    },
   },
 
   cv: {

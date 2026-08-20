@@ -13,6 +13,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { LocaleProvider } from "@/components/site/locale-provider";
 import { PageView } from "@/components/site/page-view";
+import { ScrollProgress } from "@/components/site/scroll-progress";
 import { SiteNav } from "@/components/site/site-nav";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { person } from "@/content/site";
@@ -87,6 +88,7 @@ export default async function LocaleLayout({
               {locale === "id" ? "Lompat ke konten" : "Skip to content"}
             </a>
             <SiteNav />
+            <ScrollProgress />
             <main
               id="content"
               className="flex min-h-dvh flex-col gap-4 px-0 py-0 sm:gap-6 sm:px-6 sm:py-8"

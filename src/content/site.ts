@@ -220,11 +220,9 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const nav: { label: L; href: string }[] = [
-  { label: { id: "Kerjaan", en: "Work" }, href: "#work" },
-  { label: { id: "Brand", en: "Brand" }, href: "#brand" },
-  { label: { id: "Font", en: "Type" }, href: "#type" },
-  { label: { id: "Pengalaman", en: "Experience" }, href: "#experience" },
-  { label: { id: "Tentang", en: "About" }, href: "#about" },
+  { label: { id: "Kerjaan", en: "Work" }, href: "/work" },
+  { label: { id: "Pengalaman", en: "Experience" }, href: "/experience" },
+  { label: { id: "Kontak", en: "Contact" }, href: "/#contact" },
 ];
 
 /** One label per intent. Used in nav, hero, about, and the contact form alike. */

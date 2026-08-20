@@ -28,7 +28,7 @@ export function BrandWork() {
       </p>
 
       <div className="mt-12 grid grid-cols-1 border-t-2 border-border sm:grid-cols-2">
-        {brandProjects.map((project, index) => (
+        {brandProjects.slice(0, 3).map((project, index) => (
           <m.article
             key={project.title}
             {...(reduceMotion
@@ -76,6 +76,15 @@ export function BrandWork() {
           </m.article>
         ))}
       </div>
+
+      <p className="mt-8">
+        <Link
+          href={`/${locale}/work`}
+          className="label-mono inline-flex items-center gap-2 text-foreground underline-offset-4 hover:underline"
+        >
+          {t(ui.work.seeAll, locale)}
+        </Link>
+      </p>
     </section>
   );
 }

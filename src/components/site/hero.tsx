@@ -1,13 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
-import { availability, hero, person, primaryCta, whatsappCta } from "@/content/site";
+import {
+  availability,
+  disciplines,
+  hero,
+  person,
+  primaryCta,
+  statement,
+  whatsappCta,
+} from "@/content/site";
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
@@ -17,6 +26,13 @@ const contacts = [
   { label: person.email, href: `mailto:${person.email}` },
   { label: "linkedin.com/in/isnul", href: "https://www.linkedin.com/in/isnul/" },
   { label: `+${person.whatsapp}`, href: `https://wa.me/${person.whatsapp}` },
+];
+
+/** The CV sets white on coral and ink on the lighter two. */
+const statementBlocks = [
+  { bg: "var(--teal)", ink: "#2d2d2c" },
+  { bg: "var(--sand)", ink: "#2d2d2c" },
+  { bg: "var(--coral-block)", ink: "#ffffff" },
 ];
 
 export function Hero() {
@@ -108,9 +124,85 @@ export function Hero() {
         </m.ul>
       </div>
 
-      <m.div
+      {/* One introduction, not two: the proposition that had its own section
+          now follows the nameplate directly. */}
+      <m.h2
+        {...rise(0.28)}
+        className="font-display mt-12 space-y-2 border-t-2 border-border pt-10 text-xl font-medium leading-[1.3] sm:text-2xl md:text-[2rem]"
+      >
+        {statement.leadLines[locale].map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
+        {statement.blockRows[locale].map((row, rowIndex) => (
+          <span key={row.join()} className="flex flex-wrap items-center gap-2">
+            {row.map((part, partIndex) => {
+              const block = statementBlocks[rowIndex * 2 + partIndex];
+              return (
+                <span
+                  key={part}
+                  className="border-2 border-border px-2 py-0.5"
+                  style={{ background: block.bg, color: block.ink }}
+                >
+                  {part}
+                </span>
+              );
+            })}
+          </span>
+        ))}
+      </m.h2>
+
+      {/* Three doors: a recruiter, a client, and a designer all land here. */}
+      <m.nav
         {...rise(0.3)}
-        className="mt-12 flex flex-col gap-6 border-t border-border pt-8 md:flex-row md:items-end md:justify-between"
+        aria-label={t(ui.doors.work, locale)}
+        className="mt-10 grid border-t-2 border-border sm:grid-cols-3"
+      >
+        {[
+          { href: `/${locale}/work`, label: ui.doors.work, note: ui.doors.workNote, rule: "var(--coral-block)" },
+          { href: `/${locale}/experience`, label: ui.doors.experience, note: ui.doors.experienceNote, rule: "var(--teal)" },
+          { href: `/${locale}#contact`, label: ui.doors.hire, note: ui.doors.hireNote, rule: "var(--sand)" },
+        ].map((door) => (
+          <Link
+            key={door.href}
+            href={door.href}
+            className="rule-left group border-b-2 border-border outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:not-last:border-r-2"
+            style={{ "--rule": door.rule } as React.CSSProperties}
+          >
+            <span className="font-display flex items-center gap-2 text-base font-medium tracking-tight group-hover:underline">
+              {t(door.label, locale)}
+              <ArrowRight className="size-4" />
+            </span>
+            <span className="mt-1.5 block text-sm text-muted-foreground">
+              {t(door.note, locale)}
+            </span>
+          </Link>
+        ))}
+      </m.nav>
+
+      <m.ul
+        {...rise(0.34)}
+        className="mt-10 grid border-t-2 border-border sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {disciplines.map((label, index) => (
+          <li
+            key={t(label, "en")}
+            className="flex items-center gap-2.5 border-b-2 border-border py-3 pr-4 text-sm text-foreground"
+          >
+            <span
+              aria-hidden="true"
+              className="size-2.5"
+              style={{ background: statementBlocks[index % statementBlocks.length].bg }}
+            />
+            {t(label, locale)}
+          </li>
+        ))}
+      </m.ul>
+
+      <m.div
+        {...rise(0.38)}
+        className="mt-12 flex flex-col gap-6 border-t-2 border-border pt-8 md:flex-row md:items-end md:justify-between"
       >
         <div>
           <span className="inline-flex items-center gap-2.5 text-sm text-foreground">

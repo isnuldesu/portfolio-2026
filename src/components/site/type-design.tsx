@@ -40,7 +40,7 @@ export function TypeDesign() {
             })}
         className="mt-10 grid border-t-2 border-border sm:grid-cols-2 lg:grid-cols-3"
       >
-        {typefaces.map((face) => (
+        {typefaces.slice(0, 3).map((face) => (
           <li key={face.name} className="">
             <Link
               href={`/${locale}/work/${face.slug}`}
@@ -79,6 +79,15 @@ export function TypeDesign() {
           </li>
         ))}
       </m.ul>
+
+      <p className="mt-8 px-0">
+        <Link
+          href={`/${locale}/work`}
+          className="label-mono inline-flex items-center gap-2 text-foreground underline-offset-4 hover:underline"
+        >
+          {t(ui.work.seeAll, locale)}
+        </Link>
+      </p>
     </section>
   );
 }

@@ -53,8 +53,11 @@ export default async function CaseStudyPage({
   const study = getCaseStudy(slug);
   if (!study) notFound();
 
-  const index = caseStudies.findIndex((entry) => entry.slug === study.slug);
-  const next = caseStudies[(index + 1) % caseStudies.length];
+  // Cycle within the same category: a reader on a typeface should not be
+  // handed a point of sale product as the obvious next step.
+  const siblings = caseStudies.filter((entry) => entry.category === study.category);
+  const index = siblings.findIndex((entry) => entry.slug === study.slug);
+  const next = siblings[(index + 1) % siblings.length];
 
   const links =
     study.links ??
@@ -75,7 +78,7 @@ export default async function CaseStudyPage({
       <header className="relative overflow-hidden">
         <div className="relative">
           <Link
-            href={`/${locale}#work`}
+            href={`/${locale}/work`}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
           >
             <ArrowLeft className="size-4" />
@@ -282,6 +285,14 @@ export default async function CaseStudyPage({
               {next.title}
               <ArrowUpRight className="size-5" />
             </Link>
+            <p className="mt-2">
+              <Link
+                href={`/${locale}/work`}
+                className="label-mono text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+              >
+                {t(ui.work.seeAll, locale)}
+              </Link>
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-3">

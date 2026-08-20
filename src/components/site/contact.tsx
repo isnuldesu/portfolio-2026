@@ -8,7 +8,8 @@ import { useLocale } from "@/components/site/locale-provider";
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
-import { contact, person, primaryCta, whatsappCta } from "@/content/site";
+import { contact, highlights, person, primaryCta, whatsappCta } from "@/content/site";
+import { accentAt } from "@/lib/accents";
 import { errorMessage, ui } from "@/content/ui";
 import { t, type L } from "@/lib/i18n";
 
@@ -82,6 +83,21 @@ export function Contact() {
         <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-muted-foreground">
           {t(contact.body, locale)}
         </p>
+
+        <ul className="mt-10 grid border-t-2 border-border sm:grid-cols-3">
+          {highlights.map((item, index) => (
+            <li
+              key={t(item.title, "en")}
+              className="rule-left border-b-2 border-border sm:not-last:border-r-2"
+              style={{ "--rule": accentAt(index) } as React.CSSProperties}
+            >
+              <p className="label-mono text-muted-foreground">{t(item.title, locale)}</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/85">
+                {t(item.description, locale)}
+              </p>
+            </li>
+          ))}
+        </ul>
 
         {status === "sent" ? (
           <div className="surface mt-10 rounded-none p-8 text-center">
