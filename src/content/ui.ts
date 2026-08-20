@@ -41,8 +41,8 @@ export const ui = {
       en: "Four typefaces, drawn character by character.",
     },
     body: {
-      id: "Bikin font mulanya cuma kebiasaan sejak 2020. Sekarang malah jadi bahan buat kerjaan brand. Geser barisnya.",
-      en: "Type design started as a habit in 2020 and now feeds the brand work. Drag or scroll the row.",
+      id: "Bikin font mulanya cuma kebiasaan sejak 2020. Sekarang malah jadi bahan buat kerjaan brand.",
+      en: "Type design started as a habit in 2020 and now feeds the brand work.",
     },
   },
 
@@ -99,6 +99,21 @@ export const ui = {
     glyphs: { id: "karakter", en: "glyphs" },
     styles: { id: "gaya", en: "styles" },
     characterSet: { id: "Set karakter", en: "Character set" },
+  },
+
+  cv: {
+    download: { id: "Unduh CV", en: "Download CV" },
+  },
+
+  notFound: {
+    code: { id: "404", en: "404" },
+    heading: { id: "Halamannya tidak ada", en: "That page does not exist" },
+    body: {
+      id: "Mungkin tautannya sudah berubah, atau alamatnya salah ketik. Dua pintu ini masih terbuka.",
+      en: "The link may have moved, or the address has a typo. These two doors are still open.",
+    },
+    work: { id: "Lihat kerjaan", en: "See the work" },
+    experience: { id: "Lihat pengalaman", en: "See the experience" },
   },
 
   form: {

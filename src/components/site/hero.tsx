@@ -7,7 +7,9 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { useLocale } from "@/components/site/locale-provider";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
-import { availability, hero, person, primaryCta } from "@/content/site";
+import { availability, hero, person, primaryCta, whatsappCta } from "@/content/site";
+import { BrandIcon } from "@/components/ui/brand-icon";
+import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
 
 const contacts = [
@@ -132,6 +134,31 @@ export function Hero() {
         </div>
 
         <div className="flex flex-wrap gap-3">
+          <Button
+            asChild
+            variant="outline"
+            className="h-11 gap-2 border-border px-6 text-sm font-medium"
+          >
+            <a
+              href={t(whatsappCta.href, locale)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BrandIcon name="siWhatsapp" />
+              <StableLabel value={whatsappCta.label} />
+            </a>
+          </Button>
+
+          <Button
+            asChild
+            variant="outline"
+            className="h-11 gap-2 border-border px-6 text-sm font-medium"
+          >
+            <a href="/muhammad-isnul-cv-2026.pdf" download>
+              <StableLabel value={ui.cv.download} />
+            </a>
+          </Button>
+
           <Button asChild className="h-11 gap-2 px-6 text-sm font-medium">
             <a href={primaryCta.href}>
               <ArrowRight className="size-4" />

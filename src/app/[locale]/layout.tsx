@@ -9,6 +9,8 @@ import "@fontsource/open-sauce-sans/700.css";
 import "../globals.css";
 import "../fonts.css";
 
+import { Analytics } from "@vercel/analytics/next";
+
 import { LocaleProvider } from "@/components/site/locale-provider";
 import { SiteNav } from "@/components/site/site-nav";
 import { ThemeProvider } from "@/components/site/theme-provider";
@@ -50,8 +52,14 @@ export async function generateMetadata({
       description,
       type: "website",
       locale: localeMeta[locale].htmlLang,
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: title }],
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og.png"],
+    },
   };
 }
 
@@ -86,6 +94,7 @@ export default async function LocaleLayout({
             </main>
           </LocaleProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

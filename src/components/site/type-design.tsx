@@ -38,13 +38,13 @@ export function TypeDesign() {
               viewport: { once: true, amount: 0.2 },
               transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
             })}
-        className="mt-10 flex snap-x snap-mandatory overflow-x-auto border-y-2 border-border [scrollbar-width:thin]"
+        className="mt-10 grid border-t-2 border-border sm:grid-cols-2 lg:grid-cols-3"
       >
         {typefaces.map((face) => (
-          <li key={face.name} className="w-[19rem] shrink-0 snap-start sm:w-[24rem]">
+          <li key={face.name} className="">
             <Link
               href={`/${locale}/work/${face.slug}`}
-              className="group block border-r-2 border-border outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="group block border-b-2 border-border outline-none focus-visible:ring-3 focus-visible:ring-ring/50 lg:not-last:border-r-2"
             >
             <div className="relative aspect-[4/3] overflow-hidden border-b-2 border-border">
               <Image
