@@ -126,7 +126,42 @@ export default async function CaseStudyPage({
 
       <PageSheet>
       <div>
-        <div className="space-y-14">
+        {study.problem ? (
+          <section className="border-b-2 border-border pb-12">
+            <p className="label-mono text-muted-foreground">
+              {t(ui.caseStudy.problem, locale)}
+            </p>
+            <p className="mt-4 max-w-[68ch] text-lg leading-relaxed text-foreground">
+              {t(study.problem, locale)}
+            </p>
+
+            {study.constraints?.length ? (
+              <div className="mt-8">
+                <p className="label-mono text-muted-foreground">
+                  {t(ui.caseStudy.constraints, locale)}
+                </p>
+                <ul className="mt-3 space-y-2">
+                  {study.constraints.map((item) => (
+                    <li
+                      key={t(item, "en")}
+                      className="flex gap-3 text-base leading-relaxed text-muted-foreground"
+                    >
+                      <span aria-hidden="true" className="shrink-0">
+                        &bull;
+                      </span>
+                      {t(item, locale)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </section>
+        ) : null}
+
+        <p className="label-mono mt-12 text-muted-foreground">
+          {t(ui.caseStudy.approach, locale)}
+        </p>
+        <div className="mt-6 space-y-14">
           {study.sections.map((section) => (
             <section key={t(section.heading, "en")}>
               <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
@@ -199,6 +234,27 @@ export default async function CaseStudyPage({
                 </ul>
               </div>
             ) : null}
+          </section>
+        ) : null}
+
+        {study.results?.length ? (
+          <section className="mt-14 border-t-2 border-border pt-12">
+            <p className="label-mono text-muted-foreground">
+              {t(ui.caseStudy.results, locale)}
+            </p>
+            <ul className="mt-4 space-y-3">
+              {study.results.map((item) => (
+                <li
+                  key={t(item, "en")}
+                  className="flex gap-3 text-lg leading-relaxed text-foreground"
+                >
+                  <span aria-hidden="true" className="shrink-0">
+                    &bull;
+                  </span>
+                  {t(item, locale)}
+                </li>
+              ))}
+            </ul>
           </section>
         ) : null}
 

@@ -42,7 +42,14 @@ export type CaseStudy = {
   tags: string[];
   /** Controls the tile footprint in the brand grid. */
   gridSize: "large" | "small";
+  /** Why the work existed. */
+  problem?: L;
+  /** What the engagement had to work around. */
+  constraints?: L[];
+  /** Process and what shipped. */
   sections: CaseSection[];
+  /** Only ever facts. Left empty where no number is known. */
+  results?: L[];
   typefaces?: L[];
   palette?: Swatch[];
   /** Drives the live specimen block on the detail page. */
@@ -74,6 +81,16 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/luna-pos.webp",
     tags: ["SaaS", "Product Design", "Design System"],
     gridSize: "large",
+    problem: { id: "Merchant sudah lebih dari seribu waktu saya masuk, dan mereka menjalankan toko dari permukaan yang berbeda-beda: kasir tablet, dashboard web, kiosk, layar dapur. Tiap permukaan tumbuh sendiri-sendiri. Sementara itu penjualan online mereka bergantung pada platform food delivery pihak ketiga yang potongannya berat untuk UMKM.", en: "More than a thousand merchants were already running on it, across surfaces that had grown up separately: tablet till, web dashboard, kiosk, kitchen display. Meanwhile their online sales depended on third party delivery platforms whose service charges are steep for an MSME." },
+    constraints: [
+      { id: "Setiap perubahan mendarat di toko yang sedang buka. Tidak ada jendela untuk merombak.", en: "Every change lands in a shop that is open. There is no window for a rebuild." },
+      { id: "Sembilan aplikasi berbagi satu model data, jadi keputusan di satu layar berlaku ke delapan lainnya.", en: "Nine apps share one data model, so a decision on one screen carries to the other eight." },
+    ],
+    results: [
+      { id: "Merchant aktif naik dari 1.000+ ke 4.500+ selama saya di produknya.", en: "Active merchants went from 1,000+ to 4,500+ over my time on the product." },
+      { id: "Sembilan aplikasi dirilis satu per satu, bukan satu peluncuran ulang besar.", en: "Nine apps shipped one at a time rather than as a single relaunch." },
+      { id: "LUNITE dipakai lintas produk, jadi kerja UI/UX berhenti diulang dari nol.", en: "LUNITE is used across the products, so UI/UX work stopped restarting from scratch." },
+    ],
     sections: [
       {
         heading: { id: "Satu akun, lima permukaan", en: "One account, five surfaces" },
@@ -185,6 +202,15 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/laba-id.webp",
     tags: ["Fintech", "Product Design", "Mobile"],
     gridSize: "small",
+    problem: { id: "Pemilik UMKM harus mencatat transaksi dengan benar tanpa pernah belajar akuntansi. Aplikasi pembukuan yang ada menuntut pemahaman debit dan kredit sebelum baris pertama bisa diisi.", en: "MSME owners have to record transactions correctly without ever having studied accounting. Existing bookkeeping apps ask you to understand debits and credits before the first line can be entered." },
+    constraints: [
+      { id: "Belum ada desainer sebelumnya. Warna, ikon, ukuran, huruf, komponen, design system, dan logo semuanya belum ada.", en: "There was no designer before this. Colour, icons, sizing, type, components, the design system, and the logo did not exist yet." },
+      { id: "Dua produk sekaligus: web untuk pembukuan, mobile untuk mencatat saat kejadian.", en: "Two products at once: web for the books, mobile for recording as it happens." },
+    ],
+    results: [
+      { id: "Rilis 23 Desember 2022 dan sampai sekarang masih dikembangkan.", en: "Released 23 December 2022 and still in active development." },
+      { id: "Laba Bisnis dan Laba Saku berbagi token dan komponen yang sama.", en: "Laba Bisnis and Laba Saku share the same tokens and components." },
+    ],
     sections: [
       {
         heading: { id: "Membangun sisi desainnya", en: "Founding the design side" },
@@ -283,6 +309,10 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/singapore-scout-association.webp",
     tags: ["Non-profit", "Web Design"],
     gridSize: "small",
+    problem: { id: "Satu halaman harus menanggung beberapa pembaca yang tujuannya berbeda: orang tua yang menimbang mendaftarkan anaknya, relawan yang mencari pintu masuk, donatur, dan Scout Shop. Semuanya untuk lembaga yang berdiri sejak 1910 dan berstatus lembaga amal terdaftar.", en: "One page has to carry several audiences with different intents: parents weighing enrolment, volunteers looking for a way in, donors, and the Scout Shop. All for an institution founded in 1910 and registered as a charity." },
+    constraints: [
+      { id: "Warna harus cukup lebar untuk memisahkan wilayah, program, dan kampanye tanpa keluar dari satu sistem.", en: "The palette had to separate regions, programmes, and campaigns without any of it leaving one system." },
+    ],
     sections: [
       {
         heading: { id: "Tugas halamannya", en: "What the page has to do" },
@@ -359,6 +389,11 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/andalusclass.webp",
     tags: ["EdTech", "UI/UX Design"],
     gridSize: "small",
+    problem: { id: "Covid-19 menutup asrama, tapi sekolah tetap harus berjalan. Kehadiran dan kegiatan harian santri yang biasanya terpantau di lingkungan pesantren tiba-tiba tersebar di rumah masing-masing.", en: "Covid-19 closed the campus, but the school still had to operate. Attendance and daily student activity, normally visible inside the boarding environment, were suddenly spread across homes." },
+    constraints: [
+      { id: "Diisi guru dan santri dari perangkat apa pun yang ada di rumah, lewat koneksi yang tidak bisa dijamin.", en: "Filled in by teachers and students on whatever device was at home, over a connection nobody could guarantee." },
+      { id: "Project pertama saya sebagai UI/UX designer, jadi alur, layar, huruf, dan warna semuanya digarap sendiri.", en: "My first project as a UI/UX designer, so flows, screens, type, and colour were all mine to work out." },
+    ],
     sections: [
       {
         heading: { id: "Batasannya", en: "The constraint" },
@@ -431,6 +466,16 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/birru-co.webp",
     tags: ["Branding", "Logo", "Type Design"],
     gridSize: "large",
+    problem: { id: "Birru.co rumah terapi wicara untuk anak, dan yang membaca materinya orang tua yang sedang mencari pertolongan untuk anaknya. Ini rebranding, jadi sudah ada identitas yang berjalan sebelumnya dan harus diganti tanpa membuat brandnya terasa asing.", en: "Birru.co is a speech therapy house for children, and the people reading its material are parents looking for help for their child. This was a rebrand, so an identity was already running and had to be replaced without making the brand feel like a stranger." },
+    constraints: [
+      { id: "Brandnya muncul paling sering bukan sebagai logo, tapi sebagai post sosial dan listing marketplace.", en: "The brand shows up far more often as a social post and a marketplace listing than as a logo." },
+      { id: "Tagline dan kunci logonya butuh huruf yang bisa disetel dengan mata, bukan font lisensi yang harus dilawan.", en: "The tagline and lockups needed type that could be spaced by eye, not a licensed font to fight against." },
+    ],
+    results: [
+      { id: "Birru Sans dirilis dalam dua belas gaya, enam berat dengan italic masing-masing.", en: "Birru Sans shipped in twelve styles, six weights each with an italic." },
+      { id: "Brand guidelines diserahkan sebagai acuan tim, bukan hanya file logo.", en: "Brand guidelines were handed over as something the team works from, not just a logo file." },
+      { id: "Sistemnya diteruskan ke media sosial dan listing marketplace, tempat brandnya paling sering ditemui.", en: "The system carried into social media and marketplace listings, where the brand is actually met." },
+    ],
     sections: [
       {
         heading: { id: "Sistem logo, bukan satu logo", en: "A logo system, not a logo" },
@@ -516,6 +561,7 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/backslash-creative.webp",
     tags: ["Branding", "Logo", "Pattern"],
     gridSize: "small",
+    problem: { id: "Brand studio kreatif lebih sering muncul sebagai latar ketimbang sebagai logo. Yang dibutuhkan bukan mark yang bagus saja, tapi sesuatu yang tetap dikenali di ukuran thumbnail.", en: "A creative studio's brand shows up as a background far more often than as a logo. What it needs is not just a good mark but something still recognisable at thumbnail size." },
     sections: [
       {
         heading: { id: "Empat warna, kontras tinggi", en: "Four colours, high contrast" },
@@ -589,6 +635,7 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/vjatre-skincare.webp",
     tags: ["Branding", "Social", "Packaging"],
     gridSize: "small",
+    problem: { id: "Brand skincare harus konsisten di tiga tempat sekaligus: rak, layar ponsel, dan feed. Dan hampir semua label skincare berebut palet mint yang sama.", en: "A skincare brand has to hold in three places at once: a shelf, a phone, and a feed. And nearly every skincare label is competing over the same mint palette." },
     sections: [
       {
         heading: { id: "Empat mark, empat ikon", en: "Four marks, four icons" },
@@ -665,6 +712,7 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/probe.webp",
     tags: ["App Store", "Illustration", "Promo"],
     gridSize: "large",
+    problem: { id: "Mencari diskon dan promo di Indonesia berarti menyisir situs dan feed lima brand berbeda. ProBe mengumpulkan itu di satu tempat, tapi aplikasinya sendiri harus ditemukan dulu di Google Play.", en: "Finding discounts and promos in Indonesia means trawling five brand sites and five brand feeds. ProBe collects them in one place, but the app itself has to be found on Google Play first." },
     sections: [
       {
         heading: { id: "Menang di thumbnail", en: "Winning the thumbnail" },
@@ -729,6 +777,7 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/rt-pintar.webp",
     tags: ["Icons", "Illustration", "Redesign"],
     gridSize: "small",
+    problem: { id: "Aplikasi administrasi warga penuh dengan layar yang muncul justru saat tidak ada apa-apa: belum ada tugas, kotak masuk kosong, internet putus. Layar-layar itu yang paling sering ditinggalkan sebagai kotak abu-abu berisi satu kalimat.", en: "A neighbourhood administration app is full of screens that appear precisely when there is nothing there: no task yet, empty inbox, no connection. Those are the screens most often left as a grey box with one sentence in it." },
     sections: [
       {
         heading: { id: "Dua belas ikon kategori", en: "Twelve category icons" },
@@ -793,6 +842,10 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/type-abahchan.webp",
     tags: ["Type Design", "Display"],
     gridSize: "small",
+    problem: { id: "Huruf display cuma dipakai di judul, tapi banyak project font berhenti di tengah jalan karena penulisnya mengejar set lengkap sejak awal.", en: "A display face only ever sets titles, yet plenty of type projects stall because they chase a complete set from the start." },
+    results: [
+      { id: "74 karakter: huruf besar, huruf kecil, angka, dan sembilan tanda baca.", en: "74 glyphs: caps, lowercase, figures, and nine punctuation marks." },
+    ],
     sections: [
       {
         heading: { id: "Sebatas yang dipakai", en: "Only what gets used" },
@@ -839,6 +892,10 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/type-beembo.webp",
     tags: ["Type Design", "Latin Extended"],
     gridSize: "small",
+    problem: { id: "Font yang cuma punya A sampai Z hanya bisa dipakai penulisnya sendiri. Begitu ada nama dengan aksen, hurufnya jatuh ke font lain.", en: "A face with only A to Z is usable by its author and nobody else. The moment an accented name appears, the text falls back to another font." },
+    results: [
+      { id: "197 karakter, termasuk 94 karakter beraksen di rentang Latin-1.", en: "197 glyphs, including 94 accented characters across the Latin-1 range." },
+    ],
     sections: [
       {
         heading: { id: "Kenapa diakritiknya digambar", en: "Why the accents got drawn" },
@@ -885,6 +942,10 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/type-jablo.webp",
     tags: ["Type Design", "Condensed"],
     gridSize: "small",
+    problem: { id: "Judul panjang, kolom sempit. Jalan pintasnya menggepengkan huruf lewat transformasi, dan itu merusak tebal batangnya.", en: "Long headline, narrow column. The shortcut is squeezing a face with a transform, and that ruins its stems." },
+    results: [
+      { id: "100 karakter, termasuk set tanda baca penuh.", en: "100 glyphs, including a full punctuation set." },
+    ],
     sections: [
       {
         heading: { id: "Rapat, bukan digepengkan", en: "Condensed, not squashed" },
@@ -931,6 +992,10 @@ export const caseStudies: CaseStudy[] = [
     cover: "/work/covers/geoleo.webp",
     tags: ["Type Design", "Geometric"],
     gridSize: "small",
+    problem: { id: "Keluarga font sering dianggap belum selesai kalau beratnya baru satu, padahal huruf display jarang dipanggil di berat tipis.", en: "A family is often treated as unfinished at one weight, even though a display face is rarely reached for in the light ones." },
+    results: [
+      { id: "104 karakter dalam satu berat Bold.", en: "104 glyphs in a single Bold weight." },
+    ],
     sections: [
       {
         heading: { id: "Satu berat, selesai", en: "One weight, finished" },
