@@ -27,7 +27,7 @@ export function RoleEntry({
     >
       <div>
         <p className="label-mono text-foreground">
-          {role.period === "—" ? t(ui.experience.notRecorded, locale) : role.period}
+          {role.period || t(ui.experience.notRecorded, locale)}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
           {t(role.arrangement, locale)}

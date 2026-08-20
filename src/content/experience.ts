@@ -117,7 +117,7 @@ export const roles: Role[] = [
     company: "FAR Group",
     brands: ["Fitquarters", "MindWorks", "Indonesian Fitness Founders"],
     location: { id: "Indonesia", en: "Indonesia" },
-    period: "—",
+    period: "",
     arrangement: { id: "Creative agency", en: "Creative agency" },
     featured: true,
     summary: {

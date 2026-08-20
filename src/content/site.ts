@@ -64,7 +64,7 @@ export type Project = {
 };
 
 export const projects: Project[] = caseStudies
-  .filter((study) => study.category === "product")
+  .filter((study) => study.category === "product" || study.category === "strategy")
   .map((study) => ({
     slug: study.slug,
     title: study.title,

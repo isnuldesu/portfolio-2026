@@ -21,7 +21,7 @@ export type CaseSection = { heading: L; body: L; bullets?: L[] };
 export type CaseStudy = {
   slug: string;
   title: string;
-  category: "product" | "brand" | "type";
+  category: "product" | "brand" | "type" | "strategy";
   discipline: L;
   /** The sector the client operates in, not the design discipline. */
   industry: L;
@@ -1020,6 +1020,84 @@ export const caseStudies: CaseStudy[] = [
         height: 1536,
       },
     ],
+  },
+  {
+    slug: "samase-sports-club",
+    title: "SAMASE Sports Club",
+    category: "strategy",
+    discipline: { id: "Strategi marketing", en: "Marketing strategy" },
+    industry: { id: "Kebugaran dan olahraga", en: "Fitness and sport" },
+    year: "2025",
+    duration: { id: "Apr - Agu 2025, 4 bulan", en: "Apr - Aug 2025, 4 months" },
+    role: { id: "Head of Marketing Strategy", en: "Head of Marketing Strategy" },
+    client: { id: "SAMASE Sports Club", en: "SAMASE Sports Club" },
+    teaser: {
+      id: "Strategi marketing dari pre-launch sampai grand opening, mencakup Fitspace, Physio, dan Padel.",
+      en: "Marketing strategy from pre-launch to grand opening, across Fitspace, Physio, and Padel.",
+    },
+    summary: {
+      id: "SAMASE Sports Club buka dengan tiga lini sekaligus: Fitspace, Physio, dan Padel. Saya pegang strategi marketingnya selama empat bulan menjelang pembukaan, dari positioning sampai orang benar-benar membayar keanggotaan.",
+      en: "SAMASE Sports Club opened with three lines at once: Fitspace, Physio, and Padel. I ran the marketing strategy for the four months leading to opening, from positioning through to people actually paying for a membership.",
+    },
+    cover: "/work/covers/samase-sports-club.webp",
+    tags: ["Marketing Strategy", "Funnel", "Campaign"],
+    gridSize: "large",
+    problem: {
+      id: "Gym baru tidak punya rekam jejak. Tidak ada anggota lama yang bisa bercerita, tidak ada review, tidak ada bukti bahwa tempatnya layak. Yang ada cuma bangunan yang belum buka dan tanggal grand opening yang tidak bisa digeser. Tiga lini pula, dan tiap lini menarik orang yang berbeda.",
+      en: "A new gym has no track record. No existing members to vouch for it, no reviews, no proof the place is worth the money. Just a building that has not opened and a grand opening date that will not move. Three lines, too, each pulling a different kind of person.",
+    },
+    constraints: [
+      {
+        id: "Eksekusi ads buying dan kontrol budget dipegang pihak yang ditunjuk klien. Arahan strategis, evaluasi performa, dan koordinasinya tetap di saya.",
+        en: "Ads buying and budget control sat with a party the client appointed. Strategy, performance review, and coordination stayed with me.",
+      },
+      {
+        id: "Freelance berbasis output tanpa jam kerja tetap, tapi campaign berjalan setiap hari dan keputusan tidak bisa menunggu.",
+        en: "Freelance and output based, no fixed hours, but a campaign runs every day and decisions do not wait.",
+      },
+      {
+        id: "Sebagian besar konten harus selesai di dalam tim supaya kecepatannya terjaga. Vendor hanya untuk produksi besar.",
+        en: "Most content had to be solvable in house to keep the pace. Vendors only for the big productions.",
+      },
+    ],
+    sections: [
+      {
+        heading: { id: "Menyusun funnelnya dulu", en: "Building the funnel first" },
+        body: {
+          id: "Sebelum satu iklan pun jalan, funnelnya dipasang lengkap: awareness, lead generation, lead management dan segmentasi, lalu conversion dan closing. Yang paling sering bocor bukan iklannya, tapi jarak antara orang meninggalkan nomor dan orang membayar. Tiap tahap diperiksa supaya tidak ada yang menumpuk di satu titik.",
+          en: "Before a single ad ran, the funnel went in whole: awareness, lead generation, lead management and segmentation, then conversion and closing. What leaks is rarely the ad. It is the distance between someone leaving a number and someone paying. Each stage got checked so nothing piled up in one place.",
+        },
+      },
+      {
+        heading: { id: "Satu strategi, banyak channel", en: "One strategy, many channels" },
+        body: {
+          id: "Paid ads di Meta dan TikTok, produksi konten, social media, dan event offline berjalan bersamaan. Yang saya jaga bukan masing-masing channel, tapi apakah semuanya menunjuk ke arah yang sama. Positioning dan messaging ditentukan lebih dulu supaya tim tidak menebak-nebak tiap kali membuat materi.",
+          en: "Paid ads on Meta and TikTok, content production, social media, and offline events all ran at once. What I kept an eye on was not each channel but whether they pointed the same way. Positioning and messaging were settled first so the team was not guessing every time it made something.",
+        },
+        bullets: [
+          {
+            id: "Paid advertising: arahan strategis dan evaluasi, eksekusi buying di pihak yang ditunjuk klien.",
+            en: "Paid advertising: strategy and review here, buying with the client's appointed party.",
+          },
+          {
+            id: "Konten: desain feed dan carousel, editing reels dan video pendek, materi promosi harian.",
+            en: "Content: feed and carousel design, reels and short-form editing, the daily promotional material.",
+          },
+          {
+            id: "Offline: konsep event dan exhibition, alur pengumpulan leads, sampai integrasinya kembali ke funnel.",
+            en: "Offline: event and exhibition concepts, the lead capture flow, and how it fed back into the funnel.",
+          },
+        ],
+      },
+      {
+        heading: { id: "Yang diukur", en: "What got measured" },
+        body: {
+          id: "Targetnya jelas sejak awal dan tidak berupa jumlah tayangan: minimal 50% okupansi pada masa pre-launch, dihitung dari Founding Member yang sudah membayar sebelum grand opening. Angka itu yang menentukan iklan mana diteruskan, materi mana diganti, dan bagian funnel mana yang perlu dibongkar.",
+          en: "The target was set early and it was not impressions: at least 50% occupancy during pre-launch, counted in Founding Members paid up before grand opening. That number decided which ads kept running, which material got replaced, and which part of the funnel had to be taken apart.",
+        },
+      },
+    ],
+    gallery: [],
   },
 ];
 

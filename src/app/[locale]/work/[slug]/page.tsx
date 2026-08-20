@@ -262,9 +262,11 @@ export default async function CaseStudyPage({
       </div>
       </PageSheet>
 
-      <PageSheet>
-        <CaseStudyGallery items={study.gallery} />
-      </PageSheet>
+      {study.gallery.length ? (
+        <PageSheet>
+          <CaseStudyGallery items={study.gallery} />
+        </PageSheet>
+      ) : null}
 
       <PageSheet>
       <section>
