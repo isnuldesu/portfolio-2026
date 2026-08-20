@@ -33,11 +33,11 @@ export function SiteNav() {
       <div id="nav-sentinel" className="absolute inset-x-0 top-0 h-px" />
       <header
         className={cn(
-          "sticky top-0 z-50 mx-auto h-16 w-full max-w-[82rem] transition-all duration-300",
-          scrolled ? "pill-glass" : "sheet",
+          "sticky top-0 z-50 h-16 w-full border-b-2 border-border transition-colors duration-300",
+          scrolled ? "pill-glass" : "bg-[var(--sheet)]",
         )}
       >
-        <div className="flex h-16 items-center justify-between gap-5 px-5 sm:px-8 md:px-12">
+        <div className="mx-auto flex h-16 w-full max-w-[82rem] items-center justify-between gap-5 px-5 sm:px-8 md:px-12">
           <Link
             href={`/${locale}`}
             className="font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
@@ -49,7 +49,7 @@ export function SiteNav() {
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={`/${locale}${item.href}`}
                 className="text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
               >
                 {t(item.label, locale)}
@@ -64,7 +64,7 @@ export function SiteNav() {
               asChild
               className="hidden h-10 px-5 text-sm font-medium sm:inline-flex"
             >
-              <a href={primaryCta.href}>
+              <a href={`/${locale}${primaryCta.href}`}>
               <StableLabel value={primaryCta.label} />
             </a>
             </Button>

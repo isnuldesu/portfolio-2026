@@ -7,7 +7,6 @@ import { Process } from "@/components/site/process";
 import { Statement } from "@/components/site/statement";
 import { MotionProvider } from "@/components/site/motion-provider";
 import { SiteFooter } from "@/components/site/site-footer";
-import { SiteNav } from "@/components/site/site-nav";
 import { Experience } from "@/components/site/experience";
 import { TypeDesign } from "@/components/site/type-design";
 import { GlassmorphismPortfolioBlock } from "@/components/ui/glassmorphism-portfolio-block-shadcnui";
@@ -17,7 +16,6 @@ export default function Home() {
   return (
     <>
       <AmbientBackground />
-      <SiteNav />
       <div className="flex flex-1 flex-col gap-4 sm:gap-6">
         <MotionProvider>
           <PageSheet>

@@ -10,6 +10,7 @@ import "../globals.css";
 import "../fonts.css";
 
 import { LocaleProvider } from "@/components/site/locale-provider";
+import { SiteNav } from "@/components/site/site-nav";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { person } from "@/content/site";
 import { isLocale, locales, localeMeta, t } from "@/lib/i18n";
@@ -76,6 +77,7 @@ export default async function LocaleLayout({
             >
               {locale === "id" ? "Lompat ke konten" : "Skip to content"}
             </a>
+            <SiteNav />
             <main
               id="content"
               className="flex min-h-dvh flex-col gap-4 px-0 py-0 sm:gap-6 sm:px-6 sm:py-8"

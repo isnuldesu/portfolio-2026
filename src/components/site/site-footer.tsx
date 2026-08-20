@@ -16,7 +16,7 @@ export function SiteFooter() {
           {nav.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={`/${locale}${item.href}`}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               {t(item.label, locale)}
