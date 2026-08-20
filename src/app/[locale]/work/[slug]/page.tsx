@@ -92,7 +92,7 @@ export default async function CaseStudyPage({
             {t(study.summary, locale)}
           </p>
 
-          <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-4">
+          <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t-2 border-border pt-8 sm:grid-cols-3">
             {facts.map((fact) => (
               <div key={fact.label}>
                 <dt className="label-mono text-muted-foreground">
