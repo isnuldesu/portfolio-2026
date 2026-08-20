@@ -113,22 +113,39 @@ export const roles: Role[] = [
   },
   {
     slug: "far-group",
-    title: "Creative Head",
+    title: "Head of Creative",
     company: "FAR Group",
     brands: ["Fitquarters", "MindWorks", "Indonesian Fitness Founders"],
-    location: { id: "Indonesia", en: "Indonesia" },
-    period: "",
-    arrangement: { id: "Creative agency", en: "Creative agency" },
+    location: { id: "Jakarta Selatan, Indonesia", en: "South Jakarta, Indonesia" },
+    period: "Feb 2025 - Apr 2026",
+    arrangement: { id: "Penuh waktu, remote", en: "Fulltime, remote" },
     featured: true,
-    summary: {
-      id: "Memimpin arah kreatif FAR Group, agensi yang menaungi Fitquarters, MindWorks, dan Indonesian Fitness Founders.",
-      en: "Leading the creative direction at FAR Group, the agency behind Fitquarters, MindWorks, and Indonesian Fitness Founders.",
-    },
+    summary: { id: "Memimpin tim kreatif FAR Group sekaligus menjalankan operasional Indonesian Fitness Founders, agensi yang melayani sektor fitness, beauty, dan wellness.", en: "Leading the creative team at FAR Group while running operations for Indonesian Fitness Founders, an agency serving the fitness, beauty, and wellness sectors." },
     points: [
+      { id: "Menjaga konsistensi brand di seluruh portofolio FAR Group, termasuk Fitquarters dan MindWorks.", en: "Held brand consistency across the FAR Group portfolio, including Fitquarters and MindWorks." },
+      { id: "Menerjemahkan target bisnis jadi materi visual: Key Visual, brand guidelines, content plan, dan deck promosi.", en: "Turned business targets into visual work: key visuals, brand guidelines, content plans, and promotional decks." },
+      { id: "Memegang operasional Indonesian Fitness Founders dari hulu ke hilir.", en: "Ran Indonesian Fitness Founders end to end." },
+    ],
+    scope: [
       {
-        id: "Memimpin arah kreatif untuk tiga brand di bawah satu agensi.",
-        en: "Creative direction across three brands under one agency.",
+        heading: { id: "Arah kreatif FAR Group", en: "Creative direction at FAR Group" },
+        items: [
+          { id: "Memimpin tim kreatif dan menjaga brand tetap konsisten lintas portofolio.", en: "Leading the creative team and keeping the brands consistent across the portfolio." },
+          { id: "Key Visual dan brand guidelines untuk Fitquarters dan MindWorks.", en: "Key visuals and brand guidelines for Fitquarters and MindWorks." },
+          { id: "Content plan dan deck promosi, dari rencana sampai materinya jadi.", en: "Content plans and promotional decks, from the plan through to finished material." },
+        ],
       },
+      {
+        heading: { id: "Operasional Indonesian Fitness Founders", en: "Indonesian Fitness Founders operations" },
+        items: [
+          { id: "Agensi khusus sektor fitness, beauty, dan wellness. Layanannya social media management, konsultasi bisnis, creative media, dan workshop.", en: "A niche agency for the fitness, beauty, and wellness sectors. The services are social media management, business consulting, creative media, and workshops." },
+          { id: "Klien yang sudah dikerjakan termasuk Basefit Club, Fortis Calisthenics, dan Explosive Performance.", en: "Clients delivered for include Basefit Club, Fortis Calisthenics, and Explosive Performance." },
+        ],
+      },
+    ],
+    dayToDay: [
+      { id: "Menjembatani arah kreatif dengan eksekusi operasionalnya, karena keduanya jarang berjalan sendiri.", en: "Bridging creative direction and the operations that execute it, since neither runs on its own." },
+      { id: "Mengarahkan tim kreatif dan memeriksa materi sebelum keluar ke klien.", en: "Directing the creative team and checking material before it reaches a client." },
     ],
   },
   {
@@ -182,7 +199,7 @@ export const roles: Role[] = [
     company: "SAMASE Sports Club",
     brands: ["SAMASE Fitspace", "SAMASE Physio", "SAMASE Padel"],
     location: { id: "Indonesia", en: "Indonesia" },
-    period: "Apr 2025 - Aug 2025",
+    period: "Apr 2026 - Aug 2026",
     arrangement: { id: "Freelance, berbasis output", en: "Freelance, output based" },
     featured: true,
     summary: {

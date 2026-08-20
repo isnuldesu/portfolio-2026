@@ -1027,8 +1027,8 @@ export const caseStudies: CaseStudy[] = [
     category: "strategy",
     discipline: { id: "Strategi marketing", en: "Marketing strategy" },
     industry: { id: "Kebugaran dan olahraga", en: "Fitness and sport" },
-    year: "2025",
-    duration: { id: "Apr - Agu 2025, 4 bulan", en: "Apr - Aug 2025, 4 months" },
+    year: "2026",
+    duration: { id: "Apr - Agu 2026, 4 bulan", en: "Apr - Aug 2026, 4 months" },
     role: { id: "Head of Marketing Strategy", en: "Head of Marketing Strategy" },
     client: { id: "SAMASE Sports Club", en: "SAMASE Sports Club" },
     teaser: {
@@ -1133,6 +1133,15 @@ export const caseStudies: CaseStudy[] = [
         },
         width: 2048,
         height: 1280,
+      },
+      {
+        src: "/work/gallery/samase-agenda.webp",
+        caption: {
+          id: "Agenda satu hari penuh di grid Padel. Angkanya diblur.",
+          en: "A full day on the Padel agenda grid. Figures blurred.",
+        },
+        width: 2048,
+        height: 1564,
       },
       {
         src: "/work/gallery/samase-kasir.webp",

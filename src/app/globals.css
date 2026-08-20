@@ -340,8 +340,10 @@ html.dark {
   border: var(--stroke) solid var(--border);
 }
 
-/* Nothing may push the document sideways. */
+/* Nothing may push the document sideways. Note: clip, not hidden. hidden
+   makes html and body scroll containers, and a sticky header inside a scroll
+   container stops sticking. */
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
