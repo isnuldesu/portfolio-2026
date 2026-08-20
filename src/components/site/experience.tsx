@@ -1,12 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { m, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
-import { education, roles, toolkit } from "@/content/experience";
+import { education, featuredRoles, toolkit } from "@/content/experience";
 import { ui } from "@/content/ui";
 import { t } from "@/lib/i18n";
 import { accentAt } from "@/lib/accents";
+import { RoleEntry } from "@/components/site/role-entry";
 
 /**
  * A ledger rather than a timeline: period on the left, the job on the right,
@@ -27,9 +30,9 @@ export function Experience() {
       </h2>
 
       <ol className="mt-14">
-        {roles.map((role, index) => (
+        {featuredRoles.map((role, index) => (
           <m.li
-            key={`${role.company}-${role.period}`}
+            key={role.slug}
             {...(reduceMotion
               ? {}
               : {
@@ -42,43 +45,22 @@ export function Experience() {
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
                 })}
-            className={`rule-left grid gap-4 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10 ${
-              index > 0 ? "-mt-0.5" : ""
-            }`}
-            style={{ "--rule": accentAt(index) } as React.CSSProperties}
+            className={index > 0 ? "border-t-2 border-border" : ""}
           >
-            <div>
-              <p className="label-mono text-foreground">{role.period}</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {t(role.arrangement, locale)}
-              </p>
-              <p className="text-sm text-muted-foreground">{t(role.location, locale)}</p>
-            </div>
-
-            <div>
-              <h3 className="font-display text-xl font-medium tracking-tight">
-                {role.title}
-              </h3>
-              <p className="mt-1 text-sm font-medium text-foreground">
-                {role.company}
-              </p>
-              <ul className="mt-4 space-y-2">
-                {role.points.map((point) => (
-                  <li
-                    key={t(point, "en")}
-                    className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
-                  >
-                    <span aria-hidden="true" className="mt-2 shrink-0 text-muted-foreground">
-                      &bull;
-                    </span>
-                    {t(point, locale)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <RoleEntry role={role} accent={accentAt(index)} />
           </m.li>
         ))}
       </ol>
+
+      <p className="mt-8 border-t-2 border-border pt-6">
+        <Link
+          href={`/${locale}/experience`}
+          className="label-mono inline-flex items-center gap-2 text-foreground underline-offset-4 outline-none hover:underline focus-visible:underline"
+        >
+          {t(ui.experience.seeAll, locale)}
+          <ArrowUpRight className="size-4" />
+        </Link>
+      </p>
 
       <div className="mt-6 grid md:grid-cols-3">
         <div

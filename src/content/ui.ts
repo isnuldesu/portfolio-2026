@@ -52,6 +52,13 @@ export const ui = {
     software: { id: "Software", en: "Software" },
     expertise: { id: "Keahlian", en: "Expertise" },
     education: { id: "Pendidikan", en: "Education" },
+    seeAll: { id: "Lihat semua pengalaman", en: "See all experience" },
+    allHeading: { id: "Semua pengalaman", en: "All experience" },
+    allEyebrow: { id: "Riwayat kerja", en: "Work history" },
+    scope: { id: "Ruang lingkup", en: "Scope of work" },
+    dayToDay: { id: "Sehari-hari", en: "Day to day" },
+    brands: { id: "Brand dan produk", en: "Brands and products" },
+    notRecorded: { id: "Belum tercatat", en: "Not recorded yet" },
   },
 
   process: {
