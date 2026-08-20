@@ -1040,7 +1040,9 @@ export const caseStudies: CaseStudy[] = [
       en: "SAMASE Sports Club opened with three lines at once: Fitspace, Physio, and Padel. I ran the marketing strategy for the four months leading to opening, from positioning through to people actually paying for a membership.",
     },
     cover: "/work/covers/samase-sports-club.webp",
-    tags: ["Marketing Strategy", "Funnel", "Campaign"],
+    link: "https://samasesportsclub.com",
+    linkLabel: "samasesportsclub.com",
+    tags: ["Marketing Strategy", "Landing Page", "Back Office"],
     gridSize: "large",
     problem: {
       id: "Gym baru tidak punya rekam jejak. Tidak ada anggota lama yang bisa bercerita, tidak ada review, tidak ada bukti bahwa tempatnya layak. Yang ada cuma bangunan yang belum buka dan tanggal grand opening yang tidak bisa digeser. Tiga lini pula, dan tiap lini menarik orang yang berbeda.",
@@ -1059,6 +1061,11 @@ export const caseStudies: CaseStudy[] = [
         id: "Sebagian besar konten harus selesai di dalam tim supaya kecepatannya terjaga. Vendor hanya untuk produksi besar.",
         en: "Most content had to be solvable in house to keep the pace. Vendors only for the big productions.",
       },
+    ],
+    results: [
+      { id: "Landing page live di samasesportsclub.com, dengan halaman terpisah untuk Fitspace, Physio, dan Padel.", en: "The landing page is live at samasesportsclub.com, with separate pages for Fitspace, Physio, and Padel." },
+      { id: "Back office dipakai tim untuk pendaftaran, kasir, transaksi, rekonsiliasi, dan laporan.", en: "The back office runs registration, cashier, transactions, reconciliation, and reporting for the team." },
+      { id: "Dokumentasi pemakaian ditulis supaya sistemnya bisa diserahkan, bukan bergantung pada saya.", en: "Usage documentation was written so the system could be handed over rather than depend on me." },
     ],
     sections: [
       {
@@ -1090,6 +1097,26 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        heading: { id: "Landing page-nya saya bangun sendiri", en: "I built the landing page myself" },
+        body: { id: "Campaign butuh tempat mendarat, dan menunggu vendor berarti kehilangan minggu. Jadi landing page-nya saya kerjakan sendiri: satu halaman payung plus halaman terpisah untuk Fitspace, Physio, dan Padel, karena tiga lini itu menarik orang yang berbeda dan tidak bisa dipaksa masuk satu halaman.", en: "A campaign needs somewhere to land, and waiting on a vendor costs weeks. So I built the landing page: one umbrella page plus separate pages for Fitspace, Physio, and Padel, because the three lines pull different people and will not fit on one page." },
+        bullets: [
+          { id: "Dua bahasa, dan tiap section bisa dimatikan atau dinyalakan tanpa menyentuh kode.", en: "Two languages, and any section can be switched off without touching code." },
+          { id: "A/B testing headline langsung dari panelnya, jadi copy diuji bukan diperdebatkan.", en: "Headline A/B testing from the panel, so copy gets tested instead of argued about." },
+          { id: "Logika Founding Member dan pricing menempel ke halaman, bukan ditulis ulang tiap kampanye.", en: "Founding Member logic and pricing live in the page rather than being rewritten each campaign." },
+        ],
+      },
+      {
+        heading: { id: "Lalu back office yang menjalankannya", en: "Then the back office that runs it" },
+        body: { id: "Iklan mengumpulkan lead, tapi lead tidak jadi member sendiri. Ada yang harus mencatat, menjadwalkan trial, menagih, dan menutup. Itu yang dikerjakan back office-nya: pendaftaran, agenda sesi, kasir dan QRIS, transaksi, rekonsiliasi, voucher, paket, komisi staf, sampai laporan penjualan.", en: "Ads collect leads, but a lead does not turn itself into a member. Someone has to record it, book the trial, take the money, and close. That is what the back office does: registration, session agenda, cashier and QRIS, transactions, reconciliation, vouchers, packages, staff commission, and sales reporting." },
+        bullets: [
+          { id: "Pendaftaran dan alur lead, termasuk sync ke CRM dan penjadwalan sesi trial.", en: "Registration and the lead flow, including CRM sync and trial session booking." },
+          { id: "Kasir dengan pembayaran QRIS, lalu transaksi dan rekonsiliasinya.", en: "A cashier with QRIS payment, then transactions and their reconciliation." },
+          { id: "Paket, voucher, dan template komisi yang tarifnya dipisah per jenis sesi.", en: "Packages, vouchers, and commission templates with rates split by session type." },
+          { id: "Impor transaksi lewat tempel data, untuk pindahan dari catatan lama.", en: "Transaction import by pasting data, for moving off the old records." },
+          { id: "Laporan penjualan dan analitik, plus dokumentasi cara memakainya untuk tim.", en: "Sales reporting and analytics, plus documentation so the team can run it." },
+        ],
+      },
+      {
         heading: { id: "Yang diukur", en: "What got measured" },
         body: {
           id: "Targetnya jelas sejak awal dan tidak berupa jumlah tayangan: minimal 50% okupansi pada masa pre-launch, dihitung dari Founding Member yang sudah membayar sebelum grand opening. Angka itu yang menentukan iklan mana diteruskan, materi mana diganti, dan bagian funnel mana yang perlu dibongkar.",
@@ -1097,7 +1124,44 @@ export const caseStudies: CaseStudy[] = [
         },
       },
     ],
-    gallery: [],
+    gallery: [
+      {
+        src: "/work/gallery/samase-landing.webp",
+        caption: { id: "Landing page SAMASE Sports Club", en: "The SAMASE Sports Club landing page" },
+        width: 2048,
+        height: 1536,
+      },
+      {
+        src: "/work/gallery/samase-kasir.webp",
+        caption: { id: "Kasir, sebelum pembayaran diproses", en: "The cashier, before a payment is taken" },
+        width: 2048,
+        height: 1422,
+      },
+      {
+        src: "/work/gallery/samase-rekonsiliasi.webp",
+        caption: { id: "Rekonsiliasi dengan ringkasan per kanal", en: "Reconciliation, summarised per channel" },
+        width: 2048,
+        height: 1706,
+      },
+      {
+        src: "/work/gallery/samase-paket.webp",
+        caption: { id: "Menyusun paket beserta sesi di dalamnya", en: "Building a package and the sessions inside it" },
+        width: 2048,
+        height: 2548,
+      },
+      {
+        src: "/work/gallery/samase-voucher.webp",
+        caption: { id: "Voucher dengan pembatas unit, kuota, dan rentang tanggal", en: "Vouchers with unit limits, quota, and a date range" },
+        width: 2048,
+        height: 2341,
+      },
+      {
+        src: "/work/gallery/samase-impor.webp",
+        caption: { id: "Impor transaksi dari catatan lama", en: "Importing transactions off the old records" },
+        width: 2048,
+        height: 1422,
+      },
+    ],
   },
 ];
 
