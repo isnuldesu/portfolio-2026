@@ -6,6 +6,7 @@ import { PageSheet } from "@/components/site/page-sheet";
 import { MotionProvider } from "@/components/site/motion-provider";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Experience } from "@/components/site/experience";
+import { Testimonials } from "@/components/site/testimonials";
 import { TypeDesign } from "@/components/site/type-design";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
 
@@ -30,6 +31,7 @@ export default function Home() {
           <PageSheet>
             <Experience />
           </PageSheet>
+          <Testimonials />
           <PageSheet>
             <Contact />
           </PageSheet>

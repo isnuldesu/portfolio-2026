@@ -136,7 +136,8 @@
 --------------------------------------------------------------------------- */
 
 :root {
-  --font-sans: "Open Sauce Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Neue Montreal", "Open Sauce Sans", ui-sans-serif, system-ui,
+    sans-serif;
 
   --background: oklch(0.94 0.002 100);
   --sheet: #ffffff;

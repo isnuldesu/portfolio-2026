@@ -161,9 +161,11 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
-        <p className="label-mono mt-12 text-muted-foreground">
-          {t(ui.caseStudy.approach, locale)}
-        </p>
+        {study.sections.length ? (
+          <p className="label-mono mt-12 text-muted-foreground">
+            {t(ui.caseStudy.approach, locale)}
+          </p>
+        ) : null}
         <div className="mt-6 space-y-14">
           {study.sections.map((section) => (
             <section key={t(section.heading, "en")}>

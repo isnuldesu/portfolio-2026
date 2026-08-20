@@ -104,6 +104,14 @@ export const ui = {
     characterSet: { id: "Set karakter", en: "Character set" },
   },
 
+  testimonials: {
+    eyebrow: { id: "Kata mereka", en: "In their words" },
+    heading: {
+      id: "Orang yang pernah kerja bareng saya",
+      en: "People who have worked with me",
+    },
+  },
+
   doors: {
     work: { id: "Lihat kerjaan", en: "See the work" },
     workNote: {

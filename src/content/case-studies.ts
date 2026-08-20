@@ -1175,6 +1175,24 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: "tokoclippers",
+    title: "TokoClippers",
+    category: "brand",
+    discipline: { id: "Desain produk", en: "Product design" },
+    industry: { id: "Platform clipping", en: "Clipping platform" },
+    year: "",
+    duration: { id: "Belum tercatat", en: "Not recorded yet" },
+    role: { id: "Belum tercatat", en: "Not recorded yet" },
+    client: { id: "TokoClippers", en: "TokoClippers" },
+    teaser: { id: "Platform clipping. Detailnya menyusul.", en: "A clipping platform. The detail is still to come." },
+    summary: { id: "TokoClippers adalah platform clipping. Halaman ini masih menunggu materinya: rentang waktu, peran, dan file desainnya.", en: "TokoClippers is a clipping platform. This page is still waiting on its material: the dates, the role, and the design files." },
+    cover: "/work/covers/tokoclippers.webp",
+    tags: ["Product Design"],
+    gridSize: "small",
+    sections: [],
+    gallery: [],
+  },
 ];
 
 export const getCaseStudy = (slug: string) =>

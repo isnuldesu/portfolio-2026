@@ -68,9 +68,11 @@ export function ProjectShowcase({ items = defaultProjects }: { items?: Project[]
                   <h3 className="font-display text-lg font-medium tracking-tight">
                     {project.title}
                   </h3>
-                  <span className="label-mono shrink-0 text-muted-foreground">
-                    {project.year}
-                  </span>
+                  {project.year ? (
+                    <span className="label-mono shrink-0 text-muted-foreground">
+                      {project.year}
+                    </span>
+                  ) : null}
                 </div>
 
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
