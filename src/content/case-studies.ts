@@ -1255,12 +1255,6 @@ export const caseStudies: CaseStudy[] = [
         width: 1440,
         height: 1160,
       },
-      {
-        src: "/work/gallery/tokoclippers-fundamentals.webp",
-        caption: { id: "Halaman Fundamentals dari design system-nya", en: "The Fundamentals page of the design system" },
-        width: 2048,
-        height: 1779,
-      },
     ],
   },
 ];
