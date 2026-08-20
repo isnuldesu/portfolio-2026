@@ -12,6 +12,7 @@ import "../fonts.css";
 import { Analytics } from "@vercel/analytics/next";
 
 import { LocaleProvider } from "@/components/site/locale-provider";
+import { PageView } from "@/components/site/page-view";
 import { SiteNav } from "@/components/site/site-nav";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { person } from "@/content/site";
@@ -94,6 +95,7 @@ export default async function LocaleLayout({
             </main>
           </LocaleProvider>
         </ThemeProvider>
+        <PageView />
         <Analytics />
       </body>
     </html>
