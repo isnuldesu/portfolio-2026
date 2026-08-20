@@ -1127,9 +1127,12 @@ export const caseStudies: CaseStudy[] = [
     gallery: [
       {
         src: "/work/gallery/samase-landing.webp",
-        caption: { id: "Landing page SAMASE Sports Club", en: "The SAMASE Sports Club landing page" },
+        caption: {
+          id: "Hero landing page SAMASE Sports Club",
+          en: "The SAMASE Sports Club landing page, at the top",
+        },
         width: 2048,
-        height: 1536,
+        height: 1280,
       },
       {
         src: "/work/gallery/samase-kasir.webp",
