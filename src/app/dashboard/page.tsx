@@ -7,6 +7,7 @@ import "../globals.css";
 import "../fonts.css";
 
 import { DashboardLogin } from "@/components/site/dashboard-login";
+import { TrackingToggle } from "@/components/site/tracking-toggle";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 export const dynamic = "force-dynamic";
@@ -192,6 +193,8 @@ export default async function Dashboard() {
           </ul>
         </section>
       </div>
+
+      <TrackingToggle />
 
       <section className="mt-16">
         <h2 className="font-display text-2xl font-medium tracking-tight">Messages</h2>

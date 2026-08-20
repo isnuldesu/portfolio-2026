@@ -61,11 +61,6 @@ export const ui = {
     notRecorded: { id: "Belum tercatat", en: "Not recorded yet" },
   },
 
-  process: {
-    eyebrow: { id: "Cara kerjanya", en: "How the work runs" },
-    heading: { id: "Begini jalannya", en: "Here is how it works" },
-  },
-
   about: {
     badge: { id: "Tentang", en: "About" },
     contactLine: {

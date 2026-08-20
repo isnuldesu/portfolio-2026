@@ -3,7 +3,6 @@ import { BrandWork } from "@/components/site/brand-work";
 import { Contact } from "@/components/site/contact";
 import { Hero } from "@/components/site/hero";
 import { PageSheet } from "@/components/site/page-sheet";
-import { Process } from "@/components/site/process";
 import { Statement } from "@/components/site/statement";
 import { MotionProvider } from "@/components/site/motion-provider";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -23,9 +22,6 @@ export default function Home() {
           </PageSheet>
           <PageSheet>
             <Statement />
-          </PageSheet>
-          <PageSheet>
-            <Process />
           </PageSheet>
           <PageSheet>
             <ProjectShowcase />

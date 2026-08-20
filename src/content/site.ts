@@ -285,32 +285,3 @@ export const statement = {
     en: [["to build software", "small businesses"], ["can actually run on."]],
   } as Record<Locale, string[][]>,
 } as const;
-
-export type ProcessStep = { number: string; title: L; body: L };
-
-export const processSteps: ProcessStep[] = [
-  {
-    number: "01",
-    title: { id: "Telusuri", en: "Discover" },
-    body: {
-      id: "Duduk bareng yang menjalankan. Lihat satu shift penuh, baca spreadsheet yang diam-diam jadi tumpuan, cari di mana alurnya patah.",
-      en: "Sit with the operators. Watch the shift, read the spreadsheet they secretly rely on, find where the process actually breaks.",
-    },
-  },
-  {
-    number: "02",
-    title: { id: "Rancang", en: "Design" },
-    body: {
-      id: "Alur dulu, baru layar, baru design system yang kuat. Keputusan diambil di file kerjanya, bukan di slide.",
-      en: "Flows, then screens, then a design system that holds. Decisions get made in the file, not in a deck.",
-    },
-  },
-  {
-    number: "03",
-    title: { id: "Kirim", en: "Deliver" },
-    body: {
-      id: "Front end dibangun dan diserahkan dalam keadaan jalan. Diuji pakai data asli yang berantakan, bukan skenario mulus.",
-      en: "Front end built and handed over working. Tested against the messy real data, not the happy path.",
-    },
-  },
-];
