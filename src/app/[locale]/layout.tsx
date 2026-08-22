@@ -78,6 +78,27 @@ export default async function LocaleLayout({
       className={`${spaceMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: person.name,
+              alternateName: person.shortName,
+              jobTitle: [person.role, person.secondaryRole],
+              email: `mailto:${person.email}`,
+              url: "https://isnul.site",
+              image: "https://isnul.site/portrait.webp",
+              sameAs: [
+                "https://www.linkedin.com/in/isnul/",
+                "https://github.com/isnuldesu",
+                `https://wa.me/${person.whatsapp}`,
+              ],
+              knowsLanguage: ["id", "en"],
+            }),
+          }}
+        />
         <ThemeProvider>
           <LocaleProvider locale={locale}>
             <a
