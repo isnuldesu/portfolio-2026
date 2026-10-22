@@ -123,6 +123,15 @@ export function CaseReel({ entries, title }: { entries: ReelEntry[]; title: stri
     play("step");
   }, [active]);
 
+  // A long rail scrolls on its own; keep the current thumbnail inside it.
+  const railRef = useRef<HTMLOListElement>(null);
+  useEffect(() => {
+    const rail = railRef.current;
+    const item = rail?.children[active] as HTMLElement | undefined;
+    if (!rail || !item || rail.scrollHeight <= rail.clientHeight) return;
+    rail.scrollTo({ top: item.offsetTop - rail.clientHeight / 2 + item.offsetHeight / 2, behavior: "smooth" });
+  }, [active]);
+
   // Plate number of each entry (null for notes), worked out before render.
   const plateOf: (number | null)[] = [];
   let count = 0;
@@ -212,7 +221,15 @@ export function CaseReel({ entries, title }: { entries: ReelEntry[]; title: stri
 
       {/* Thumbnail rail */}
       <nav aria-label="Plates" className="hidden lg:block">
-        <ol className="sticky top-[calc(50dvh-10rem)] flex flex-col gap-2 pt-10">
+        <ol
+          ref={railRef}
+          data-lenis-prevent
+          className={`sticky flex flex-col gap-2 [scrollbar-width:none] ${
+            images.length > 8
+              ? "top-24 max-h-[calc(100dvh-8rem)] overflow-y-auto px-1 py-2"
+              : "top-[calc(50dvh-10rem)] pt-10"
+          }`}
+        >
           {images.map(({ entry }, index) => (
             <li key={entry.src}>
               <button
