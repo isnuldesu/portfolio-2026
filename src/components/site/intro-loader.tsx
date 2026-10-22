@@ -8,7 +8,7 @@ import { MascotWalk } from "@/components/site/mascot";
 const DURATION_MS = 3900;
 
 /**
- * Opening sequence, once per session: an ink panel covers the page, the mascot
+ * Opening sequence, on every full load of home: an ink panel covers the page, the mascot
  * walks in from the left and shoves it off to the right, uncovering the name,
  * which then lifts away. Whether it plays is decided before first paint by
  * INTRO_ARM_SCRIPT in the locale layout (see src/lib/intro.ts).
