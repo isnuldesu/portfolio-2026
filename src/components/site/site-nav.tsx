@@ -7,6 +7,7 @@ import { ArrowDown } from "@phosphor-icons/react/dist/ssr";
 import { useLocale } from "@/components/site/locale-provider";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
 import { MiMark } from "@/components/site/mi-logo";
+import { MobileMenu } from "@/components/site/mobile-menu";
 import { SoundToggle } from "@/components/site/sound-toggle";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -45,13 +46,13 @@ export function SiteNav() {
         <div className="mx-auto flex h-16 w-full max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8">
           <Link
             href={`/${locale}`}
-            className="group/logo flex items-center gap-2.5 font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="group/logo flex shrink-0 items-center gap-2.5 whitespace-nowrap font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <MiMark className="w-11 text-[var(--coral)] transition-transform duration-500 group-hover/logo:-rotate-6 group-hover/logo:scale-105" />
             <span>{person.name}</span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-1 xl:flex">
             {nav.map((item) => (
               <a
                 key={item.href}
@@ -68,13 +69,17 @@ export function SiteNav() {
               label={t(ui.nav.audio, locale)}
               on={t(ui.nav.audioOn, locale)}
               off={t(ui.nav.audioOff, locale)}
+              className="hidden xl:inline-flex"
             />
-            <LocaleSwitcher />
-            <ThemeToggle label={t(ui.nav.themeToggle, locale)} />
+            {/* Below sm these two move into the menu sheet. */}
+            <div className="hidden items-center gap-2 sm:flex">
+              <LocaleSwitcher />
+              <ThemeToggle label={t(ui.nav.themeToggle, locale)} />
+            </div>
             <a
               href={`/downloads/muhammad-isnul-resume-2026-${locale}.pdf`}
               download
-              className="press hidden h-10 items-center gap-1.5 rounded-full bg-muted px-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring md:inline-flex"
+              className="press hidden h-10 items-center gap-1.5 rounded-full bg-muted px-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring xl:inline-flex"
             >
               {t(ui.reach.resume, locale)}
               <ArrowDown className="size-4" />
@@ -84,6 +89,7 @@ export function SiteNav() {
                 <StableLabel value={primaryCta.label} />
               </a>
             </Button>
+            <MobileMenu />
           </div>
         </div>
       </header>

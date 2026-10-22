@@ -126,7 +126,7 @@ export default async function CaseStudyPage({
       <article className="mx-auto w-full max-w-[90rem] px-5 sm:px-8">
         <div className="lg:grid lg:grid-cols-[17rem_minmax(0,1fr)_4.5rem] lg:gap-12">
           {/* Meta column */}
-          <aside data-lenis-prevent className="pt-10 lg:sticky lg:top-16 lg:flex lg:h-[calc(100dvh-4rem)] lg:flex-col lg:justify-between lg:self-start lg:overflow-y-auto lg:pb-8 [scrollbar-width:none]">
+          <aside data-lenis-prevent className="pt-10 pb-10 lg:sticky lg:top-16 lg:flex lg:h-[calc(100dvh-4rem)] lg:flex-col lg:justify-between lg:self-start lg:overflow-y-auto lg:pb-8 [scrollbar-width:none]">
             <div>
               <Link
                 href={`/${locale}/work`}

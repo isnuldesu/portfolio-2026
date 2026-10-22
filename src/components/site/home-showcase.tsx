@@ -74,7 +74,6 @@ export function HomeShowcase({
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const desktop = window.matchMedia("(min-width: 768px)").matches;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- decided once, on the client only
     setWebgl(desktop && !reduce);
 
     const proxy = state.current;
