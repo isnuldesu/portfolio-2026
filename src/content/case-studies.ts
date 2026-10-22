@@ -1131,7 +1131,7 @@ export const caseStudies: CaseStudy[] = [
       id: "SAMASE Sports Club buka dengan tiga lini sekaligus: Fitspace, Physio, dan Padel. Saya pegang strategi marketingnya selama empat bulan menjelang pembukaan, dari positioning sampai orang benar-benar membayar keanggotaan.",
       en: "SAMASE Sports Club opened with three lines at once: Fitspace, Physio, and Padel. I ran the marketing strategy for the four months leading to opening, from positioning through to people actually paying for a membership.",
     },
-    cover: shotCover("samase-sports-club"),
+    cover: "/work/shots/samase-sports-club/00-cover.webp",
     link: "https://samasesportsclub.com",
     linkLabel: "samasesportsclub.com",
     tags: ["Marketing Strategy", "Landing Page", "Back Office"],
@@ -1254,6 +1254,7 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     gallery: shots("samase-sports-club", [
+      { id: "Back office dan landing page di laptop dan ponsel", en: "The back office and landing page on laptop and phone", file: "01" },
       { id: "Gerbang SAMASE Sports Club, perspektif sebelum buka", en: "The SAMASE Sports Club gate, a pre-opening perspective", file: "vn-01-gate" },
       { id: "Pipeline lead lima tahap. Data dummy.", en: "The five stage lead pipeline. Dummy data.", file: "bo-03-pipeline" },
       { id: "Konten launch Instagram untuk Physio dan Fitspace", en: "Instagram launch content for Physio and Fitspace", file: "ct-02-launch" },
