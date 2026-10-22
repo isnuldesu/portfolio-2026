@@ -39,11 +39,11 @@ export default async function ExperiencePage({
   if (!isLocale(locale)) notFound();
 
   return (
-    <article className="flex flex-col gap-4 sm:gap-6">
-      <PageSheet>
+    <article className="flex flex-col">
+      <PageSheet className="!pb-10">
         <Link
           href={`/${locale}#experience`}
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
+          className="inline-flex h-10 items-center gap-2 rounded-full bg-secondary pl-3 pr-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring"
         >
           <ArrowLeft className="size-4" />
           {t(ui.caseStudy.back, locale)}
@@ -52,21 +52,41 @@ export default async function ExperiencePage({
         <p className="label-mono mt-10 text-muted-foreground">
           {t(ui.experience.allEyebrow, locale)}
         </p>
-        <h1 className="font-display mt-3 text-4xl font-medium tracking-tight md:text-6xl">
+        <h1 className="font-display mt-3 text-4xl font-bold md:text-6xl">
           {t(ui.experience.allHeading, locale)}
         </h1>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <a
+            href={`/downloads/muhammad-isnul-cv-2026-${locale}.pdf`}
+            download
+            className="inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground outline-none transition-opacity hover:opacity-85 focus-visible:ring-3 focus-visible:ring-ring"
+          >
+            {t(ui.reach.cv, locale)} (PDF)
+          </a>
+          <a
+            href={`/downloads/muhammad-isnul-resume-2026-${locale}.pdf`}
+            download
+            className="inline-flex h-10 items-center gap-2 rounded-full bg-secondary px-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring"
+          >
+            {t(ui.reach.resume, locale)} (PDF)
+          </a>
+        </div>
       </PageSheet>
 
       <MotionProvider>
-        {roles.map((role, index) => (
-          <PageSheet key={role.slug}>
-            <RoleEntry role={role} accent={accentAt(index)} detail />
-          </PageSheet>
-        ))}
+        <PageSheet className="!py-0">
+          <ol className="space-y-3">
+            {roles.map((role, index) => (
+              <li key={role.slug}>
+                <RoleEntry role={role} accent={accentAt(index)} detail />
+              </li>
+            ))}
+          </ol>
+        </PageSheet>
       </MotionProvider>
 
       <PageSheet>
-        <div className="grid md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-3">
           <div className="rule-left" style={{ "--rule": accentAt(1) } as React.CSSProperties}>
             <p className="label-mono text-muted-foreground">
               {t(ui.experience.software, locale)}

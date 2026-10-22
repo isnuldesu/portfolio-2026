@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { clientKey, rateLimit } from "@/lib/rate-limit";
 import { getSupabase } from "@/lib/supabase";
 
 type Payload = {
@@ -16,6 +17,15 @@ const asText = (value: unknown, max: number) =>
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export async function POST(request: Request) {
+  // Five messages per ten minutes per address is plenty for a person.
+  const limit = rateLimit(clientKey(request, "contact"), 5, 10 * 60 * 1000);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { code: "rate" },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+    );
+  }
+
   let body: Payload;
   try {
     body = await request.json();

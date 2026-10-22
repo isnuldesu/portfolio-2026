@@ -18,10 +18,34 @@ export type GalleryItem = {
 };
 export type CaseSection = { heading: L; body: L; bullets?: L[] };
 
+/**
+ * The eight-plate series for a project, generated in Gemini (Nano Banana Pro)
+ * from the original deck slides and cut to 2048 by 1449. Plate 01 is the
+ * cover; this returns plates 02 to 08 with their captions, in order.
+ */
+const shots = (slug: string, captions: (L & { file?: string })[]): GalleryItem[] =>
+  captions.map(({ file, ...caption }, index) => ({
+    // A replaced plate gets a new file name (`file`), so no cached copy of
+    // the old picture can be served in its place.
+    src: `/work/shots/${slug}/${file ?? String(index + 2).padStart(2, "0")}.webp`,
+    caption,
+    width: 2048,
+    height: 1449,
+  }));
+
+const shotCover = (slug: string) => `/work/shots/${slug}/01.webp`;
+
+export type RoleGroup = "product" | "web" | "brand" | "type" | "marketing";
+
+/** Work index groups, in the order they are shown. */
+export const roleGroups: RoleGroup[] = ["product", "web", "brand", "type", "marketing"];
+
 export type CaseStudy = {
   slug: string;
   title: string;
   category: "product" | "brand" | "type" | "strategy";
+  /** The role this was done in, which is how the work index is grouped. */
+  roleGroup: RoleGroup;
   discipline: L;
   /** The sector the client operates in, not the design discipline. */
   industry: L;
@@ -39,6 +63,12 @@ export type CaseStudy = {
   /** Opening paragraph on the detail page. */
   summary: L;
   cover: string;
+  /**
+   * A raw interface screenshot, when one exists. Shown inside a browser frame
+   * on the project stage, the way the cover cannot be (covers are finished
+   * presentation slides).
+   */
+  screen?: string;
   tags: string[];
   /** Controls the tile footprint in the brand grid. */
   gridSize: "large" | "small";
@@ -62,6 +92,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "luna-pos",
     title: "Luna POS",
     category: "product",
+    roleGroup: "product",
     discipline: { id: "Product design", en: "Product design" },
     industry: { id: "Teknologi ritel, SaaS kasir", en: "Retail technology, point of sale SaaS" },
     year: "2021 - Present",
@@ -78,7 +109,7 @@ export const caseStudies: CaseStudy[] = [
       id: "Luna POS itu software as a service untuk pemilik usaha di Indonesia: pantau penjualan, stok barang, akuntansi, dan hubungan pelanggan dari satu akun. Saya masuk setelah produknya rilis, waktu lebih dari seribu merchant sudah bergantung padanya. Artinya setiap perubahan harus mendarat tanpa merusak toko yang sedang buka.",
       en: "Luna POS is software as a service for Indonesian business owners: sales monitoring, product stock, accounting, and customer relations in one account. I joined after launch, with more than a thousand merchants already depending on it, which meant every change had to land without breaking a working shop.",
     },
-    cover: "/work/covers/luna-pos.webp",
+    cover: shotCover("luna-pos"),
     tags: ["SaaS", "Product Design", "Design System"],
     gridSize: "large",
     problem: { id: "Merchant sudah lebih dari seribu waktu saya masuk, dan mereka menjalankan toko dari permukaan yang berbeda-beda: kasir tablet, dashboard web, kiosk, layar dapur. Tiap permukaan tumbuh sendiri-sendiri. Sementara itu penjualan online mereka bergantung pada platform food delivery pihak ketiga yang potongannya berat untuk UMKM.", en: "More than a thousand merchants were already running on it, across surfaces that had grown up separately: tablet till, web dashboard, kiosk, kitchen display. Meanwhile their online sales depended on third party delivery platforms whose service charges are steep for an MSME." },
@@ -142,43 +173,21 @@ export const caseStudies: CaseStudy[] = [
       { name: "Black", hex: "#1A1423" },
       { name: "White", hex: "#FFFFFF" },
     ],
-    gallery: [
-      {
-        src: "/work/gallery/lunapos-overview.webp",
-        caption: {
-          id: "Gambaran produk dan kelima permukaannya",
-          en: "Product overview and the five surfaces",
-        },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/lunapos.webp",
-        caption: {
-          id: "Back office, dashboard web merchant",
-          en: "Back office, the web merchant dashboard",
-        },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/gallery/lunapos-app.webp",
-        caption: { id: "Kasir di tablet dan ponsel", en: "Tablet and phone point of sale" },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/gallery/lunapos-tokoluna.webp",
-        caption: { id: "TokoLUNA, toko online merchant", en: "TokoLUNA, the merchant online store" },
-        width: 2048,
-        height: 1449,
-      },
-    ],
+    gallery: shots("luna-pos", [
+      { id: "Back office: detail pelanggan, poin, dan kupon", en: "Back office: customer detail, points, and coupons" },
+      { id: "Kasir tablet di meja kedai kopi", en: "The tablet till on a coffee shop counter" },
+      { id: "Pembayaran QRIS di ponsel", en: "QRIS payment on the phone" },
+      { id: "Masuk, laporan harian, dan metode pembayaran", en: "Sign in, daily report, and payment methods" },
+      { id: "Kasir tablet, QRIS, dan struk, dari atas", en: "The tablet till, QRIS, and a receipt, from above", file: "06-flat" },
+      { id: "Dipakai di toko: kasir dan pembeli", en: "In a shop: the till and the customer" },
+      { id: "Satu ekosistem: TokoLUNA dan kasir Luna POS", en: "One ecosystem: TokoLUNA and the Luna POS till" },
+    ]),
   },
   {
     slug: "laba-id",
     title: "Laba.id",
     category: "product",
+    roleGroup: "product",
     discipline: { id: "Product design", en: "Product design" },
     industry: { id: "Fintech, akuntansi UMKM", en: "Fintech, MSME accounting" },
     year: "2021 - Present",
@@ -199,7 +208,7 @@ export const caseStudies: CaseStudy[] = [
       id: "Laba.id itu teman keuangan untuk usaha mikro, kecil, dan menengah: catat transaksi dengan benar tanpa harus paham akuntansi lebih dulu. Idenya muncul September 2020 waktu pandemi, pengembangannya mulai awal 2021, dan saya desainer pertama yang mengerjakannya.",
       en: "Laba.id is a financial companion for micro, small, and medium businesses: record transactions accurately without needing to understand accounting first. The idea started in September 2020 during the pandemic, development began in early 2021, and I was the first designer on it.",
     },
-    cover: "/work/covers/laba-id.webp",
+    cover: shotCover("laba-id"),
     tags: ["Fintech", "Product Design", "Mobile"],
     gridSize: "small",
     problem: { id: "Pemilik UMKM harus mencatat transaksi dengan benar tanpa pernah belajar akuntansi. Aplikasi pembukuan yang ada menuntut pemahaman debit dan kredit sebelum baris pertama bisa diisi.", en: "MSME owners have to record transactions correctly without ever having studied accounting. Existing bookkeeping apps ask you to understand debits and credits before the first line can be entered." },
@@ -256,37 +265,121 @@ export const caseStudies: CaseStudy[] = [
       { name: "Silver Chalice", hex: "#AEAEAE" },
       { name: "Shark", hex: "#212529" },
     ],
-    gallery: [
+    gallery: shots("laba-id", [
+      { id: "Laba Bisnis di web: daftar penjualan dan detail invoice", en: "Laba Bisnis on the web: the sales list and an invoice" },
+      { id: "Dipakai di meja warung", en: "On a corner shop counter" },
+      { id: "Laporan laba rugi", en: "The profit and loss report" },
+      { id: "Logo, warna, dan huruf Laba.id", en: "Laba.id logo, colour, and type" },
+      { id: "Dashboard, invoice, dan kalkulator di meja", en: "The dashboard, an invoice, and a calculator on the desk", file: "06-flat" },
+      { id: "Pemilik usaha mengecek pembukuannya", en: "An owner going over the books" },
+      { id: "Satu sistem: Laba Bisnis dan Laba Saku", en: "One system: Laba Bisnis and Laba Saku" },
+    ]),
+  },
+  {
+    slug: "laba-saku",
+    title: "Laba Saku",
+    category: "product",
+    roleGroup: "product",
+    discipline: { id: "Mobile app design", en: "Mobile app design" },
+    industry: { id: "Fintech, pembukuan UMKM", en: "Fintech, MSME bookkeeping" },
+    year: "2021 - Present",
+    duration: { id: "Jan 2021 - sekarang", en: "Jan 2021 - present" },
+    role: { id: "Product Designer", en: "Product Designer" },
+    client: { id: "IMPACTO, untuk Laba.id", en: "IMPACTO, for Laba.id" },
+    link: "https://play.google.com/store/apps/details?id=com.impacto.kakutor",
+    linkLabel: "Google Play",
+    links: [
+      { href: "https://play.google.com/store/apps/details?id=com.impacto.kakutor", label: "Google Play" },
+      { href: "https://labasaku.com", label: "labasaku.com" },
+    ],
+    teaser: {
+      id: "Aplikasi pembukuan Laba.id di Android: catat penjualan, terima QRIS, cetak struk, semuanya dari ponsel. 10 rb+ download, rating 4,5 di Google Play.",
+      en: "Laba.id's bookkeeping app for Android: record a sale, take QRIS, print the receipt, all from the phone. 10K+ downloads, rated 4.5 on Google Play.",
+    },
+    summary: {
+      id: "Laba Saku itu separuh mobile dari Laba.id. Aplikasinya menjawab tiga pertanyaan pemilik usaha setiap hari: berapa omzet hari ini, berapa pengeluarannya, dan berapa untung sebenarnya. Pemakainya menjalankan toko dari ponsel, di depan pelanggan, jadi setiap catatan harus selesai dalam hitungan detik.",
+      en: "Laba Saku is the mobile half of Laba.id. It answers the three questions a business owner asks every day: what came in today, what went out, and what the real profit is. Its users run the shop from their phone, in front of a customer, so every entry has to be done in seconds.",
+    },
+    cover: shotCover("laba-saku"),
+    tags: ["Fintech", "Mobile", "Product Design"],
+    gridSize: "small",
+    problem: {
+      id: "Pemilik warung, kafe, laundry, dan konter HP mencatat di meja kasir, bukan di meja kantor. Kalau mencatat butuh paham akuntansi atau butuh laptop, catatannya tidak pernah dibuat, dan laporan keuangannya tidak pernah ada.",
+      en: "Owners of corner shops, cafes, laundries, and phone counters record at the till, not at a desk. If recording needs accounting knowledge or a laptop, the entry never gets made, and the financial report never exists.",
+    },
+    constraints: [
+      { id: "Satu design system dengan Laba Bisnis di web: token dan komponennya sama, jadi data dan istilahnya harus terbaca sama di dua layar.", en: "One design system with Laba Bisnis on the web: the same tokens and components, so the data and the words have to read the same on both screens." },
+      { id: "Dipakai lintas jenis usaha, dari toko kelontong sampai online shop, dengan alur yang tetap satu.", en: "Used across very different businesses, from corner shops to online sellers, with one flow for all of them." },
+    ],
+    results: [
+      { id: "10 rb+ download dan rating 4,5 dari 59 ulasan di Google Play (Oktober 2026).", en: "10K+ downloads and a 4.5 rating from 59 reviews on Google Play (October 2026)." },
+      { id: "Masih dikembangkan: pembaruan terakhir 20 Juni 2026.", en: "Still in active development: last updated 20 June 2026." },
+    ],
+    sections: [
       {
-        src: "/work/gallery/laba-overview.webp",
-        caption: { id: "Produknya untuk apa", en: "What the product is for" },
-        width: 2048,
-        height: 1449,
+        heading: { id: "Isi aplikasinya", en: "What is in it" },
+        body: {
+          id: "Dari mencatat transaksi sampai laporan keuangan, semuanya ada di satu aplikasi, dan setiap fitur menulis ke catatan yang sama.",
+          en: "From recording a sale to the financial statements, all in one app, and every feature writes to the same books.",
+        },
+        bullets: [
+          { id: "LabaPay: terima pembayaran QRIS yang langsung tercatat di pembukuan", en: "LabaPay: QRIS payments that land straight in the books" },
+          { id: "Catat penjualan, pembelian, dan biaya operasional dalam hitungan detik", en: "Sales, purchases, and running costs recorded in seconds" },
+          { id: "Cetak struk langsung dari ponsel", en: "Receipts printed straight from the phone" },
+          { id: "Produk dan stok, aset usaha, kas dan bank, kontak pelanggan dan supplier", en: "Products and stock, business assets, cash and bank, customer and supplier contacts" },
+          { id: "Laporan laba rugi, posisi keuangan, dan arus kas otomatis", en: "Automatic profit and loss, balance sheet, and cash flow reports" },
+        ],
       },
       {
-        src: "/work/gallery/laba-brand.webp",
-        caption: { id: "Logo, huruf, dan warna", en: "Logo, type, and colour" },
-        width: 2048,
-        height: 1449,
+        heading: { id: "Dibangun di atas sistem Laba", en: "Built on the Laba system" },
+        body: {
+          id: "Laba Saku lahir bareng Laba Bisnis, dari design system yang saya bangun untuk Laba.id. Komponen, warna, dan istilahnya sama, jadi pemilik usaha yang mencatat di ponsel siang hari dan membuka laporan di laptop malamnya tidak perlu belajar dua kali.",
+          en: "Laba Saku was designed alongside Laba Bisnis, on the design system I built for Laba.id. Same components, colours, and wording, so an owner who records on the phone at noon and opens the report on a laptop at night never learns anything twice.",
+        },
       },
       {
-        src: "/work/gallery/laba-bisnis.webp",
-        caption: { id: "Laba Bisnis, aplikasi web", en: "Laba Bisnis, the web app" },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/gallery/laba-saku.webp",
-        caption: { id: "Laba Saku, aplikasi mobile", en: "Laba Saku, the mobile app" },
-        width: 2048,
-        height: 1449,
+        heading: { id: "Untuk usaha yang mana", en: "Who it is for" },
+        body: {
+          id: "Tampilannya dibuat sederhana supaya bisa dipakai tanpa paham akuntansi, untuk usaha apa pun yang mencatat di depan pelanggan.",
+          en: "Kept simple enough to use without knowing accounting, for any business that records in front of its customers.",
+        },
+        bullets: [
+          { id: "Toko kelontong dan retail", en: "Corner shops and retail" },
+          { id: "Kafe, restoran, dan usaha F&B", en: "Cafes, restaurants, and F&B" },
+          { id: "Usaha jasa dan laundry", en: "Services and laundries" },
+          { id: "Konter HP dan online shop", en: "Phone counters and online shops" },
+        ],
       },
     ],
+    typefaces: [
+      {
+        id: "MuseoModerno, disesuaikan untuk logotype",
+        en: "MuseoModerno, adjusted for the logotype",
+      },
+      { id: "Lato", en: "Lato" },
+    ],
+    palette: [
+      { name: "Science Blue", hex: "#0163C8" },
+      { name: "Malachite", hex: "#04BA27" },
+      { name: "Blaze Orange", hex: "#FF7202" },
+      { name: "Red", hex: "#ED0019" },
+      { name: "Shark", hex: "#212529" },
+    ],
+    gallery: shots("laba-saku", [
+      { id: "Mencatat transaksi baru dalam hitungan detik", en: "A new transaction in seconds" },
+      { id: "Beranda, riwayat transaksi, dan form tambah transaksi", en: "Home, transaction history, and the new transaction form" },
+      { id: "LabaPay: pembayaran QRIS", en: "LabaPay: QRIS payments" },
+      { id: "Kas & Bank dan laporan, dari atas", en: "Cash & Bank and the reports, from above", file: "05-flat" },
+      { id: "Aset usaha dan kontak", en: "Business assets and contacts" },
+      { id: "Cetak struk dari ponsel di warung", en: "Printing a receipt from the phone at the counter" },
+      { id: "Laporan keuangan, siap dibuka di mana saja", en: "Financial reports, ready wherever the owner is" },
+    ]),
   },
   {
     slug: "singapore-scout-association",
     title: "The Singapore Scout Association",
     category: "product",
+    roleGroup: "web",
     discipline: { id: "Desain web", en: "Web design" },
     industry: { id: "Nirlaba, gerakan kepemudaan", en: "Non-profit, youth movement" },
     year: "2023",
@@ -306,7 +399,7 @@ export const caseStudies: CaseStudy[] = [
       id: "The Singapore Scout Association salah satu gerakan kepemudaan tertua di Singapura, berdiri sejak 1910, dan anggota penuh World Organisation of the Scout Movement yang per 2022 menghitung lebih dari 57 juta Pramuka di 173 organisasi nasional. Saya bergabung dengan tim yang membangun landing page mereka.",
       en: "The Singapore Scout Association is one of the oldest youth movements in Singapore, dating back to 1910, and a full member of the World Organisation of the Scout Movement, which counted over 57 million Scouts across 173 national organisations as of 2022. I joined the team building their landing page.",
     },
-    cover: "/work/covers/singapore-scout-association.webp",
+    cover: shotCover("singapore-scout-association"),
     tags: ["Non-profit", "Web Design"],
     gridSize: "small",
     problem: { id: "Satu halaman harus menanggung beberapa pembaca yang tujuannya berbeda: orang tua yang menimbang mendaftarkan anaknya, relawan yang mencari pintu masuk, donatur, dan Scout Shop. Semuanya untuk lembaga yang berdiri sejak 1910 dan berstatus lembaga amal terdaftar.", en: "One page has to carry several audiences with different intents: parents weighing enrolment, volunteers looking for a way in, donors, and the Scout Shop. All for an institution founded in 1910 and registered as a charity." },
@@ -341,34 +434,21 @@ export const caseStudies: CaseStudy[] = [
       { name: "Grey 10", hex: "#434345" },
       { name: "Lux Black", hex: "#212529" },
     ],
-    gallery: [
-      {
-        src: "/work/gallery/scout-overview.webp",
-        caption: { id: "Asosiasinya siapa", en: "Who the association is" },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/gallery/scout-brand.webp",
-        caption: {
-          id: "Skala huruf dan sistem warna lengkapnya",
-          en: "Type scale and the full colour system",
-        },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/scout.webp",
-        caption: { id: "Landing page-nya", en: "The landing page" },
-        width: 2048,
-        height: 1449,
-      },
-    ],
+    gallery: shots("singapore-scout-association", [
+      { id: "Donasi dan relawan, di layar penuh", en: "Donations and volunteering, full screen" },
+      { id: "Di aula pramuka", en: "In a scout hall" },
+      { id: "Scout Shop dan donasi di ponsel", en: "The Scout Shop and donations on the phone" },
+      { id: "Hero, relawan, dan footer di mobile", en: "Hero, volunteering, and the footer on mobile" },
+      { id: "Halaman di laptop dan ponsel, dari atas", en: "The page on laptop and phone, from above", file: "06-flat" },
+      { id: "Orang tua dan anak mendaftar", en: "A parent and child signing up" },
+      { id: "Logo, huruf, warna, dan komponen", en: "Logo, type, colour, and components" },
+    ]),
   },
   {
     slug: "andalusclass",
     title: "AndalusClass",
     category: "product",
+    roleGroup: "product",
     discipline: { id: "Desain UI/UX", en: "UI/UX design" },
     industry: { id: "Pendidikan, pesantren", en: "Education, boarding school" },
     year: "2020",
@@ -386,7 +466,7 @@ export const caseStudies: CaseStudy[] = [
       id: "Waktu Covid-19 menutup asrama, Al-Andalus tetap harus berjalan sebagai sekolah. AndalusClass aplikasi web internal yang mereka bangun untuk mencatat kehadiran dan kegiatan harian santri selama belajar dari rumah. Ini juga project pertama saya sebagai UI/UX designer.",
       en: "When Covid-19 closed the campus, Al-Andalus still had to operate as a school. AndalusClass is the internal web app they built to track attendance and daily student activity while students were learning from home. It was also my first project as a UI/UX designer.",
     },
-    cover: "/work/covers/andalusclass.webp",
+    cover: shotCover("andalusclass"),
     tags: ["EdTech", "UI/UX Design"],
     gridSize: "small",
     problem: { id: "Covid-19 menutup asrama, tapi sekolah tetap harus berjalan. Kehadiran dan kegiatan harian santri yang biasanya terpantau di lingkungan pesantren tiba-tiba tersebar di rumah masing-masing.", en: "Covid-19 closed the campus, but the school still had to operate. Attendance and daily student activity, normally visible inside the boarding environment, were suddenly spread across homes." },
@@ -424,31 +504,21 @@ export const caseStudies: CaseStudy[] = [
       { name: "Azure Radiance", hex: "#0284F4" },
       { name: "Mine Shaft", hex: "#333333" },
     ],
-    gallery: [
-      {
-        src: "/work/gallery/andalusclass-overview.webp",
-        caption: { id: "Kenapa sekolahnya butuh ini", en: "Why the school needed it" },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/gallery/andalusclass-brand.webp",
-        caption: { id: "Huruf dan sistem warnanya", en: "Type and the colour system" },
-        width: 2048,
-        height: 1449,
-      },
-      {
-        src: "/work/andalusclass.webp",
-        caption: { id: "Layar absensi dan penjadwalan", en: "Attendance and scheduling screens" },
-        width: 2048,
-        height: 1449,
-      },
-    ],
+    gallery: shots("andalusclass", [
+      { id: "Web app di tablet: masuk dan aktivitas harian", en: "The web app on a tablet: sign in and daily activity" },
+      { id: "Di meja kelas", en: "On a classroom desk" },
+      { id: "Aktivitas harian kelas di ponsel", en: "A class's daily activity on the phone" },
+      { id: "Masuk, absensi, dan aktivitas harian", en: "Sign in, attendance, and daily activity" },
+      { id: "Absensi dan aktivitas harian, dari atas", en: "Attendance and daily activity, from above", file: "06-flat" },
+      { id: "Guru mengabsen kelas", en: "A teacher taking attendance" },
+      { id: "Logo, huruf, warna, dan komponen", en: "Logo, type, colour, and components" },
+    ]),
   },
   {
     slug: "birru-co",
     title: "Birru.co",
     category: "brand",
+    roleGroup: "brand",
     discipline: { id: "Identitas brand", en: "Brand identity" },
     industry: { id: "Kesehatan anak, terapi wicara", en: "Children's health, speech therapy" },
     year: "2023 - 2025",
@@ -463,7 +533,7 @@ export const caseStudies: CaseStudy[] = [
       id: "Identitas lengkap untuk Birru.co, rumah terapi wicara untuk anak, dari logogram sampai materi marketplace. Brandnya jalan dengan typeface sendiri, bukan font berlisensi, dan itu sebabnya wordmark dan huruf di antarmukanya terdengar seperti satu suara.",
       en: "A full identity for Birru.co, a speech therapy house for children, taken from the logogram through to the marketplace collateral. The brand ships with its own typeface rather than a licensed one, which is why the wordmark and the interface type feel like the same voice.",
     },
-    cover: "/work/covers/birru-co.webp",
+    cover: shotCover("birru-co"),
     tags: ["Branding", "Logo", "Type Design"],
     gridSize: "large",
     problem: { id: "Birru.co rumah terapi wicara untuk anak, dan yang membaca materinya orang tua yang sedang mencari pertolongan untuk anaknya. Ini rebranding, jadi sudah ada identitas yang berjalan sebelumnya dan harus diganti tanpa membuat brandnya terasa asing.", en: "Birru.co is a speech therapy house for children, and the people reading its material are parents looking for help for their child. This was a rebrand, so an identity was already running and had to be replaced without making the brand feel like a stranger." },
@@ -510,40 +580,21 @@ export const caseStudies: CaseStudy[] = [
       styles: [{"label": "ExtraLight", "weight": 200}, {"label": "ExtraLight Italic", "weight": 200, "italic": true}, {"label": "Light", "weight": 300}, {"label": "Light Italic", "weight": 300, "italic": true}, {"label": "Regular", "weight": 400}, {"label": "Regular Italic", "weight": 400, "italic": true}, {"label": "SemiBold", "weight": 600}, {"label": "SemiBold Italic", "weight": 600, "italic": true}, {"label": "Bold", "weight": 700}, {"label": "Bold Italic", "weight": 700, "italic": true}, {"label": "ExtraBold", "weight": 800}, {"label": "ExtraBold Italic", "weight": 800, "italic": true}],
       characters: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "|", "}", "~", "©", "®", "°", "±", "×", "÷"],
     },
-    gallery: [
-      {
-        src: "/work/birru.webp",
-        caption: { id: "Logo dan varian brandmark", en: "Logo and brandmark variants" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/birru-tagline.webp",
-        caption: { id: "Kunci tagline", en: "Tagline lockups" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/birru-typeface.webp",
-        caption: { id: "Birru Sans berdampingan dengan Nunito", en: "Birru Sans against Nunito" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/birru-social.webp",
-        caption: {
-          id: "Desain media sosial dan marketplace",
-          en: "Social media and marketplace design",
-        },
-        width: 2048,
-        height: 1536,
-      },
-    ],
+    gallery: shots("birru-co", [
+      { id: "Logo, logogram, dan varian brandmark", en: "The logo, the logogram, and the brandmark variants" },
+      { id: "Di ruang terapi", en: "In the therapy room" },
+      { id: "Instagram Birru", en: "Birru on Instagram" },
+      { id: "Post sosial media dan toko marketplace", en: "Social posts and the marketplace shop" },
+      { id: "Merchandise dan alat terapi, dari atas", en: "Merchandise and therapy cards, from above" },
+      { id: "Tagline: Building Connection, Unlocking Communication", en: "The tagline: Building Connection, Unlocking Communication" },
+      { id: "Birru Sans, typeface untuk brandnya", en: "Birru Sans, the brand's own typeface" },
+    ]),
   },
   {
     slug: "backslash-creative",
     title: "Backslash Creative",
     category: "brand",
+    roleGroup: "brand",
     discipline: { id: "Identitas brand", en: "Brand identity" },
     industry: { id: "Studio kreatif", en: "Creative studio" },
     year: "2022",
@@ -558,7 +609,7 @@ export const caseStudies: CaseStudy[] = [
       id: "Identitas untuk sebuah studio kreatif, disusun dalam lima bagian: varian logo, warna, tipografi, pola, dan brandnya saat dipakai. Polanya yang paling banyak bekerja, karena brand studio lebih sering muncul sebagai latar ketimbang sebagai logo.",
       en: "Identity for a creative studio, built in five parts: logo variations, colour, typography, pattern, and the brand in action. The pattern does most of the heavy lifting, because a studio brand shows up more often as a background than as a logo.",
     },
-    cover: "/work/covers/backslash-creative.webp",
+    cover: shotCover("backslash-creative"),
     tags: ["Branding", "Logo", "Pattern"],
     gridSize: "small",
     problem: { id: "Brand studio kreatif lebih sering muncul sebagai latar ketimbang sebagai logo. Yang dibutuhkan bukan mark yang bagus saja, tapi sesuatu yang tetap dikenali di ukuran thumbnail.", en: "A creative studio's brand shows up as a background far more often than as a logo. What it needs is not just a good mark but something still recognisable at thumbnail size." },
@@ -584,37 +635,21 @@ export const caseStudies: CaseStudy[] = [
       { name: "Cod Gray", hex: "#0A0A0A" },
       { name: "Wild Sand", hex: "#F5F5F5" },
     ],
-    gallery: [
-      {
-        src: "/work/gallery/backslash-logo.webp",
-        caption: { id: "Varian logo", en: "Logo variations" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/backslash-colors.webp",
-        caption: { id: "Warna brand", en: "Brand colours" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/backslash-pattern.webp",
-        caption: { id: "Desain pola", en: "Pattern design" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/backslash.webp",
-        caption: { id: "Brandnya saat dipakai", en: "Brand in action" },
-        width: 2048,
-        height: 5073,
-      },
-    ],
+    gallery: shots("backslash-creative", [
+      { id: "Varian logo", en: "Logo variations" },
+      { id: "Mural pola di pintu masuk studio", en: "The pattern as a mural at the studio entrance" },
+      { id: "Post Instagram dengan pola brand", en: "An Instagram post in the brand pattern" },
+      { id: "Deck presentasi studio", en: "The studio's pitch deck" },
+      { id: "Merchandise studio, dari atas", en: "Studio merchandise, from above" },
+      { id: "Brand guidelines yang dipakai tim", en: "The brand guidelines in use" },
+      { id: "Warna, pola, dan wordmark", en: "Colour, pattern, and the wordmark" },
+    ]),
   },
   {
     slug: "vjatre-skincare",
     title: "VJatre Skincare",
     category: "brand",
+    roleGroup: "brand",
     discipline: { id: "Brand dan sosial", en: "Brand and social" },
     industry: { id: "Skincare", en: "Skincare" },
     year: "2022",
@@ -632,7 +667,7 @@ export const caseStudies: CaseStudy[] = [
       id: "Brand skincare harus terlihat konsisten di rak, di layar ponsel, dan di feed. VJatre dapat logo primer dan sekunder plus dua alternatif, set ikon yang menyertainya, satu pola, dan sistem template sosial yang berdiri di atas empat warna yang sama.",
       en: "A skincare brand needs to look consistent on a shelf, on a phone, and in a feed. VJatre got a primary and secondary logo plus two alternates, a matching icon set, a pattern, and a social template system built on the same four colours.",
     },
-    cover: "/work/covers/vjatre-skincare.webp",
+    cover: shotCover("vjatre-skincare"),
     tags: ["Branding", "Social", "Packaging"],
     gridSize: "small",
     problem: { id: "Brand skincare harus konsisten di tiga tempat sekaligus: rak, layar ponsel, dan feed. Dan hampir semua label skincare berebut palet mint yang sama.", en: "A skincare brand has to hold in three places at once: a shelf, a phone, and a feed. And nearly every skincare label is competing over the same mint palette." },
@@ -658,43 +693,21 @@ export const caseStudies: CaseStudy[] = [
       { name: "Dune", hex: "#362F2E" },
       { name: "Cod Gray", hex: "#0A0A0A" },
     ],
-    gallery: [
-      {
-        src: "/work/gallery/vjatre-logo.webp",
-        caption: { id: "Varian logo dan ikon", en: "Logo and icon variants" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/vjatre-colors.webp",
-        caption: { id: "Warna brand", en: "Brand colour" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/vjatre-pattern.webp",
-        caption: { id: "Desain pola", en: "Pattern design" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/gallery/vjatre-social.webp",
-        caption: { id: "Post media sosial", en: "Social media posts" },
-        width: 2048,
-        height: 1536,
-      },
-      {
-        src: "/work/vjatre.webp",
-        caption: { id: "Brandnya saat dipakai", en: "Brand in action" },
-        width: 2048,
-        height: 2954,
-      },
-    ],
+    gallery: shots("vjatre-skincare", [
+      { id: "Logo dan ikon VJatre", en: "The VJatre logo and icon" },
+      { id: "Di meja wastafel", en: "On a bathroom vanity" },
+      { id: "Post bahan alami di Instagram", en: "An ingredient post on Instagram" },
+      { id: "Sistem konten sosial media", en: "The social media content system" },
+      { id: "Produk dan bahan alaminya, dari atas", en: "The products and their ingredients, from above" },
+      { id: "Serum saat dipakai", en: "The serum in use" },
+      { id: "Warna brand", en: "Brand colours" },
+    ]),
   },
   {
     slug: "probe",
     title: "ProBe",
     category: "brand",
+    roleGroup: "brand",
     discipline: { id: "Art direction produk", en: "Product art direction" },
     industry: { id: "Aplikasi diskon dan promo", en: "Discount and promo app" },
     year: "2022",
@@ -760,6 +773,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "rt-pintar",
     title: "RT Pintar",
     category: "brand",
+    roleGroup: "brand",
     discipline: { id: "Ikon dan ilustrasi", en: "Icons and illustration" },
     industry: { id: "Administrasi warga", en: "Neighbourhood administration" },
     year: "2022",
@@ -825,6 +839,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "abahchan",
     title: "Abahchan",
     category: "type",
+    roleGroup: "type",
     discipline: { id: "Desain font", en: "Type design" },
     industry: { id: "Project pribadi", en: "Personal project" },
     year: "2020",
@@ -875,6 +890,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "beembo",
     title: "BeemBO",
     category: "type",
+    roleGroup: "type",
     discipline: { id: "Desain font", en: "Type design" },
     industry: { id: "Project pribadi", en: "Personal project" },
     year: "2020",
@@ -925,6 +941,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "jablo",
     title: "Jablo",
     category: "type",
+    roleGroup: "type",
     discipline: { id: "Desain font", en: "Type design" },
     industry: { id: "Project pribadi", en: "Personal project" },
     year: "2020",
@@ -975,6 +992,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "geoleo",
     title: "Geoleo",
     category: "type",
+    roleGroup: "type",
     discipline: { id: "Desain font", en: "Type design" },
     industry: { id: "Project pribadi", en: "Personal project" },
     year: "Undated",
@@ -1025,6 +1043,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "samase-sports-club",
     title: "SAMASE Sports Club",
     category: "strategy",
+    roleGroup: "marketing",
     discipline: { id: "Strategi marketing", en: "Marketing strategy" },
     industry: { id: "Kebugaran dan olahraga", en: "Fitness and sport" },
     year: "2026",
@@ -1039,7 +1058,7 @@ export const caseStudies: CaseStudy[] = [
       id: "SAMASE Sports Club buka dengan tiga lini sekaligus: Fitspace, Physio, dan Padel. Saya pegang strategi marketingnya selama empat bulan menjelang pembukaan, dari positioning sampai orang benar-benar membayar keanggotaan.",
       en: "SAMASE Sports Club opened with three lines at once: Fitspace, Physio, and Padel. I ran the marketing strategy for the four months leading to opening, from positioning through to people actually paying for a membership.",
     },
-    cover: "/work/covers/samase-sports-club.webp",
+    cover: "/work/deck/samase-sports-club.webp",
     link: "https://samasesportsclub.com",
     linkLabel: "samasesportsclub.com",
     tags: ["Marketing Strategy", "Landing Page", "Back Office"],
@@ -1126,52 +1145,52 @@ export const caseStudies: CaseStudy[] = [
     ],
     gallery: [
       {
-        src: "/work/gallery/samase-landing.webp",
+        src: "/work/deck/samase-sports-club--1.webp",
         caption: {
           id: "Hero landing page SAMASE Sports Club",
           en: "The SAMASE Sports Club landing page, at the top",
         },
         width: 2048,
-        height: 1280,
+        height: 1449,
       },
       {
-        src: "/work/gallery/samase-agenda.webp",
+        src: "/work/deck/samase-sports-club--2.webp",
         caption: {
           id: "Agenda satu hari penuh di grid Padel. Angkanya diblur.",
           en: "A full day on the Padel agenda grid. Figures blurred.",
         },
         width: 2048,
-        height: 1564,
+        height: 1449,
       },
       {
-        src: "/work/gallery/samase-kasir.webp",
+        src: "/work/deck/samase-sports-club--3.webp",
         caption: { id: "Kasir, sebelum pembayaran diproses. Angkanya diblur.", en: "The cashier, before a payment is taken. Figures blurred." },
         width: 2048,
-        height: 1422,
+        height: 1449,
       },
       {
-        src: "/work/gallery/samase-rekonsiliasi.webp",
+        src: "/work/deck/samase-sports-club--4.webp",
         caption: { id: "Rekonsiliasi dengan ringkasan per kanal. Angkanya diblur.", en: "Reconciliation, summarised per channel. Figures blurred." },
         width: 2048,
-        height: 1706,
+        height: 1449,
       },
       {
-        src: "/work/gallery/samase-paket.webp",
+        src: "/work/deck/samase-sports-club--5.webp",
         caption: { id: "Menyusun paket beserta sesi di dalamnya. Harganya diblur.", en: "Building a package and the sessions inside it. Prices blurred." },
         width: 2048,
-        height: 2548,
+        height: 1449,
       },
       {
-        src: "/work/gallery/samase-voucher.webp",
+        src: "/work/deck/samase-sports-club--6.webp",
         caption: { id: "Voucher dengan pembatas unit, kuota, dan rentang tanggal. Angkanya diblur.", en: "Vouchers with unit limits, quota, and a date range. Figures blurred." },
         width: 2048,
-        height: 2341,
+        height: 1449,
       },
       {
-        src: "/work/gallery/samase-impor.webp",
+        src: "/work/deck/samase-sports-club--7.webp",
         caption: { id: "Impor transaksi dari catatan lama. Angkanya diblur.", en: "Importing transactions off the old records. Figures blurred." },
         width: 2048,
-        height: 1422,
+        height: 1449,
       },
     ],
   },
@@ -1179,6 +1198,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "tokoclippers",
     title: "TokoClippers",
     category: "product",
+    roleGroup: "product",
     discipline: { id: "Desain produk", en: "Product design" },
     industry: { id: "Creator economy, platform clipping", en: "Creator economy, clipping platform" },
     year: "2026",
@@ -1187,7 +1207,7 @@ export const caseStudies: CaseStudy[] = [
     client: { id: "TokoClippers", en: "TokoClippers" },
     teaser: { id: "Platform yang mempertemukan creator dengan clipper, dua sisi dengan kebutuhan yang berlawanan, plus design system-nya sendiri.", en: "A platform pairing creators with clippers, two sides with opposing needs, and the design system underneath it." },
     summary: { id: "TokoClippers mempertemukan creator yang punya konten panjang dengan clipper yang memotongnya jadi klip pendek. Dua sisi itu memakai aplikasi yang sama tapi menginginkan hal yang berlawanan, dan uang berpindah di antara keduanya. Saya merancang keduanya, web dan mobile, di atas design system yang dibangun bersamaan.", en: "TokoClippers pairs creators who have long-form content with clippers who cut it into short clips. The two sides use the same product and want opposite things, and money moves between them. I designed both, web and mobile, on a design system built alongside." },
-    cover: "/work/covers/tokoclippers.webp",
+    cover: shotCover("tokoclippers"),
     tags: ["Product Design", "Design System", "Two-sided"],
     gridSize: "large",
     problem: { id: "Marketplace dua sisi selalu punya masalah yang sama: satu produk, dua orang yang menginginkan hal berlawanan. Creator ingin klipnya banyak, cepat, dan sesuai brief. Clipper ingin project yang jelas bayarannya dan tidak membuang waktu. Kalau salah satu sisi dibuat nyaman dengan mengorbankan yang lain, sisi itu yang pergi.", en: "A two-sided marketplace always has the same problem: one product, two people who want opposite things. A creator wants many clips, quickly, on brief. A clipper wants a job with a clear payout and no wasted effort. Make one side comfortable at the other's expense and that side leaves." },
@@ -1218,44 +1238,15 @@ export const caseStudies: CaseStudy[] = [
         body: { id: "Fundamentals, Button, Inputfield, Alert, Breadcrumb, Avatar Label, dan Progress bar label masing-masing punya halaman sendiri di file yang sama. Dibangun bersamaan dengan produknya, bukan dirapikan setelahnya, supaya web dan mobile tidak berjalan sendiri-sendiri.", en: "Fundamentals, Button, Inputfield, Alert, Breadcrumb, Avatar Label, and Progress bar label each have their own page in the same file. Built alongside the product rather than tidied up afterwards, so web and mobile do not drift apart." },
       },
     ],
-    gallery: [
-      {
-        src: "/work/gallery/tokoclippers-home-clippers.webp",
-        caption: { id: "Beranda sisi clipper, project yang bisa diambil di paling atas", en: "The clipper home, jobs that can be taken leading the page" },
-        width: 1440,
-        height: 1160,
-      },
-      {
-        src: "/work/gallery/tokoclippers-home-creator.webp",
-        caption: { id: "Beranda sisi creator, performa project yang sedang berjalan", en: "The creator home, how the running projects are performing" },
-        width: 1440,
-        height: 1160,
-      },
-      {
-        src: "/work/gallery/tokoclippers-detail-project.webp",
-        caption: { id: "Ringkasan project yang dilihat clipper sebelum melamar", en: "The project summary a clipper reads before applying" },
-        width: 1440,
-        height: 1160,
-      },
-      {
-        src: "/work/gallery/tokoclippers-buat-project.webp",
-        caption: { id: "Buat project baru, langkah ketiga dengan anggaran dan target per klip", en: "Creating a project, third step, with budget and per-clip target" },
-        width: 1440,
-        height: 1160,
-      },
-      {
-        src: "/work/gallery/tokoclippers-withdraw.webp",
-        caption: { id: "Penarikan saldo berhasil. Keadaan gagal dan tertunda digambar terpisah.", en: "A successful withdrawal. The failed and pending states are drawn separately." },
-        width: 1440,
-        height: 1024,
-      },
-      {
-        src: "/work/gallery/tokoclippers-tiket-cs.webp",
-        caption: { id: "Detail tiket CS, dengan gelembung chat di dalamnya", en: "A support ticket in detail, chat bubble and all" },
-        width: 1440,
-        height: 1160,
-      },
-    ],
+    gallery: shots("tokoclippers", [
+      { id: "Dashboard clipper: saldo, views, dan project berjalan", en: "The clipper dashboard: balance, views, and running projects" },
+      { id: "Detail project di meja content creator", en: "A project brief on a creator's desk" },
+      { id: "Penarikan saldo berhasil", en: "A completed withdrawal" },
+      { id: "Buat project dan tiket CS", en: "Creating a project, and a support ticket" },
+      { id: "Dashboard creator dan clipper, dari atas", en: "Creator and clipper dashboards, from above" },
+      { id: "Clipper mengecek project di malam hari", en: "A clipper checking projects at night" },
+      { id: "Logo, warna, huruf, dan komponen", en: "Logo, colour, type, and components" },
+    ]),
   },
 ];
 

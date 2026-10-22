@@ -139,7 +139,8 @@ export const roles: Role[] = [
         heading: { id: "Operasional Indonesian Fitness Founders", en: "Indonesian Fitness Founders operations" },
         items: [
           { id: "Agensi khusus sektor fitness, beauty, dan wellness. Layanannya social media management, konsultasi bisnis, creative media, dan workshop.", en: "A niche agency for the fitness, beauty, and wellness sectors. The services are social media management, business consulting, creative media, and workshops." },
-          { id: "Klien yang sudah dikerjakan termasuk Basefit Club, Fortis Calisthenics, dan Explosive Performance.", en: "Clients delivered for include Basefit Club, Fortis Calisthenics, and Explosive Performance." },
+          { id: "Rendezvous Fitness Bali: detail creative design untuk postingan Instagram dan platform lain, termasuk Stories. Selain gym-nya, juga desain untuk resort-nya, Rendezvous Hotel, dan F&B healthy food-nya.", en: "Rendezvous Fitness Bali: detailed creative design for Instagram posts, Stories, and their other platforms. Beyond the gym, the same work for the resort, Rendezvous Hotel, and its healthy food F&B." },
+          { id: "Klien lain yang sudah dikerjakan termasuk Basefit Club, Fortis Calisthenics, dan Explosive Performance.", en: "Other clients delivered for include Basefit Club, Fortis Calisthenics, and Explosive Performance." },
         ],
       },
     ],
@@ -198,7 +199,7 @@ export const roles: Role[] = [
     title: "Head of Marketing Strategy",
     company: "SAMASE Sports Club",
     brands: ["SAMASE Fitspace", "SAMASE Physio", "SAMASE Padel"],
-    location: { id: "Indonesia", en: "Indonesia" },
+    location: { id: "Tangerang Selatan, Indonesia", en: "South Tangerang, Indonesia" },
     period: "Apr 2026 - Aug 2026",
     arrangement: { id: "Freelance, berbasis output", en: "Freelance, output based" },
     featured: true,

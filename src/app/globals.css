@@ -8,7 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-space-mono);
+  --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -46,6 +46,14 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Motion, measured off huyml.co: a long, soft settle for opacity, blur and
+     movement, and a short snap for presses. Overriding the defaults means
+     every bare `transition-*` and every `ease-out` in the site uses them. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-press: cubic-bezier(0.2, 0, 0, 1);
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  --default-transition-duration: 320ms;
 }
 
 :root {
@@ -136,10 +144,9 @@
 --------------------------------------------------------------------------- */
 
 :root {
-  --font-sans: "Neue Montreal", "Open Sauce Sans", ui-sans-serif, system-ui,
-    sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  --background: oklch(0.94 0.002 100);
+  --background: #ffffff;
   --sheet: #ffffff;
   --foreground: #2d2d2c;
 
@@ -160,14 +167,15 @@
   --accent: oklch(0.965 0.001 100);
   --accent-foreground: #2d2d2c;
 
-  --border: #070504;
-  --input: #070504;
+  /* Square's hairline dividers, tinted toward the CV's warm ink. */
+  --border: #e6e5e3;
+  --input: #8a8a88;
   --ring: oklch(0.63 0.19 20 / 35%);
 
-  --radius: 0rem;
+  --radius: 0.625rem;
 
-  /* One stroke weight for the whole page. The reference measures 2px. */
-  --stroke: 2px;
+  /* Square draws structure with 1px hairlines, not the CV's 2px rules. */
+  --stroke: 1px;
 
   /* The CV palette. Coral leads; the rest tag categories. */
   --coral: #eb5362;
@@ -198,40 +206,23 @@ html {
   color: #fff;
 }
 
-/* On the CV every heading, title, and contact line is Space Mono. Neue
-   Montreal is reserved for running text and meta. */
+/* Headings run in Host Grotesk at a tight track. */
 .font-display {
-  font-family: var(--font-space-mono), ui-monospace, monospace;
-  letter-spacing: -0.02em;
+  font-family: var(--font-host-grotesk), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.03em;
 }
 
-/* Mono labels, the CV's signature. Replaces the old italic serif. */
+/* Mono labels, set in Geist Mono. */
 .label-mono {
-  font-family: var(--font-space-mono), ui-monospace, monospace;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
 }
 
-/* Panels sit on the page as paper, held by a hairline rather than a shadow. */
-/* The CV builds structure from rules, not from filled cards. */
+/* A flat filled panel, Square's card: no border, no shadow. */
 .surface {
-  background: transparent;
-  border: var(--stroke) solid var(--border);
-}
-
-.pill-glass {
-  border: var(--stroke) solid var(--border);
-  background: color-mix(in oklab, var(--sheet) 90%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .pill-glass {
-    background: var(--sheet);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
+  background: var(--muted);
+  border-radius: 16px;
 }
 
 /* ---------------------------------------------------------------------------
@@ -240,8 +231,9 @@ html {
 --------------------------------------------------------------------------- */
 
 .dark {
-  --background: oklch(0.132 0.003 285);
-  --sheet: oklch(0.185 0.004 285);
+  /* One ground, no lifted sheet: Square does not frame content. */
+  --background: oklch(0.155 0.003 285);
+  --sheet: oklch(0.155 0.003 285);
   --foreground: oklch(0.955 0.002 100);
 
   --card: oklch(0.212 0.004 285);
@@ -261,8 +253,9 @@ html {
   --accent: oklch(0.253 0.005 285);
   --accent-foreground: oklch(0.955 0.002 100);
 
-  --border: #efefee;
-  --input: #efefee;
+  /* Hairlines, not the CV's bright 2px rules. */
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 30%);
   --ring: oklch(0.72 0.16 20 / 45%);
 
   --coral: #f2707c;
@@ -278,33 +271,29 @@ html.dark {
   color-scheme: dark;
 }
 
-.dark .surface {
-  background: transparent;
-  border-color: var(--border);
-}
-
-.dark .pill-glass {
-  background: color-mix(in oklab, var(--sheet) 90%, transparent);
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .dark .pill-glass {
-    background: var(--sheet);
-  }
-}
-
-/* The CV hangs a thick colour rule off the left of every content group. */
-/* A stroked block with a colour rule down its left edge. The rule is 12pt of
-   a 555pt content column on the CV, so it stays chunky at any width. */
+/* A content group as a Square card. The CV's colour rule survives as a
+   single accent dot in the top right corner, set per card with --rule. */
 .rule-left {
-  border-left: 14px solid var(--rule, var(--teal));
-  padding: 1rem 0 1rem 1.25rem;
+  position: relative;
+  background: var(--muted);
+  border-radius: 16px;
+  padding: 1.25rem 2.75rem 1.25rem 1.25rem;
+}
+
+.rule-left::after {
+  content: "";
+  position: absolute;
+  top: 1.4rem;
+  right: 1.25rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--rule, var(--teal));
 }
 
 @media (min-width: 768px) {
   .rule-left {
-    border-left-width: 20px;
-    padding: 1.5rem 0 1.5rem 1.75rem;
+    padding: 1.75rem 3rem 1.75rem 1.75rem;
   }
 }
 
@@ -335,10 +324,906 @@ html.dark {
   border-right-width: var(--stroke);
 }
 
-/* The page sits on the ground as a single sheet, the way a document does. */
+/* Sections sit straight on the white ground; Square draws no page frame. */
 .sheet {
   background: var(--sheet);
-  border: var(--stroke) solid var(--border);
+}
+
+/* ---------------------------------------------------------------------------
+   Square scope. Work index and case studies. Structure measured off the
+   Square Dashboard (Market), coloured with the CV palette: pill buttons at
+   40/48px, 40px icon tiles at radius 10, flat surfaces with no shadow, and
+   hairline dividers instead of the CV's 2px rules.
+--------------------------------------------------------------------------- */
+
+.theme-square {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-sq: var(--font-geist-mono), ui-monospace, monospace;
+
+  --background: #ffffff;
+  --sheet: #ffffff;
+  --foreground: #2d2d2c;
+  --card: #ffffff;
+  --card-foreground: #2d2d2c;
+  --primary: #2d2d2c;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.955 0.002 100);
+  --secondary-foreground: #2d2d2c;
+  --muted: oklch(0.955 0.002 100);
+  --muted-foreground: #6d6f71;
+  --accent: oklch(0.955 0.002 100);
+  --accent-foreground: #2d2d2c;
+  --border: #e6e5e3;
+  --input: #8a8a88;
+  --ring: oklch(0.63 0.19 20 / 35%);
+  --stroke: 1px;
+
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--foreground);
+  background: var(--background);
+  font-feature-settings: "ss01", "ss03";
+}
+
+/* .theme-square pins light values, so dark mode has to restate the CV's dark
+   palette here rather than inherit it from .dark. */
+.dark .theme-square {
+  --background: oklch(0.155 0.003 285);
+  --sheet: oklch(0.155 0.003 285);
+  --foreground: oklch(0.955 0.002 100);
+  --card: oklch(0.212 0.004 285);
+  --card-foreground: oklch(0.955 0.002 100);
+  --primary: oklch(0.955 0.002 100);
+  --primary-foreground: oklch(0.2 0.004 285);
+  --secondary: oklch(0.253 0.005 285);
+  --secondary-foreground: oklch(0.955 0.002 100);
+  --muted: oklch(0.253 0.005 285);
+  --muted-foreground: #a8aaac;
+  --accent: oklch(0.253 0.005 285);
+  --accent-foreground: oklch(0.955 0.002 100);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 30%);
+  --ring: oklch(0.72 0.16 20 / 45%);
+}
+
+.theme-square .sq-mono {
+  font-family: var(--font-mono-sq);
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+
+/* Market's heading-30: 32/40 bold, tight. */
+.theme-square .sq-h1,
+.theme-square .sq-h2 {
+  font-family: var(--font-host-grotesk), var(--font-sans);
+}
+
+.theme-square .sq-h1 {
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.theme-square .sq-h2 {
+  font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.theme-square .sq-h3 {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.theme-square .sq-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--foreground) 82%, transparent);
+}
+
+/* Market accessory: the 40px filled tile that holds a row's icon. */
+.theme-square .sq-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--muted);
+  color: var(--foreground);
+  flex-shrink: 0;
+}
+
+/* Media sits in a flat filled frame, the way Square frames previews. */
+.theme-square .sq-frame {
+  background: var(--muted);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------------
+   Intro loader. The mascot walks in (0.2-0.7s), shoves the ink panel off to the
+   right (0.7-2.4s), the coral name lifts away (2.6-3.1s), and the white
+   ground fades (3.0-3.5s). Hidden unless the inline script marked "play".
+--------------------------------------------------------------------------- */
+
+.intro {
+  /* Small, the way the reference keeps its walker: a figure, not a hero. */
+  --mascot-h: clamp(170px, 30vh, 300px);
+  --mascot-w: calc(var(--mascot-h) * 239 / 360);
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  /* Always a white stage: the mascot's ink outline needs a light ground,
+     even when the site behind it is in dark mode. */
+  background: #ffffff;
+  cursor: pointer;
+  animation: intro-out 0.5s ease-in 3.4s forwards;
+}
+
+html[data-intro="play"] .intro {
+  display: block;
+}
+
+.intro-name-clip {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.intro-name {
+  font-family: var(--font-host-grotesk), var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(3.5rem, 15vw, 13rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--coral);
+  animation: intro-name-out 0.55s cubic-bezier(0.7, 0, 0.2, 1) 3s forwards;
+}
+
+.intro-pusher {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  width: calc(100vw + var(--mascot-w));
+  transform: translateX(calc(-1 * var(--mascot-w)));
+  animation: intro-push 2.6s cubic-bezier(0.45, 0, 0.35, 1) 0.2s forwards;
+}
+
+.intro-mascot {
+  height: var(--mascot-h);
+  width: var(--mascot-w);
+  flex-shrink: 0;
+  /* Fingertips meet the panel edge. */
+  margin-right: calc(var(--mascot-w) * -0.02);
+  position: relative;
+  z-index: 1;
+}
+
+.intro-panel {
+  width: 100vw;
+  height: 100%;
+  flex-shrink: 0;
+  background: #2d2d2c;
+}
+
+
+@keyframes intro-push {
+  0% {
+    transform: translateX(calc(-1 * var(--mascot-w)));
+  }
+  22% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes intro-name-out {
+  to {
+    transform: translateY(-110%);
+  }
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Walk sprite: 32 frames of continuous video, one full gait cycle (left step
+   and right step), stepped with steps(32). With the sheet at 3200% of the box,
+   background-position k/31 * 100% lands exactly on frame k, so the run ends at
+   32/31 = 103.2258%. The loop seam was chosen where first and last frame match. */
+.mascot-walk {
+  position: relative;
+  aspect-ratio: 239 / 360;
+  background: url("/mascot/v3/walk-32.webp") 0 0 / 3200% 100% no-repeat;
+  animation: mascot-walk 1.1s steps(32) infinite;
+}
+
+@keyframes mascot-walk {
+  to {
+    background-position: 103.2258% 0;
+  }
+}
+
+/* Dust kicked up behind the back foot, once per step. */
+.mascot-dust {
+  position: absolute;
+  bottom: 1%;
+  left: 8%;
+  width: 16%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 2px solid #2d2d2c;
+  background: #ffffff;
+  opacity: 0;
+  animation: mascot-dust 0.55s ease-out infinite;
+}
+
+.mascot-dust-b {
+  left: -4%;
+  bottom: 4%;
+  width: 11%;
+  animation-delay: 0.18s;
+}
+
+@keyframes mascot-dust {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-80%, -40%) scale(1);
+  }
+}
+
+/* Three short effort strokes above the beanie, flickering with the step. */
+.mascot-effort {
+  position: absolute;
+  top: -4%;
+  right: 6%;
+  width: 22%;
+  height: 12%;
+  background:
+    linear-gradient(#2d2d2c, #2d2d2c) 10% 80% / 3px 45% no-repeat,
+    linear-gradient(#2d2d2c, #2d2d2c) 50% 20% / 3px 50% no-repeat,
+    linear-gradient(#2d2d2c, #2d2d2c) 90% 80% / 3px 45% no-repeat;
+  animation: mascot-effort 0.55s steps(2) infinite;
+}
+
+@keyframes mascot-effort {
+  50% {
+    transform: translateY(-15%) rotate(6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-walk,
+  .mascot-dust,
+  .mascot-effort {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Case study curtain: an ink panel holds the project name, then drops away.
+--------------------------------------------------------------------------- */
+
+.case-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: #2d2d2c;
+  animation: case-curtain-out 0.75s cubic-bezier(0.7, 0, 0.2, 1) 0.6s forwards;
+}
+
+.case-curtain-title {
+  font-family: var(--font-host-grotesk), var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  opacity: 0;
+  animation: case-curtain-title 0.45s ease-out 0.05s forwards;
+}
+
+@keyframes case-curtain-out {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes case-curtain-title {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-curtain {
+    display: none;
+  }
+}
+
+/* Text that changes in place (showcase meta, the big counter) comes back in
+   out of a blur instead of cutting. Re-keying the element replays it. */
+.blur-swap {
+  animation: blur-swap 0.55s var(--ease-out) both;
+}
+
+@keyframes blur-swap {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Audio toggle: four bars, a flat dash when off, a running wave when on. */
+.sound-wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.sound-wave i {
+  display: block;
+  width: 2px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: height 0.45s var(--ease-out);
+}
+
+.sound-wave.is-on i {
+  animation: sound-wave 0.9s var(--ease-out) infinite alternate;
+}
+
+.sound-wave.is-on i:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.sound-wave.is-on i:nth-child(3) {
+  animation-delay: -0.6s;
+}
+
+.sound-wave.is-on i:nth-child(4) {
+  animation-delay: -0.15s;
+}
+
+@keyframes sound-wave {
+  from {
+    height: 3px;
+  }
+  to {
+    height: 12px;
+  }
+}
+
+/* Presses snap down fast and come back on the same curve. */
+.press {
+  transition-property: transform, background-color, color, opacity, box-shadow;
+  transition-duration: 180ms, 520ms, 520ms, 450ms, 450ms;
+  transition-timing-function: var(--ease-press), cubic-bezier(0.22, 0.61, 0.36, 1),
+    cubic-bezier(0.22, 0.61, 0.36, 1), var(--ease-out), var(--ease-out);
+}
+
+.press:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-swap {
+    animation: none;
+  }
+  .press:active {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print documents (resume, CV). A4 sheets in the site's palette, laid out
+   like a designer's one-pager: a light hero card, an ink panel holding the
+   record, pill headings, sticker skills. Every word is real text in reading
+   order, decoration is CSS shapes with no text in it, so ATS parsers read the
+   page top to bottom. Screen shows the sheet on a grey desk; PDF drops it.
+--------------------------------------------------------------------------- */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* Static (non-variable) cuts of the site fonts, for print only. Chrome turns
+   variable fonts into Type 3 glyphs when it writes a PDF, and some ATS
+   parsers lose the spaces between bold words in those. Static TrueType
+   embeds as real text. All three families are OFL. */
+@font-face {
+  font-family: "Inter Print";
+  src: url("/fonts/print/inter-400.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Inter Print";
+  src: url("/fonts/print/inter-600.woff") format("woff");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Inter Print";
+  src: url("/fonts/print/inter-700.woff") format("woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Host Grotesk Print";
+  src: url("/fonts/print/host-grotesk-600.woff") format("woff");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Host Grotesk Print";
+  src: url("/fonts/print/host-grotesk-700.woff") format("woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Geist Mono Print";
+  src: url("/fonts/print/geist-mono-400.woff") format("woff");
+  font-weight: 400;
+}
+
+.print-doc {
+  --font-inter: "Inter Print";
+  --font-host-grotesk: "Host Grotesk Print";
+  --font-geist-mono: "Geist Mono Print";
+  --cv-ink: #2d2d2c;
+  --cv-coral: #eb5362;
+  --cv-coral-soft: #fbe1e3;
+  --cv-paper: #f2f1ef;
+  --cv-butter: #f7e9a6;
+  --cv-muted: #6d6f71;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  color: var(--cv-ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.print-doc a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cv {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 24px auto;
+  padding: 9mm;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5mm;
+  font-size: 8pt;
+  line-height: 1.36;
+}
+
+/* The multi-page CV flows as plain blocks: Chrome fragments flex columns
+   across pages badly (gaps, overlapping footers). */
+.cv-flow {
+  display: block;
+  min-height: auto;
+  /* Repeat the sheet padding on every printed page, so page two does not
+     start flush against the paper edge. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.cv-flow > * + * {
+  margin-top: 3.5mm;
+}
+
+.cv-flow .cv-panel > .cv-col > * + * {
+  margin-top: 4mm;
+}
+
+.cv-flow .cv-panel > .cv-col {
+  display: block;
+}
+
+.cv-flow .cv-list {
+  display: block;
+}
+
+.cv-flow .cv-list > * + * {
+  margin-top: 2.1mm;
+}
+
+.cv-flow .cv-foot {
+  break-inside: avoid;
+}
+
+@media print {
+  .print-doc {
+    background: #ffffff;
+  }
+  .cv {
+    margin: 0;
+  }
+}
+
+/* Hero card ---------------------------------------------------------------- */
+
+.cv-hero {
+  display: grid;
+  grid-template-columns: 44mm 1fr;
+  gap: 6mm;
+  align-items: center;
+  padding: 5mm;
+  border-radius: 6mm;
+  background: var(--cv-paper);
+}
+
+.cv-art {
+  position: relative;
+  height: 46mm;
+  border-radius: 5mm;
+  background: var(--cv-coral);
+  overflow: hidden;
+}
+
+/* The big initials behind the mascot are a shape, not text, so a parser
+   never reads them as part of the name. */
+.cv-art-mark {
+  position: absolute;
+  inset: 3mm -6mm auto -3mm;
+  height: 30mm;
+  background: url("/brand/mi-mark-white.svg") left center / contain no-repeat;
+  opacity: 0.95;
+}
+
+/* The monogram in the hero line, beside "Hello, I'm". Background image, not
+   inline SVG, so it adds nothing to the PDF text layer. */
+.cv-logo {
+  display: inline-block;
+  width: 12mm;
+  height: 8mm;
+  margin-right: 2.5mm;
+  vertical-align: middle;
+  background: url("/brand/mi-mark.svg") left center / contain no-repeat;
+}
+
+.cv-art img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 112%;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.cv-hello {
+  display: inline-block;
+  padding: 0.6mm 2.6mm;
+  border-radius: 1.6mm;
+  background: var(--cv-butter);
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+}
+
+.cv-name {
+  margin-top: 1.5mm;
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 27pt;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.cv-role {
+  display: inline-block;
+  margin-top: 2.5mm;
+  padding: 1.2mm 4mm;
+  border-radius: 999px;
+  background: var(--cv-coral);
+  color: #ffffff;
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 12.5pt;
+  font-weight: 700;
+}
+
+/* The cursor arrow pointing at the role pill. A sibling with no text, so it
+   can be moved freely without changing the order text is written to the PDF
+   (anything positioned or transformed is painted, and written, last). */
+.cv-cursor {
+  display: inline-block;
+  width: 5mm;
+  height: 5mm;
+  margin-left: -1.5mm;
+  vertical-align: -3.2mm;
+  background: var(--cv-ink);
+  clip-path: polygon(0 0, 100% 45%, 52% 56%, 40% 100%);
+}
+
+.cv-secondary {
+  margin-top: 2mm;
+  font-weight: 600;
+}
+
+.cv-intro {
+  margin-top: 2mm;
+  font-size: 8.4pt;
+  line-height: 1.45;
+  color: #3f3f3e;
+}
+
+.cv-contacts {
+  margin-top: 2.5mm;
+  font-size: 7.8pt;
+  color: var(--cv-muted);
+}
+
+.cv-sep {
+  color: #b9b8b5;
+}
+
+/* Ink panel ----------------------------------------------------------------- */
+
+.cv-panel {
+  flex: 1;
+  padding: 6mm;
+  border-radius: 6mm;
+  background: var(--cv-ink);
+  color: #ffffff;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.cv-cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 6mm;
+  align-items: start;
+}
+
+.cv-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+}
+
+.cv-h {
+  display: inline-block;
+  margin-bottom: 2.4mm;
+  padding: 0.8mm 3.6mm;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--cv-ink);
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  break-after: avoid;
+}
+
+.cv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.1mm;
+}
+
+.cv-item {
+  padding-left: 5mm;
+  break-inside: avoid;
+}
+
+/* Coral eight-point star in place of a bullet character. Floated rather
+   than positioned, so the item's text keeps its place in the PDF. */
+.cv-item::before {
+  content: "";
+  float: left;
+  margin: 0.9mm 0 0 -5mm;
+  width: 3mm;
+  height: 3mm;
+  background: var(--cv-coral);
+  clip-path: polygon(50% 0, 61% 30%, 93% 18%, 75% 47%, 100% 64%, 66% 66%, 64% 100%, 50% 75%, 36% 100%, 34% 66%, 0 64%, 25% 47%, 7% 18%, 39% 30%);
+}
+
+.cv-date {
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 9.6pt;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cv-title {
+  font-weight: 600;
+}
+
+.cv-org {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.cv-text {
+  margin-top: 0.6mm;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cv-accent {
+  margin-top: 0.6mm;
+  color: #ffb3ba;
+}
+
+.cv-bullets {
+  margin-top: 0.8mm;
+  padding-left: 3.2mm;
+  list-style: disc;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cv-bullets li::marker {
+  color: var(--cv-coral);
+}
+
+/* Skill stickers inside a selection frame, the way a design tool shows it. */
+/* Corner handles are background squares, not positioned boxes, for the
+   same reason. */
+.cv-stickers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5mm;
+  padding: 2.6mm;
+  border: 0.35mm solid #7aa7ff;
+  background:
+    linear-gradient(#ffffff, #ffffff) left top / 1.6mm 1.6mm no-repeat,
+    linear-gradient(#ffffff, #ffffff) right bottom / 1.6mm 1.6mm no-repeat;
+}
+
+.cv-sticker {
+  display: inline-block;
+  padding: 0.8mm 2.6mm;
+  border-radius: 999px;
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 7.8pt;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cv-sticker:nth-child(4n + 1) {
+  background: var(--cv-coral);
+  color: #ffffff;
+}
+
+.cv-sticker:nth-child(4n + 2) {
+  background: #ffffff;
+  color: var(--cv-ink);
+}
+
+.cv-sticker:nth-child(4n + 3) {
+  background: var(--cv-butter);
+  color: var(--cv-ink);
+}
+
+.cv-sticker:nth-child(4n + 4) {
+  background: transparent;
+  color: #ffffff;
+  box-shadow: inset 0 0 0 0.35mm #ffffff;
+}
+
+.cv-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8mm;
+}
+
+.cv-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5mm;
+  padding: 1mm 2.6mm;
+  border-radius: 1.6mm;
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+
+.cv-tool::before {
+  content: "";
+  width: 2mm;
+  height: 2mm;
+  border-radius: 0.6mm;
+  background: var(--cv-coral);
+}
+
+.cv-key {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cv-links a {
+  color: #ffb3ba;
+}
+
+.cv-more {
+  margin-top: 3mm;
+}
+
+.cv-line + .cv-line {
+  margin-top: 0.8mm;
+}
+
+/* Footer -------------------------------------------------------------------- */
+
+.cv-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4mm;
+  padding: 0 2mm;
+}
+
+.cv-foot-contact {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+  font-size: 8.4pt;
+}
+
+.cv-foot-chip {
+  padding: 2mm 4.5mm;
+  border-radius: 3mm;
+  background: var(--cv-butter);
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+.cv-foot-thanks {
+  display: flex;
+  align-items: flex-end;
+  gap: 2mm;
+  font-family: var(--font-host-grotesk), var(--font-inter), sans-serif;
+  font-size: 13pt;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--cv-coral);
+}
+
+.cv-foot-thanks img {
+  height: 15mm;
+  width: auto;
+}
+
+/* Deck artboards: the exact pixel size of the existing product deck pages. */
+.deck-board {
+  width: 2048px;
+  height: 1449px;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Nothing may push the document sideways. Note: clip, not hidden. hidden

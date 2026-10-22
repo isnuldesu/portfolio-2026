@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowDown } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
+import { MiMark } from "@/components/site/mi-logo";
+import { SoundToggle } from "@/components/site/sound-toggle";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
@@ -33,24 +36,27 @@ export function SiteNav() {
       <div id="nav-sentinel" className="absolute inset-x-0 top-0 h-px" />
       <header
         className={cn(
-          "sticky top-0 z-50 h-16 w-full border-b-2 border-border transition-colors duration-300",
-          scrolled ? "pill-glass" : "bg-[var(--sheet)]",
+          "sticky top-0 z-50 h-16 w-full border-b border-border transition-colors duration-300",
+          scrolled
+            ? "bg-[color-mix(in_oklab,var(--sheet)_88%,transparent)] backdrop-blur-md"
+            : "bg-[var(--sheet)]",
         )}
       >
-        <div className="mx-auto flex h-16 w-full max-w-[82rem] items-center justify-between gap-5 px-5 sm:px-8 md:px-12">
+        <div className="mx-auto flex h-16 w-full max-w-[90rem] items-center justify-between gap-5 px-5 sm:px-8">
           <Link
             href={`/${locale}`}
-            className="font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="group/logo flex items-center gap-2.5 font-display text-base font-bold tracking-tight text-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           >
-            {person.name}
+            <MiMark className="w-11 text-[var(--coral)] transition-transform duration-500 group-hover/logo:-rotate-6 group-hover/logo:scale-105" />
+            <span>{person.name}</span>
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={`/${locale}${item.href}`}
-                className="text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
+                className="press inline-flex h-9 items-center rounded-full px-3 text-sm font-medium text-foreground/70 outline-none transition-colors hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
               >
                 {t(item.label, locale)}
               </a>
@@ -58,15 +64,25 @@ export function SiteNav() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <SoundToggle
+              label={t(ui.nav.audio, locale)}
+              on={t(ui.nav.audioOn, locale)}
+              off={t(ui.nav.audioOff, locale)}
+            />
             <LocaleSwitcher />
             <ThemeToggle label={t(ui.nav.themeToggle, locale)} />
-            <Button
-              asChild
-              className="hidden h-10 px-5 text-sm font-medium sm:inline-flex"
+            <a
+              href={`/downloads/muhammad-isnul-resume-2026-${locale}.pdf`}
+              download
+              className="press hidden h-10 items-center gap-1.5 rounded-full bg-muted px-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring md:inline-flex"
             >
-              <a href={`/${locale}${primaryCta.href}`}>
-              <StableLabel value={primaryCta.label} />
+              {t(ui.reach.resume, locale)}
+              <ArrowDown className="size-4" />
             </a>
+            <Button asChild variant="sq-primary" size="sq-sm" className="hidden sm:inline-flex">
+              <a href={`/${locale}${primaryCta.href}`}>
+                <StableLabel value={primaryCta.label} />
+              </a>
             </Button>
           </div>
         </div>

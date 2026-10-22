@@ -5,18 +5,19 @@ import { m, useReducedMotion } from "motion/react";
 import { ArrowUpRight, CircleNotch } from "@phosphor-icons/react/dist/ssr";
 
 import { useLocale } from "@/components/site/locale-provider";
+import { ContactChannels } from "@/components/site/contact-channels";
+import { Mascot } from "@/components/site/mascot";
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
-import { contact, highlights, person, primaryCta, whatsappCta } from "@/content/site";
-import { accentAt } from "@/lib/accents";
+import { contact, person, primaryCta, whatsappCta } from "@/content/site";
 import { errorMessage, ui } from "@/content/ui";
 import { t, type L } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 const fieldClass =
-  "w-full rounded-none border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50";
+  "w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50";
 
 const labelClass = "block text-sm font-medium text-foreground/90";
 
@@ -77,30 +78,22 @@ export function Contact() {
             })}
         className=""
       >
-        <h2 className="font-display text-3xl font-medium tracking-tight text-balance md:text-5xl">
+        <h2 className="font-display text-3xl font-bold text-balance md:text-5xl">
           {t(contact.heading, locale)}
         </h2>
         <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-muted-foreground">
           {t(contact.body, locale)}
         </p>
 
-        <ul className="mt-10 grid border-t-2 border-border sm:grid-cols-3">
-          {highlights.map((item, index) => (
-            <li
-              key={t(item.title, "en")}
-              className="rule-left border-b-2 border-border sm:not-last:border-r-2"
-              style={{ "--rule": accentAt(index) } as React.CSSProperties}
-            >
-              <p className="label-mono text-muted-foreground">{t(item.title, locale)}</p>
-              <p className="mt-2 text-sm leading-relaxed text-foreground/85">
-                {t(item.description, locale)}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-10">
+          <ContactChannels />
+        </div>
+
+        <p className="label-mono mt-14 text-muted-foreground">{t(ui.reach.brief, locale)}</p>
 
         {status === "sent" ? (
-          <div className="surface mt-10 rounded-none p-8 text-center">
+          <div className="mt-10 rounded-2xl bg-muted p-8 text-center">
+            <Mascot className="mx-auto mb-6 h-auto w-full max-w-[6rem]" expression="laugh" />
             <p className="text-lg font-medium text-foreground">
               {t(ui.form.successTitle, locale)}
             </p>
@@ -108,11 +101,7 @@ export function Contact() {
               {t(ui.form.successBody, locale)}
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                asChild
-                variant="outline"
-                className="h-11 gap-2 rounded-none border-border bg-card px-6 text-sm font-medium"
-              >
+              <Button asChild variant="sq-secondary" size="sq-sm" className="bg-background">
                 <a
                   href={t(whatsappCta.href, locale)}
                   target="_blank"
@@ -132,7 +121,7 @@ export function Contact() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-10 grid gap-5" noValidate>
+          <form onSubmit={handleSubmit} className="mt-4 grid gap-5" noValidate>
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="grid gap-2">
                 <label htmlFor="contact-name" className={labelClass}>
@@ -198,8 +187,10 @@ export function Contact() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button
                 type="submit"
+                variant="sq-primary"
+                size="sq-lg"
                 disabled={status === "sending"}
-                className="h-12 w-full gap-2 rounded-none px-8 text-sm font-medium sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 {status === "sending" ? (
                   <>
@@ -214,11 +205,7 @@ export function Contact() {
                 )}
               </Button>
 
-              <Button
-                asChild
-                variant="outline"
-                className="h-12 w-full gap-2 rounded-none border-border bg-card px-8 text-sm font-medium sm:w-auto"
-              >
+              <Button asChild variant="sq-secondary" size="sq-lg" className="w-full sm:w-auto">
                 <a
                   href={t(whatsappCta.href, locale)}
                   target="_blank"

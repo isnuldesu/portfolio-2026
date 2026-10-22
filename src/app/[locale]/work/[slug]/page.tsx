@@ -3,16 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
-import { CaseStudyGallery } from "@/components/site/case-study-gallery";
+import { CaseCurtain } from "@/components/site/case-curtain";
+import { CaseReel, type ReelEntry } from "@/components/site/case-reel";
 import { FontSpecimen } from "@/components/site/font-specimen";
-import { PageSheet } from "@/components/site/page-sheet";
 import { Button } from "@/components/ui/button";
 import { StableLabel } from "@/components/ui/stable-label";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
+import { coverSizes } from "@/content/cover-sizes";
 import { person, primaryCta, whatsappCta } from "@/content/site";
 import { ui } from "@/content/ui";
 import { isLocale, locales, t } from "@/lib/i18n";
-import { accentAt } from "@/lib/accents";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -44,6 +44,16 @@ export async function generateMetadata({
   };
 }
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
+/**
+ * Case study, after huyml.co: an ink curtain with the project name opens the
+ * page; a meta column (about, role, year, client, impact, links) holds still
+ * on the left; every plate of the project runs down the middle with the
+ * process notes between them; a thumbnail rail tracks the plates on the
+ * right; the next project closes the page in display type. Visual language
+ * stays Square: flat fills, hairlines, pill actions.
+ */
 export default async function CaseStudyPage({
   params,
 }: PageProps<"/[locale]/work/[slug]">) {
@@ -58,6 +68,7 @@ export default async function CaseStudyPage({
   const siblings = caseStudies.filter((entry) => entry.category === study.category);
   const index = siblings.findIndex((entry) => entry.slug === study.slug);
   const next = siblings[(index + 1) % siblings.length];
+  const number = caseStudies.findIndex((entry) => entry.slug === study.slug) + 1;
 
   const links =
     study.links ??
@@ -65,175 +76,148 @@ export default async function CaseStudyPage({
       ? [{ href: study.link, label: study.linkLabel ?? t(ui.caseStudy.visit, locale) }]
       : []);
 
-  const facts = [
-    { label: t(ui.caseStudy.industry, locale), value: t(study.industry, locale) },
-    { label: t(ui.caseStudy.role, locale), value: t(study.role, locale) },
-    { label: t(ui.caseStudy.duration, locale), value: t(study.duration, locale) },
-    { label: t(ui.caseStudy.client, locale), value: t(study.client, locale) },
+  // Plates: cover first, then the raw interface shot, then the gallery, no repeats.
+  const [coverW, coverH] = coverSizes[study.cover] ?? [2048, 1449];
+  const plates: Extract<ReelEntry, { kind: "image" }>[] = [
+    { kind: "image" as const, src: study.cover, width: coverW, height: coverH, alt: study.title },
+    ...study.gallery.map((item) => ({
+      kind: "image" as const,
+      src: item.src,
+      width: item.width,
+      height: item.height,
+      alt: t(item.caption, locale),
+      caption: t(item.caption, locale),
+    })),
+  ].filter((plate, i, all) => all.findIndex((other) => other.src === plate.src) === i);
+
+  // Notes: the problem and constraints first, then each process section.
+  const notes: Extract<ReelEntry, { kind: "text" }>[] = [
+    { kind: "text", label: t(ui.caseStudy.overview, locale).toUpperCase(), body: t(study.summary, locale) },
   ];
+  if (study.problem) {
+    notes.push({
+      kind: "text",
+      label: t(ui.caseStudy.problem, locale).toUpperCase(),
+      body: t(study.problem, locale),
+      bullets: study.constraints?.map((item) => t(item, locale)),
+    });
+  }
+  study.sections.forEach((section, i) =>
+    notes.push({
+      kind: "text",
+      label: `${pad(i + 1)} / ${t(section.heading, locale).toUpperCase()}`,
+      heading: t(section.heading, locale),
+      body: t(section.body, locale),
+      bullets: section.bullets?.map((item) => t(item, locale)),
+    }),
+  );
+
+  // Interleave: a plate, then a note, until either runs out.
+  const entries: ReelEntry[] = [];
+  for (let i = 0; i < Math.max(plates.length, notes.length); i++) {
+    if (plates[i]) entries.push(plates[i]);
+    if (notes[i]) entries.push(notes[i]);
+  }
 
   return (
-    <article className="flex flex-col gap-4 sm:gap-6">
-      <PageSheet>
-      <header className="relative overflow-hidden">
-        <div className="relative">
-          <Link
-            href={`/${locale}/work`}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground"
-          >
-            <ArrowLeft className="size-4" />
-            {t(ui.caseStudy.back, locale)}
-          </Link>
+    <div className="theme-square">
+      <CaseCurtain key={study.slug} title={study.title} />
 
-          <p className="label-mono mt-10 text-muted-foreground">
-            / {t(study.discipline, locale)}
-          </p>
-          <h1 className="font-display mt-3 text-4xl font-medium tracking-tight text-balance md:text-6xl">
-            {study.title}
-          </h1>
-          <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-foreground/75 md:text-lg">
-            {t(study.summary, locale)}
-          </p>
+      <article className="mx-auto w-full max-w-[90rem] px-5 sm:px-8">
+        <div className="lg:grid lg:grid-cols-[17rem_minmax(0,1fr)_4.5rem] lg:gap-12">
+          {/* Meta column */}
+          <aside data-lenis-prevent className="pt-10 lg:sticky lg:top-16 lg:flex lg:h-[calc(100dvh-4rem)] lg:flex-col lg:justify-between lg:self-start lg:overflow-y-auto lg:pb-8 [scrollbar-width:none]">
+            <div>
+              <Link
+                href={`/${locale}/work`}
+                className="inline-flex h-10 items-center gap-2 rounded-full bg-secondary pl-3 pr-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring"
+              >
+                <ArrowLeft className="size-4" />
+                {t(ui.caseStudy.back, locale)}
+              </Link>
 
-          <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 border-t-2 border-border pt-8 sm:grid-cols-3">
-            {facts.map((fact) => (
-              <div key={fact.label}>
-                <dt className="label-mono text-muted-foreground">
-                  {fact.label}
-                </dt>
-                <dd className="mt-1.5 text-sm text-foreground">{fact.value}</dd>
-              </div>
-            ))}
-          </dl>
-
-          {links.length ? (
-            <ul className="mt-8 flex flex-wrap gap-3">
-              {links.map((entry) => (
-                <li key={entry.href}>
-                  <a
-                    href={entry.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm font-medium outline-none transition-colors hover:bg-foreground hover:text-background focus-visible:ring-3 focus-visible:ring-ring/50"
-                  >
-                    {entry.label}
-                    <ArrowUpRight className="size-4" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </div>
-      </header>
-      </PageSheet>
-
-      <PageSheet>
-      <div>
-        {study.problem ? (
-          <section className="border-b-2 border-border pb-12">
-            <p className="label-mono text-muted-foreground">
-              {t(ui.caseStudy.problem, locale)}
-            </p>
-            <p className="mt-4 max-w-[68ch] text-lg leading-relaxed text-foreground">
-              {t(study.problem, locale)}
-            </p>
-
-            {study.constraints?.length ? (
-              <div className="mt-8">
-                <p className="label-mono text-muted-foreground">
-                  {t(ui.caseStudy.constraints, locale)}
-                </p>
-                <ul className="mt-3 space-y-2">
-                  {study.constraints.map((item) => (
-                    <li
-                      key={t(item, "en")}
-                      className="flex gap-3 text-base leading-relaxed text-muted-foreground"
-                    >
-                      <span aria-hidden="true" className="shrink-0">
-                        &bull;
-                      </span>
-                      {t(item, locale)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </section>
-        ) : null}
-
-        {study.sections.length ? (
-          <p className="label-mono mt-12 text-muted-foreground">
-            {t(ui.caseStudy.approach, locale)}
-          </p>
-        ) : null}
-        <div className="mt-6 space-y-14">
-          {study.sections.map((section) => (
-            <section key={t(section.heading, "en")}>
-              <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
-                {t(section.heading, locale)}
-              </h2>
-              <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-foreground/75">
-                {t(section.body, locale)}
+              <p className="label-mono mt-8 text-muted-foreground">
+                {pad(number)} / {t(study.discipline, locale).toUpperCase()}
               </p>
-              {section.bullets ? (
-                <ul className="mt-5 space-y-2.5">
-                  {section.bullets.map((bullet) => (
-                    <li
-                      key={t(bullet, "en")}
-                      className="flex gap-3 text-base leading-relaxed text-foreground/75"
-                    >
-                      <span
-                        className="mt-2.5 size-1.5 shrink-0 rounded-full"
-                        style={{ background: "var(--coral)" }}
-                      />
-                      {t(bullet, locale)}
+              <h1 className="font-display mt-2 text-3xl font-bold leading-tight lg:hidden">{study.title}</h1>
+
+              <dl className="mt-6 grid grid-cols-[5.5rem_1fr] gap-x-4 gap-y-5 text-sm">
+                <dt className="text-muted-foreground">{t(ui.caseStudy.about, locale)}</dt>
+                <dd className="leading-relaxed">{t(study.teaser, locale)}</dd>
+
+                <dt className="text-muted-foreground">{t(ui.caseStudy.role, locale)}</dt>
+                <dd>{t(study.role, locale)}</dd>
+
+                <dt className="text-muted-foreground">{t(ui.caseStudy.year, locale)}</dt>
+                <dd>{study.year}</dd>
+
+                <dt className="text-muted-foreground">{t(ui.caseStudy.client, locale)}</dt>
+                <dd>{t(study.client, locale)}</dd>
+
+                {study.results?.length ? (
+                  <>
+                    <dt className="text-muted-foreground">{t(ui.caseStudy.impact, locale)}</dt>
+                    <dd>
+                      <ul className="space-y-1.5">
+                        {study.results.slice(0, 2).map((item) => (
+                          <li key={t(item, "en")}>{t(item, locale)}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </>
+                ) : null}
+              </dl>
+
+              {links.length ? (
+                <ul className="mt-6 space-y-1">
+                  {links.map((entry) => (
+                    <li key={entry.href}>
+                      <a
+                        href={entry.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 text-base font-medium underline underline-offset-4 outline-none hover:no-underline focus-visible:ring-3 focus-visible:ring-ring"
+                      >
+                        {entry.label}
+                        <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      </a>
                     </li>
                   ))}
                 </ul>
               ) : null}
-            </section>
-          ))}
+            </div>
+
+            <p className="label-mono mt-8 hidden text-muted-foreground lg:block">
+              {t(ui.caseStudy.scroll, locale)}
+            </p>
+          </aside>
+
+          <CaseReel entries={entries} title={study.title} />
         </div>
 
         {study.typefaces || study.palette ? (
-          <section className="mt-16 grid gap-6 md:grid-cols-2">
+          <section className="grid gap-3 md:grid-cols-2 lg:ml-[19rem] lg:mr-[7.5rem]">
             {study.typefaces ? (
-              <div
-                className="rule-left"
-                style={{ "--rule": accentAt(0) } as React.CSSProperties}
-              >
-                <h3 className="label-mono text-muted-foreground">
-                  {t(ui.caseStudy.typography, locale)}
-                </h3>
-                <ul className="mt-4 space-y-2">
+              <div className="rounded-2xl bg-muted p-6">
+                <h3 className="label-mono text-muted-foreground">{t(ui.caseStudy.typography, locale)}</h3>
+                <ul className="mt-4 space-y-1">
                   {study.typefaces.map((face) => (
-                    <li key={t(face, "en")} className="font-display text-xl tracking-tight">
+                    <li key={t(face, "en")} className="text-xl font-semibold tracking-tight">
                       {t(face, locale)}
                     </li>
                   ))}
                 </ul>
               </div>
             ) : null}
-
             {study.palette ? (
-              <div
-                className="rule-left"
-                style={{ "--rule": accentAt(1) } as React.CSSProperties}
-              >
-                <h3 className="label-mono text-muted-foreground">
-                  {t(ui.caseStudy.palette, locale)}
-                </h3>
+              <div className="rounded-2xl bg-muted p-6">
+                <h3 className="label-mono text-muted-foreground">{t(ui.caseStudy.palette, locale)}</h3>
                 <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {study.palette.map((swatch) => (
                     <li key={swatch.hex + swatch.name}>
-                      <span
-                        className="block h-14 w-full rounded-none border border-border"
-                        style={{ background: swatch.hex }}
-                      />
+                      <span className="block h-14 w-full rounded-[10px]" style={{ background: swatch.hex }} />
                       <span className="mt-2 block text-xs font-medium">{swatch.name}</span>
-                      <span className="block font-mono text-[11px] text-muted-foreground">
-                        {swatch.hex}
-                      </span>
+                      <span className="label-mono block text-muted-foreground">{swatch.hex}</span>
                     </li>
                   ))}
                 </ul>
@@ -242,84 +226,35 @@ export default async function CaseStudyPage({
           </section>
         ) : null}
 
-        {study.results?.length ? (
-          <section className="mt-14 border-t-2 border-border pt-12">
-            <p className="label-mono text-muted-foreground">
-              {t(ui.caseStudy.results, locale)}
-            </p>
-            <ul className="mt-4 space-y-3">
-              {study.results.map((item) => (
-                <li
-                  key={t(item, "en")}
-                  className="flex gap-3 text-lg leading-relaxed text-foreground"
-                >
-                  <span aria-hidden="true" className="shrink-0">
-                    &bull;
-                  </span>
-                  {t(item, locale)}
-                </li>
-              ))}
-            </ul>
-          </section>
+        {study.specimen ? (
+          <div className="mt-16 lg:ml-[19rem] lg:mr-[7.5rem]">
+            <FontSpecimen specimen={study.specimen} />
+          </div>
         ) : null}
 
-        {study.specimen ? <FontSpecimen specimen={study.specimen} /> : null}
-      </div>
-      </PageSheet>
-
-      {study.gallery.length ? (
-        <PageSheet>
-          <CaseStudyGallery items={study.gallery} />
-        </PageSheet>
-      ) : null}
-
-      <PageSheet>
-      <section>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="label-mono text-muted-foreground">
-              {t(ui.caseStudy.next, locale)}
-            </p>
-            <Link
-              href={`/${locale}/work/${next.slug}`}
-              className="font-display mt-1 inline-flex items-center gap-2 text-2xl font-medium tracking-tight outline-none hover:underline focus-visible:underline"
-            >
-              {next.title}
-              <ArrowUpRight className="size-5" />
-            </Link>
-            <p className="mt-2">
-              <Link
-                href={`/${locale}/work`}
-                className="label-mono text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-              >
-                {t(ui.work.seeAll, locale)}
-              </Link>
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <Button asChild className="h-11 rounded-none px-6 text-sm font-medium">
+        {/* Next project, set in display type the way the reel's title is. */}
+        <section className="flex flex-col items-center py-28 text-center md:py-40">
+          <p className="text-sm text-muted-foreground">{t(ui.caseStudy.next, locale)}</p>
+          <Link
+            href={`/${locale}/work/${next.slug}`}
+            className="font-display group mt-3 text-[clamp(3rem,10vw,9rem)] font-bold leading-none tracking-tight text-[var(--coral)] outline-none transition-transform duration-500 ease-out hover:-translate-y-1 focus-visible:underline"
+          >
+            {next.title}
+          </Link>
+          <div className="mt-12 flex flex-wrap justify-center gap-2">
+            <Button asChild variant="sq-primary" size="sq-sm">
               <Link href={`/${locale}${primaryCta.href}`}>
                 <StableLabel value={primaryCta.label} />
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="h-11 rounded-none border-border bg-card px-6 text-sm font-medium"
-            >
-              <a
-                href={t(whatsappCta.href, locale)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            <Button asChild variant="sq-secondary" size="sq-sm">
+              <a href={t(whatsappCta.href, locale)} target="_blank" rel="noopener noreferrer">
                 <StableLabel value={whatsappCta.label} />
               </a>
             </Button>
           </div>
-        </div>
-      </section>
-      </PageSheet>
-    </article>
+        </section>
+      </article>
+    </div>
   );
 }

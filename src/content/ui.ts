@@ -9,10 +9,9 @@ export const ui = {
   nav: {
     themeToggle: { id: "Ganti tema terang atau gelap", en: "Switch light or dark theme" },
     menu: { id: "Menu", en: "Menu" },
-  },
-
-  hero: {
-    eyebrow: { id: "Portofolio 2026", en: "Portfolio 2026" },
+    audio: { id: "Audio", en: "Audio" },
+    audioOn: { id: "Nyala", en: "On" },
+    audioOff: { id: "Mati", en: "Off" },
   },
 
   work: {
@@ -30,28 +29,11 @@ export const ui = {
     categoryStrategy: { id: "Strategi", en: "Strategy" },
     categoryBrand: { id: "Brand", en: "Brand" },
     categoryType: { id: "Font", en: "Type" },
-  },
-
-  brand: {
-    heading: {
-      id: "Identitas brand, sebelum ada produknya.",
-      en: "Brand systems, before there is a product to design.",
-    },
-    body: {
-      id: "Logo, pola, dan ilustrasi untuk label skincare, studio kreatif, dan aplikasi konsumen.",
-      en: "Identity, pattern, and illustration work for skincare labels, creative studios, and consumer apps.",
-    },
-  },
-
-  type: {
-    heading: {
-      id: "Empat typeface, digambar huruf per huruf.",
-      en: "Four typefaces, drawn character by character.",
-    },
-    body: {
-      id: "Bikin font mulanya cuma kebiasaan sejak 2020. Sekarang malah jadi bahan buat kerjaan brand.",
-      en: "Type design started as a habit in 2020 and now feeds the brand work.",
-    },
+    roleProduct: { id: "Product Designer", en: "Product Designer" },
+    roleWeb: { id: "Web Designer", en: "Web Designer" },
+    roleBrand: { id: "Brand & Graphic Designer", en: "Brand & Graphic Designer" },
+    roleType: { id: "Font Designer", en: "Font Designer" },
+    roleMarketing: { id: "Strategi Marketing", en: "Marketing Strategy" },
   },
 
   experience: {
@@ -67,14 +49,6 @@ export const ui = {
     dayToDay: { id: "Sehari-hari", en: "Day to day" },
     brands: { id: "Brand dan produk", en: "Brands and products" },
     notRecorded: { id: "Belum tercatat", en: "Not recorded yet" },
-  },
-
-  about: {
-    badge: { id: "Tentang", en: "About" },
-    contactLine: {
-      id: "Sekali chat langsung sampai, dan yang saya balas rencana kerja, bukan company profile.",
-      en: "Reachable in one message, and I answer with a plan rather than a brochure.",
-    },
   },
 
   caseStudy: {
@@ -94,6 +68,17 @@ export const ui = {
     galleryHeading: { id: "Isi projectnya", en: "Inside the project" },
     plates: { id: "halaman", en: "plates" },
     next: { id: "Project berikutnya", en: "Next project" },
+    solution: { id: "Solusinya", en: "The solution" },
+    impact: { id: "Dampaknya", en: "The impact" },
+    jumpWork: { id: "Lihat pengerjaannya", en: "See the work" },
+    jumpImpact: { id: "Langsung ke hasil", en: "Jump to impact" },
+    story: { id: "Ceritanya", en: "The story" },
+    overview: { id: "Ringkasan", en: "Overview" },
+    viewCase: { id: "Lihat studi kasus", en: "View case study" },
+    about: { id: "Tentang", en: "About" },
+    year: { id: "Tahun", en: "Year" },
+    scroll: { id: "Gulir", en: "Scroll" },
+    allSelected: { id: "Semua kerjaan", en: "All the work" },
   },
 
   specimen: {
@@ -112,28 +97,6 @@ export const ui = {
     },
   },
 
-  doors: {
-    work: { id: "Lihat kerjaan", en: "See the work" },
-    workNote: {
-      id: "14 project, lengkap dengan masalah dan hasilnya",
-      en: "Fourteen projects, with the problem and the result",
-    },
-    experience: { id: "Riwayat kerja", en: "Work history" },
-    experienceNote: {
-      id: "Tujuh posisi, ruang lingkup dan kerja hariannya",
-      en: "Seven roles, their scope and their day to day",
-    },
-    hire: { id: "Ajak kerja sama", en: "Start a project" },
-    hireNote: {
-      id: "Scope, timeline, dan harga, bukan ajakan meeting",
-      en: "Scope, timeline, and a price, not a meeting invite",
-    },
-  },
-
-  cv: {
-    download: { id: "Unduh CV", en: "Download CV" },
-  },
-
   notFound: {
     code: { id: "404", en: "404" },
     heading: { id: "Halamannya tidak ada", en: "That page does not exist" },
@@ -143,6 +106,18 @@ export const ui = {
     },
     work: { id: "Lihat kerjaan", en: "See the work" },
     experience: { id: "Lihat pengalaman", en: "See the experience" },
+  },
+
+  reach: {
+    whatsappNote: { id: "Paling cepat. Biasanya saya balas di hari yang sama.", en: "Fastest. I usually reply the same day." },
+    instagramNote: { id: "Kirim DM, lihat juga kerjaan yang belum masuk sini.", en: "Send a DM, and see work that is not on this site yet." },
+    emailNote: { id: "Untuk brief, file, atau yang butuh jejak tertulis.", en: "For briefs, files, or anything that needs a paper trail." },
+    copy: { id: "Salin alamat", en: "Copy address" },
+    copied: { id: "Tersalin", en: "Copied" },
+    brief: { id: "Atau kirim brief singkat di sini", en: "Or send a short brief here" },
+    fab: { id: "Chat WhatsApp", en: "Chat on WhatsApp" },
+    resume: { id: "Resume", en: "Resume" },
+    cv: { id: "Unduh CV", en: "Download CV" },
   },
 
   form: {
@@ -188,6 +163,10 @@ export const ui = {
       failed: {
         id: "Gagal terkirim. Email saya langsung saja.",
         en: "Could not send that. Email me directly instead.",
+      },
+      rate: {
+        id: "Terlalu banyak pesan dalam waktu singkat. Tunggu sebentar, atau WhatsApp saja.",
+        en: "Too many messages in a short time. Wait a few minutes, or WhatsApp me.",
       },
       network: {
         id: "Koneksinya putus. Coba lagi, atau email saya langsung.",

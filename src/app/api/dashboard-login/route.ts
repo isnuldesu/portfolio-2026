@@ -1,30 +1,40 @@
 import { NextResponse } from "next/server";
 
+import { createSession, passwordMatches, SESSION_SECONDS } from "@/lib/dashboard-session";
+import { clientKey, rateLimit } from "@/lib/rate-limit";
+
 export async function POST(request: Request) {
   const expected = process.env.DASHBOARD_PASSWORD;
   if (!expected) return NextResponse.json({ ok: false }, { status: 503 });
 
+  // Five tries per quarter hour per address.
+  const limit = rateLimit(clientKey(request, "dash-login"), 5, 15 * 60 * 1000);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { ok: false },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+    );
+  }
+
   let password = "";
   try {
-    password = (await request.json()).password ?? "";
+    password = String((await request.json()).password ?? "");
   } catch {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
 
-  // Compare every character so the reply time says nothing about the answer.
-  let mismatch = password.length === expected.length ? 0 : 1;
-  for (let i = 0; i < expected.length; i++) {
-    mismatch |= password.charCodeAt(i) ^ expected.charCodeAt(i);
+  if (!passwordMatches(password, expected)) {
+    return NextResponse.json({ ok: false }, { status: 401 });
   }
-  if (mismatch !== 0) return NextResponse.json({ ok: false }, { status: 401 });
 
   const response = NextResponse.json({ ok: true });
-  response.cookies.set("dash", expected, {
+  // A signed expiry, never the password itself.
+  response.cookies.set("dash", createSession(expected), {
     httpOnly: true,
     sameSite: "lax",
     secure: true,
     path: "/dashboard",
-    maxAge: 60 * 60 * 12,
+    maxAge: SESSION_SECONDS,
   });
   return response;
 }

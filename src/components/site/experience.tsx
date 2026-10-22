@@ -29,7 +29,7 @@ export function Experience() {
         {t(ui.experience.heading, locale)}
       </h2>
 
-      <ol className="mt-14">
+      <ol className="mt-14 space-y-3">
         {featuredRoles.map((role, index) => (
           <m.li
             key={role.slug}
@@ -45,26 +45,25 @@ export function Experience() {
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
                 })}
-            className={index > 0 ? "border-t-2 border-border" : ""}
           >
             <RoleEntry role={role} accent={accentAt(index)} />
           </m.li>
         ))}
       </ol>
 
-      <p className="mt-8 border-t-2 border-border pt-6">
+      <p className="mt-6">
         <Link
           href={`/${locale}/experience`}
-          className="label-mono inline-flex items-center gap-2 text-foreground underline-offset-4 outline-none hover:underline focus-visible:underline"
+          className="inline-flex h-10 items-center gap-2 rounded-full bg-secondary px-4 text-sm font-medium outline-none transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring"
         >
           {t(ui.experience.seeAll, locale)}
           <ArrowUpRight className="size-4" />
         </Link>
       </p>
 
-      <div className="mt-6 grid md:grid-cols-3">
+      <div className="mt-10 grid gap-3 md:grid-cols-3">
         <div
-          className="rule-left md:-mr-0.5"
+          className="rule-left"
           style={{ "--rule": accentAt(1) } as React.CSSProperties}
         >
           <p className="label-mono text-muted-foreground">
@@ -78,7 +77,7 @@ export function Experience() {
         </div>
 
         <div
-          className="rule-left -mt-0.5 md:mt-0 md:-mr-0.5"
+          className="rule-left"
           style={{ "--rule": accentAt(0) } as React.CSSProperties}
         >
           <p className="label-mono text-muted-foreground">
@@ -92,7 +91,7 @@ export function Experience() {
         </div>
 
         <div
-          className="rule-left -mt-0.5 md:mt-0"
+          className="rule-left"
           style={{ "--rule": accentAt(3) } as React.CSSProperties}
         >
           <p className="label-mono text-muted-foreground">

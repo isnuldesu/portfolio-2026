@@ -1,13 +1,8 @@
 import { cookies } from "next/headers";
-import { Space_Mono } from "next/font/google";
-
-import "@fontsource/open-sauce-sans/400.css";
-import "@fontsource/open-sauce-sans/500.css";
-import "../globals.css";
-import "../fonts.css";
 
 import { DashboardLogin } from "@/components/site/dashboard-login";
 import { TrackingToggle } from "@/components/site/tracking-toggle";
+import { verifySession } from "@/lib/dashboard-session";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 export const dynamic = "force-dynamic";
@@ -16,13 +11,6 @@ export const metadata = {
   title: "Dashboard",
   robots: { index: false, follow: false },
 };
-
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
 
 type View = { path: string; locale: string | null; referrer: string | null; created_at: string };
 type Message = { name: string; email: string; message: string; created_at: string };
@@ -38,23 +26,15 @@ function tally<T extends string | null>(rows: T[]) {
 
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rule-left" style={{ "--rule": "var(--coral)" } as React.CSSProperties}>
+    <div className="rounded-2xl bg-muted p-5">
       <p className="label-mono text-muted-foreground">{label}</p>
-      <p className="font-display mt-2 text-4xl font-medium leading-none">{value}</p>
+      <p className="font-display mt-2 text-4xl font-bold leading-none tabular-nums">{value}</p>
     </div>
   );
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className={`${spaceMono.variable} h-full antialiased`}>
-      <body className="min-h-full bg-background text-foreground">
-        <main className="mx-auto w-full max-w-[82rem] px-0 py-0 sm:px-6 sm:py-8">
-          <div className="sheet px-5 py-12 sm:px-8 md:px-12 md:py-16">{children}</div>
-        </main>
-      </body>
-    </html>
-  );
+  return <main className="mx-auto w-full max-w-[76rem] px-5 py-16 sm:px-8">{children}</main>;
 }
 
 /** Reading the clock and the database belongs outside the render path. */
@@ -86,7 +66,7 @@ async function loadDashboard() {
 
 export default async function Dashboard() {
   const password = process.env.DASHBOARD_PASSWORD;
-  const unlocked = (await cookies()).get("dash")?.value === password;
+  const unlocked = verifySession((await cookies()).get("dash")?.value, password);
 
   if (!password || !unlocked) {
     return (
@@ -120,7 +100,7 @@ export default async function Dashboard() {
   return (
     <Shell>
       <p className="label-mono text-muted-foreground">Portfolio</p>
-      <h1 className="font-display mt-3 text-4xl font-medium tracking-tight md:text-5xl">
+      <h1 className="font-display mt-3 text-4xl font-bold md:text-5xl">
         Dashboard
       </h1>
       <p className="mt-4 text-sm text-muted-foreground">
@@ -128,21 +108,21 @@ export default async function Dashboard() {
         a language, a referring host, and a country.
       </p>
 
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Stat label="Views" value={views.length} />
         <Stat label="Days with traffic" value={byDay.length} />
         <Stat label="Messages" value={messages.length} />
       </div>
 
       <section className="mt-16">
-        <h2 className="font-display text-2xl font-medium tracking-tight">Per day</h2>
-        <ul className="mt-6 border-t-2 border-border">
+        <h2 className="font-display text-2xl font-bold">Per day</h2>
+        <ul className="mt-6 border-t border-border">
           {byDay.slice(0, 30).map(([day, count]) => (
-            <li key={day} className="flex items-center gap-4 border-b-2 border-border py-2">
+            <li key={day} className="flex items-center gap-4 border-b border-border py-2">
               <span className="label-mono w-28 shrink-0 text-muted-foreground">{day}</span>
               <span
                 aria-hidden="true"
-                className="h-3"
+                className="h-2.5 rounded-full"
                 style={{
                   width: `${Math.max(2, (count / peak) * 100)}%`,
                   background: "var(--coral-block)",
@@ -152,7 +132,7 @@ export default async function Dashboard() {
             </li>
           ))}
           {byDay.length === 0 ? (
-            <li className="border-b-2 border-border py-4 text-sm text-muted-foreground">
+            <li className="border-b border-border py-4 text-sm text-muted-foreground">
               Nothing recorded yet.
             </li>
           ) : null}
@@ -161,10 +141,10 @@ export default async function Dashboard() {
 
       <div className="mt-16 grid gap-12 lg:grid-cols-2">
         <section>
-          <h2 className="font-display text-2xl font-medium tracking-tight">Pages</h2>
-          <ul className="mt-6 border-t-2 border-border">
+          <h2 className="font-display text-2xl font-bold">Pages</h2>
+          <ul className="mt-6 border-t border-border">
             {byPath.map(([path, count]) => (
-              <li key={path} className="flex gap-4 border-b-2 border-border py-2 text-sm">
+              <li key={path} className="flex gap-4 border-b border-border py-2 text-sm">
                 <span className="truncate">{path}</span>
                 <span className="label-mono ml-auto shrink-0 text-muted-foreground">
                   {count}
@@ -175,14 +155,14 @@ export default async function Dashboard() {
         </section>
 
         <section>
-          <h2 className="font-display text-2xl font-medium tracking-tight">
+          <h2 className="font-display text-2xl font-bold">
             Referrers and language
           </h2>
-          <ul className="mt-6 border-t-2 border-border">
+          <ul className="mt-6 border-t border-border">
             {[...byReferrer, ...byLocale].map(([label, count], index) => (
               <li
                 key={`${label}-${index}`}
-                className="flex gap-4 border-b-2 border-border py-2 text-sm"
+                className="flex gap-4 border-b border-border py-2 text-sm"
               >
                 <span className="truncate">{label}</span>
                 <span className="label-mono ml-auto shrink-0 text-muted-foreground">
@@ -197,10 +177,10 @@ export default async function Dashboard() {
       <TrackingToggle />
 
       <section className="mt-16">
-        <h2 className="font-display text-2xl font-medium tracking-tight">Messages</h2>
-        <ul className="mt-6 border-t-2 border-border">
+        <h2 className="font-display text-2xl font-bold">Messages</h2>
+        <ul className="mt-6 border-t border-border">
           {messages.map((message) => (
-            <li key={message.created_at + message.email} className="border-b-2 border-border py-5">
+            <li key={message.created_at + message.email} className="border-b border-border py-5">
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                 <span className="font-display text-base font-medium">{message.name}</span>
                 <a
@@ -219,7 +199,7 @@ export default async function Dashboard() {
             </li>
           ))}
           {messages.length === 0 ? (
-            <li className="border-b-2 border-border py-4 text-sm text-muted-foreground">
+            <li className="border-b border-border py-4 text-sm text-muted-foreground">
               No messages yet.
             </li>
           ) : null}

@@ -1,6 +1,6 @@
 /**
- * One section, one sheet. Sections stack down the ground as separate pages
- * rather than running together inside a single long document.
+ * One section of a page: a centred column with generous vertical rhythm.
+ * Square draws no frame around content, so this is spacing only.
  */
 export function PageSheet({
   children,
@@ -10,7 +10,7 @@ export function PageSheet({
   className?: string;
 }) {
   return (
-    <div className={`sheet mx-auto w-full max-w-[82rem] overflow-x-clip px-5 py-12 sm:px-8 md:px-12 md:py-16 ${className}`}>
+    <div className={`mx-auto w-full max-w-[76rem] overflow-x-clip px-5 py-16 sm:px-8 md:py-24 ${className}`}>
       {children}
     </div>
   );

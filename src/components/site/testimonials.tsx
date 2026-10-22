@@ -23,7 +23,7 @@ export function Testimonials() {
         {t(ui.testimonials.heading, locale)}
       </h2>
 
-      <ul className="mt-12 grid border-t-2 border-border sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {testimonials.map((item, index) => (
           <m.li
             key={item.name + item.company}
@@ -39,7 +39,7 @@ export function Testimonials() {
                     ease: [0.16, 1, 0.3, 1] as const,
                   },
                 })}
-            className="rule-left border-b-2 border-border lg:not-last:border-r-2"
+            className="rule-left"
             style={{ "--rule": accentAt(index) } as React.CSSProperties}
           >
             <p className="text-base leading-relaxed text-foreground">

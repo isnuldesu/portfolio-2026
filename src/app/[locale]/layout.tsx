@@ -1,31 +1,26 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Space_Mono } from "next/font/google";
-// Open Sauce Sans carries body copy. Self-hosted from the OFL release rather
-// than pulled from a third party at runtime.
-import "@fontsource/open-sauce-sans/400.css";
-import "@fontsource/open-sauce-sans/500.css";
-import "@fontsource/open-sauce-sans/700.css";
 import "../globals.css";
 import "../fonts.css";
+import { fontVariables } from "../site-fonts";
 
 import { Analytics } from "@vercel/analytics/next";
 
 import { LocaleProvider } from "@/components/site/locale-provider";
 import { PageView } from "@/components/site/page-view";
+import { PressSound } from "@/components/site/press-sound";
 import { SiteNav } from "@/components/site/site-nav";
+import { SmoothScroll } from "@/components/site/smooth-scroll";
+import { WhatsappFab } from "@/components/site/whatsapp-fab";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { person } from "@/content/site";
 import { isLocale, locales, localeMeta, t } from "@/lib/i18n";
+import { INTRO_ARM_SCRIPT } from "@/lib/intro";
 
 
-
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
+// Only /id and /en exist. Any other first segment is an unmatched route, so it
+// gets app/global-not-found.tsx rather than the bare default 404.
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -75,9 +70,10 @@ export default async function LocaleLayout({
     <html
       lang={localeMeta[locale].htmlLang}
       suppressHydrationWarning
-      className={`${spaceMono.variable} h-full antialiased`}
+      className={`${fontVariables} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
+        <script dangerouslySetInnerHTML={{ __html: INTRO_ARM_SCRIPT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -103,17 +99,20 @@ export default async function LocaleLayout({
           <LocaleProvider locale={locale}>
             <a
               href="#content"
-              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:border-2 focus:border-border focus:bg-[var(--sheet)] focus:px-4 focus:py-2 focus:text-sm"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:border focus:border-border focus:bg-[var(--sheet)] focus:px-4 focus:py-2 focus:text-sm"
             >
               {locale === "id" ? "Lompat ke konten" : "Skip to content"}
             </a>
             <SiteNav />
             <main
               id="content"
-              className="flex min-h-dvh flex-col gap-4 px-0 py-0 sm:gap-6 sm:px-6 sm:py-8"
+              className="flex min-h-dvh flex-col"
             >
               {children}
             </main>
+            <WhatsappFab />
+            <SmoothScroll />
+            <PressSound />
           </LocaleProvider>
         </ThemeProvider>
         <PageView />

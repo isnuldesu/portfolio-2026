@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  experimental: {
+    // The root layout sits under [locale], so unmatched URLs get their own
+    // full document in app/global-not-found.tsx.
+    globalNotFound: true,
+  },
   // The repo root, not the first package-lock.json found up the tree.
   turbopack: { root: path.resolve(process.cwd()) },
   outputFileTracingRoot: path.resolve(process.cwd()),

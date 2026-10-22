@@ -48,7 +48,7 @@ export function TrackingToggle() {
       <button
         type="button"
         onClick={toggle}
-        className="mt-4 h-11 border-2 border-border px-6 text-sm font-medium"
+        className="mt-4 h-10 rounded-full bg-background px-4 text-sm font-medium transition-colors hover:bg-primary hover:text-primary-foreground"
       >
         {optedOut ? "Start counting this browser" : "Stop counting this browser"}
       </button>

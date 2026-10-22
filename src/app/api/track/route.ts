@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { clientKey, rateLimit } from "@/lib/rate-limit";
 import { getSupabase } from "@/lib/supabase";
 
 /**
@@ -8,6 +9,11 @@ import { getSupabase } from "@/lib/supabase";
  * click came from, and the country the CDN already knows.
  */
 export async function POST(request: Request) {
+  // A reader does not open sixty pages a minute. Drop the excess quietly.
+  if (!rateLimit(clientKey(request, "track"), 60, 60 * 1000).ok) {
+    return NextResponse.json({ ok: true });
+  }
+
   let body: { path?: unknown; locale?: unknown; referrer?: unknown };
   try {
     body = await request.json();

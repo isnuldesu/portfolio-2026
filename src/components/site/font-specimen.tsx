@@ -33,7 +33,7 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
 
   return (
     <section className="mt-16">
-      <div className="flex flex-wrap items-baseline justify-between gap-4 border-b-2 border-border pb-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-border pb-4">
         <h2 className="font-display text-2xl font-medium tracking-tight md:text-3xl">
           {t(ui.specimen.heading, locale)}
         </h2>
@@ -45,7 +45,7 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
 
       {/* Type something and watch it set in the real face. */}
       <div className="mt-8">
-        <div className="flex flex-wrap items-center gap-4 border-y-2 border-border py-4">
+        <div className="flex flex-wrap items-center gap-4 border-y border-border py-4">
           <label htmlFor={inputId} className="label-mono text-muted-foreground">
             {t(ui.specimen.tryIt, locale)}
           </label>
@@ -55,7 +55,7 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
             value={text}
             onChange={(event) => setText(event.target.value)}
             placeholder={sample}
-            className="min-w-0 flex-1 border-b-2 border-border bg-transparent px-1 py-2 text-sm outline-none focus-visible:border-foreground focus-visible:ring-0"
+            className="min-w-0 flex-1 border-b border-border bg-transparent px-1 py-2 text-sm outline-none focus-visible:border-foreground focus-visible:ring-0"
           />
           <label htmlFor={sizeId} className="label-mono text-muted-foreground">
             {size}px
@@ -80,26 +80,26 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
         </p>
       </div>
 
-      {/* Size ladder. */}
-      <div className="mt-10 border-t-2 border-border">
+      {/* Size ladder, in whatever was typed above. */}
+      <div className="mt-10 border-t border-border">
         {SIZES.map((step) => (
           <p
             key={step}
-            className="overflow-hidden border-b-2 border-border py-3 leading-[1.2] break-words"
+            className="overflow-hidden border-b border-border py-3 leading-[1.2] break-words"
             style={{ ...face, fontSize: `${step}px` }}
           >
-            {sample}
+            {typed}
           </p>
         ))}
       </div>
 
       {/* Every style in the family, set in itself. */}
       {specimen.styles.length > 1 ? (
-        <ul className="mt-10 border-t-2 border-border">
+        <ul className="mt-10 border-t border-border">
           {specimen.styles.map((style) => (
             <li
               key={style.label}
-              className="flex flex-wrap items-baseline justify-between gap-4 border-b-2 border-border py-4"
+              className="flex flex-wrap items-baseline justify-between gap-4 border-b border-border py-4"
             >
               <span
                 className="text-3xl leading-none"
@@ -109,7 +109,7 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
                   fontStyle: style.italic ? "italic" : "normal",
                 }}
               >
-                {sample}
+                {typed}
               </span>
               <span className="label-mono text-muted-foreground">{style.label}</span>
             </li>
@@ -122,11 +122,11 @@ export function FontSpecimen({ specimen }: { specimen: Specimen }) {
         <p className="label-mono text-muted-foreground">
           {t(ui.specimen.characterSet, locale)}
         </p>
-        <ul className="mt-4 -ml-0.5 flex flex-wrap border-t-2 border-border pt-0.5">
+        <ul className="mt-4 -ml-0.5 flex flex-wrap border-t border-border pt-0.5">
           {specimen.characters.map((glyph) => (
             <li
               key={glyph}
-              className="ml-0.5 mt-0.5 flex size-12 items-center justify-center border-b-2 border-r-2 border-border text-xl sm:size-14 sm:text-2xl"
+              className="ml-0.5 mt-0.5 flex size-12 items-center justify-center border-b border-r border-border text-xl sm:size-14 sm:text-2xl"
               style={face}
             >
               {glyph}
