@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
 import { CaseCurtain } from "@/components/site/case-curtain";
+import { ScrollToTop } from "@/components/site/scroll-to-top";
 import { CaseReel, type ReelEntry } from "@/components/site/case-reel";
 import { FontSpecimen } from "@/components/site/font-specimen";
 import { Button } from "@/components/ui/button";
@@ -122,6 +123,7 @@ export default async function CaseStudyPage({
   return (
     <div className="theme-square">
       <CaseCurtain key={study.slug} title={study.title} />
+      <ScrollToTop key={`top-${study.slug}`} />
 
       <article className="mx-auto w-full max-w-[90rem] px-5 sm:px-8">
         <div className="lg:grid lg:grid-cols-[17rem_minmax(0,1fr)_4.5rem] lg:gap-12">
