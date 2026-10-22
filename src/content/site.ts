@@ -11,7 +11,7 @@ export const person = {
   role: "Product Designer (UX/UI)",
   secondaryRole: "Creative Director & Designer",
   /** How the CV signs itself. */
-  shortName: "MUH.ISNUL",
+  shortName: "MUH ISNUL",
   email: "isnulmuhammad@gmail.com",
   whatsapp: "6282255845751",
   whatsappLabel: "0822 5584 5751",

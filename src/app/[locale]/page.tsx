@@ -14,7 +14,7 @@ import { ui } from "@/content/ui";
 import { isLocale, t } from "@/lib/i18n";
 
 /**
- * Home: the cat intro, a short introduction, then every project on one pinned
+ * Home: the name intro, a short introduction, then every project on one pinned
  * stage (Huy Phan's structure, Square's components, the CV's colours). The
  * brand, type, and product grids the old home carried are all inside the
  * stage now, so they are not repeated below it.

@@ -2,25 +2,23 @@
 
 import { useEffect, useState } from "react";
 
-import { MascotWalk } from "@/components/site/mascot";
-
 /** Matches the end of the intro-out keyframes in globals.css. */
-const DURATION_MS = 3900;
+const DURATION_MS = 2300;
 
 /**
- * Opening sequence, on every full load of home: an ink panel covers the page, the mascot
- * walks in from the left and shoves it off to the right, uncovering the name,
- * which then lifts away. Whether it plays is decided before first paint by
- * INTRO_ARM_SCRIPT in the locale layout (see src/lib/intro.ts).
+ * Opening sequence, on every full load of home: the name rises in letter by
+ * letter, holds for a beat, then lifts away to uncover the page. Whether it
+ * plays is decided before first paint by INTRO_ARM_SCRIPT in the locale
+ * layout (see src/lib/intro.ts).
  */
 export function IntroLoader({ name }: { name: string }) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
-    // Only the inline script marks "play", and only on a first, full page
-    // load. Client-side navigation back to home never runs it, so the
-    // overlay stays display:none and there is nothing to run.
+    // Only the inline script marks "play", and only on a full page load.
+    // Client-side navigation back to home never runs it, so the overlay
+    // stays display:none and there is nothing to run.
     if (root.dataset.intro !== "play") return;
 
     root.style.overflow = "hidden";
@@ -45,16 +43,14 @@ export function IntroLoader({ name }: { name: string }) {
   if (done) return null;
 
   return (
-    <>
-      <div className="intro" aria-hidden="true" onClick={() => setDone(true)}>
-        <div className="intro-name-clip">
-          <p className="intro-name">{name}</p>
-        </div>
-        <div className="intro-pusher">
-          <MascotWalk className="intro-mascot" />
-          <div className="intro-panel" />
-        </div>
-      </div>
-    </>
+    <div className="intro" aria-hidden="true" onClick={() => setDone(true)}>
+      <p className="intro-name">
+        {[...name].map((letter, i) => (
+          <span key={i} className="intro-letter" style={{ "--i": i } as React.CSSProperties}>
+            {letter}
+          </span>
+        ))}
+      </p>
+    </div>
   );
 }
