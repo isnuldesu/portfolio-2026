@@ -9,7 +9,7 @@ import { PageSheet } from "@/components/site/page-sheet";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Testimonials } from "@/components/site/testimonials";
 import { caseStudies } from "@/content/case-studies";
-import { availability, person } from "@/content/site";
+import { person } from "@/content/site";
 import { ui } from "@/content/ui";
 import { isLocale, t } from "@/lib/i18n";
 
@@ -43,12 +43,6 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         <section className="mx-auto grid w-full max-w-[90rem] gap-6 px-5 pb-10 pt-14 sm:px-8 md:grid-cols-12 md:pb-16 md:pt-20">
           <div className="md:col-span-3">
             <p className="label-mono text-muted-foreground">{person.role}</p>
-            {availability.open ? (
-              <p className="mt-3 inline-flex h-8 items-center gap-2 rounded-full bg-muted px-3 text-sm font-medium">
-                <span className="size-2 rounded-full bg-[var(--teal)]" aria-hidden="true" />
-                {t(availability.label, locale)}
-              </p>
-            ) : null}
           </div>
           <h1 className="font-display text-balance text-[clamp(2rem,4.2vw,4rem)] font-bold leading-[1.05] md:col-span-9">
             {t(person.intro, locale)}

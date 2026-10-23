@@ -30,14 +30,6 @@ export const person = {
   } as L,
 } as const;
 
-export const availability = {
-  open: true,
-  label: {
-    id: "Terbuka untuk 2 project kuartal ini",
-    en: "Open for 2 projects this quarter",
-  } as L,
-} as const;
-
 export type SocialLink = {
   label: string;
   handle: string;
